@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class DBConnector {
     private final Logger logger = Logger.getLogger(this.getClass().getName());
-    private final static String DB_URL = "jdbc:sqlserver://localhost;databaseName=PZM1;user=SA;password=ms-SQL-2022;trustServerCertificate=true;";
+    private final static String DB_URL = "jdbc:sqlserver://localhost;databaseName=Autohaendler;user=sa;password=ms-SQL-2022;trustServerCertificate=true;";
     private Connection dbConnection;
 
     public DBConnector() {
@@ -23,7 +23,9 @@ public class DBConnector {
     }
     public Connection openConnection() {
         try {
+            System.out.println("heil");
             dbConnection = DriverManager.getConnection(DB_URL);
+            System.out.println("heilo");
             logger.info("Connection to database established");
         } catch(SQLException e) {
             logger.severe("Error while trying to execute query");
