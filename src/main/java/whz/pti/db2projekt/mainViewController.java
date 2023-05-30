@@ -17,7 +17,7 @@ public class mainViewController {
 
     @FXML
     public void initialize() {
-        DBConnector dbConnector = new DBConnector();
+        DBConnector dbConnector = new DBConnector("sa","ms-SQL-2022");
         try {
             Connection connection = dbConnector.openConnection();
             connection.close();
