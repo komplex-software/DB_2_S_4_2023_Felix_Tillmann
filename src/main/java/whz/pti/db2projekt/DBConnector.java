@@ -15,7 +15,6 @@ public class DBConnector {
 
     private void setDBUrl(String username, String password) {
         DB_URL = "jdbc:sqlserver://localhost;databaseName=Autohaendler;user="+ username +";password=" + password + ";trustServerCertificate=true;";
-        registerDriver();
     }
 
     private void registerDriver () {
