@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class HelloController {
+public class mainViewController {
     @FXML
     private Label welcomeText;
 
