@@ -13,7 +13,9 @@ public class loginViewController {
 
     @FXML
     private ComboBox username;
-    private TextField password;
+    @FXML
+    private PasswordField password;
+    @FXML
     private Button login;
 
     private ObservableList<String> olUsernames = FXCollections.observableArrayList();
@@ -23,14 +25,18 @@ public class loginViewController {
         olUsernames.add("sa");
         olUsernames.add("reiter");
         olUsernames.add("schreiter");
+
         username.setItems(olUsernames);
+
+        //setup zum testen
         username.getSelectionModel().select(0);
+        password.setText("ms-SQL-2022");
     }
 
     @FXML
     protected void onLoginButtonClick() {
-
-        DBConnector dbConnector = new DBConnector(username.getValue().toString(),"ms-SQL-2022");
+        checkPassword();
+        DBConnector dbConnector = new DBConnector(username.getValue().toString(),checkPassword());
         try {
             Connection connection = dbConnector.openConnection();
             connection.close();
@@ -39,12 +45,21 @@ public class loginViewController {
         }
     }
 
-
-// aktuell nicht in use
-    private String checkPassword(String password){
-        if(password.equals("test")){
+    private String checkPassword(){
+        if (password.getText().equals("ms-SQL-2022")){
             return "ms-SQL-2022";
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("E Rohr");
+            alert.setHeaderText("Passwort oder Nutzername falsch");
+            alert.setContentText("bitte 'test' eingeben");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
         }
-            return "ms-SQL-2022";
+
+        return "falsch";
     }
 }
