@@ -28,7 +28,7 @@ public class MainViewController {
 
 
     @FXML
-    private Button adresse_speichern;
+    private Button adresse_löschen;
     @FXML
     private Button adresse_suchen;
     @FXML
@@ -43,7 +43,7 @@ public class MainViewController {
     private TextField anrede_anredewort;
 
     @FXML
-    private Button anrede_speichern;
+    private Button anrede_löschen;
     @FXML
     private Button anrede_suchen;
     @FXML
@@ -73,7 +73,7 @@ public class MainViewController {
     private ComboBox fahrzeug_istVermietet;
 
     @FXML
-    private Button fahrzeug_speichern;
+    private Button fahrzeug_löschen;
     @FXML
     private Button fahrzeug_suchen;
     @FXML
@@ -88,7 +88,7 @@ public class MainViewController {
     private TextField fahrzeugfarbe_farbname;
 
     @FXML
-    private Button fahrzeugfarbe_speichern;
+    private Button fahrzeugfarbe_löschen;
     @FXML
     private Button fahrzeugfarbe_suchen;
     @FXML
@@ -105,7 +105,7 @@ public class MainViewController {
     private ComboBox fahrzeugmodell_fahrzeugtyp;
 
     @FXML
-    private Button fahrzeugmodell_speichern;
+    private Button fahrzeugmodell_löschen;
     @FXML
     private Button fahrzeugmodell_suchen;
     @FXML
@@ -120,7 +120,7 @@ public class MainViewController {
     private TextField fahrzeugtyp_bezeichnung;
 
     @FXML
-    private Button fahrzeugtyp_speichern;
+    private Button fahrzeugtyp_löschen;
     @FXML
     private Button fahrzeugtyp_suchen;
     @FXML
@@ -135,7 +135,7 @@ public class MainViewController {
     private ComboBox hatAnsprechpartner_farbe;
 
     @FXML
-    private Button hatAnsprechpartner_speichern;
+    private Button hatAnsprechpartner_löschen;
     @FXML
     private Button hatAnsprechpartner_suchen;
     @FXML
@@ -150,7 +150,7 @@ public class MainViewController {
     private ComboBox hatFarben_farbe;
 
     @FXML
-    private Button hatFarben_speichern;
+    private Button hatFarben_löschen;
     @FXML
     private Button hatFarben_suchen;
     @FXML
@@ -165,7 +165,7 @@ public class MainViewController {
     private TextField hersteller_name;
 
     @FXML
-    private Button hersteller_speichern;
+    private Button hersteller_löschen;
     @FXML
     private Button hersteller_suchen;
     @FXML
@@ -189,7 +189,7 @@ public class MainViewController {
     private ComboBox kunde_ansprechpartner;
 
     @FXML
-    private Button kunde_speichern;
+    private Button kunde_löschen;
     @FXML
     private Button kunde_suchen;
     @FXML
@@ -217,7 +217,7 @@ public class MainViewController {
     private ComboBox mitarbeiter_adresse;
 
     @FXML
-    private Button mitarbeiter_speichern;
+    private Button mitarbeiter_löschen;
     @FXML
     private Button mitarbeiter_anlegen;
     @FXML
@@ -1660,7 +1660,7 @@ public class MainViewController {
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
             vornameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVorname()));
             nachnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNachname()));
-            //adresseIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAdresse_id()).asObject());
+            adresseIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAdresse_id()).asObject());
             ansprechpartnerIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnsprechpartner_id()).asObject());
             anredeIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnrede_id()).asObject());
 
@@ -1689,7 +1689,7 @@ public class MainViewController {
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
             vornameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVorname()));
             nachnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNachname()));
-            //adresseIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAdresse_id()).asObject());
+            adresseIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAdresse_id()).asObject());
             lohnColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getLohn()).asObject());
             beschaeftigungsstartColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBeschaeftigungsstart().toString()));
             verfuegbarColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isVerfuegbar()).asObject());
