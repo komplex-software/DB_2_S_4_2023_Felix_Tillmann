@@ -53,7 +53,7 @@ public class MainViewController {
     // -------------- Anrede --------------
     // ------------ Fahrzeuge -------------
     @FXML
-    private ComboBox fahrzeug_id;
+    private ComboBox<Integer> fahrzeug_id;
     @FXML
     private TextField fahrzeug_kaufpreis;
     @FXML
@@ -1537,6 +1537,28 @@ public class MainViewController {
 
             tableView.getItems().add(fahrzeug);
         }
+
+        for(Fahrzeug fahrz: Fahrzeug.getFahrzeugList()) {
+            fahrzeug_id.getItems().add(fahrz.getId());
+        }
+        fahrzeug_id.setOnAction(event -> {
+            Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            Fahrzeug fahrz = Fahrzeug.getFahrzeugList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            // Set combo box modell
+            fahrzeug_modell.getItems().clear();
+            Fahrzeugmodell.getModellList().forEach(modell -> fahrzeug_modell.getItems().add(modell.getId()));
+            try {
+                fahrzeug_modell.getSelectionModel().select(fahrz.getModell_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fahrzeug_kaufpreis.setText(Float.toString(fahrz.getKaufpreis()));
+            fahrzeug_mietpreis.setText(Float.toString(fahrz.getMietpreis()));
+            /// TODO: fahrzeug_istVermietet sollte checkbox sein
+        });
     }
 
     private void showFahrzeugfarbe() {
