@@ -5,13 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.pti.db2projekt.MainViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.pti.db2projekt.MainViewController">
    <children>
       <TabPane prefHeight="451.0" prefWidth="1090.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -68,12 +67,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="fahrzeug_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="fahrzeug_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeuge">
                            <font>
                               <Font size="60.0" />
@@ -108,12 +102,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="fahrzeugfarbe_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="fahrzeugfarbe_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugfarbe">
                            <font>
                               <Font size="60.0" />
@@ -134,12 +123,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="fahrzeugmodell_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="fahrzeugmodell_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugmodell">
                            <font>
                               <Font size="60.0" />
@@ -162,12 +146,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="fahrzeugtyp_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="fahrzeugtyp_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugtyp">
                            <font>
                               <Font size="60.0" />
@@ -188,12 +167,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="hatAnsprechpartner_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="hatAnsprechpartner_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="HatAnsprechpartner">
                            <font>
                               <Font size="60.0" />
@@ -214,12 +188,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="hatFarben_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="hatFarben_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="HatFarben">
                            <font>
                               <Font size="60.0" />
@@ -240,12 +209,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="hersteller_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="hersteller_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Hersteller">
                            <font>
                               <Font size="60.0" />
@@ -266,12 +230,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="kunde_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="kunde_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Kunde">
                            <font>
                               <Font size="60.0" />
@@ -300,12 +259,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="mitarbeiter_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
+                        <TableView fx:id="mitarbeiter_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Mitarbeiter">
                            <font>
                               <Font size="60.0" />
