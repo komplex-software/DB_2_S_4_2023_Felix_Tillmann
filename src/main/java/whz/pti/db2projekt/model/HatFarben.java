@@ -14,6 +14,10 @@ public class HatFarben {
         hatFarbenList.add(hatFarben);
     }
 
+    public static void clearList() {
+        hatFarbenList.clear();
+    }
+
     public void setFahrzeug_id(int fahrzeug_id) {
         this.fahrzeug_id = fahrzeug_id;
     }
