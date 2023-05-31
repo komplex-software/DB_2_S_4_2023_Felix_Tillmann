@@ -433,9 +433,9 @@ public class MainViewController {
                 fahrzeug.setKaufpreis(Float.parseFloat(fahrzeug_kaufpreis.getText()));
                 fahrzeug.setMietpreis(Float.parseFloat(fahrzeug_mietpreis.getText()));
                 fahrzeug.setIstVermietet(fahrzeug_istVermietet.isSelected());
-                fahrzeug.setMietKunde_id(fahrzeug_mietkunde.getSelectionModel().getSelectedItem());
+                fahrzeug.setMietKunde_id(fahrzeug_mietkunde.getSelectionModel().getSelectedItem() != null ? fahrzeug_mietkunde.getSelectionModel().getSelectedItem() : -1);
                 fahrzeug.setIstVerkauft(fahrzeug_istVerkauft.isSelected());
-                fahrzeug.setKaufKunde_id(fahrzeug_kaufkunde.getSelectionModel().getSelectedItem());
+                fahrzeug.setKaufKunde_id(fahrzeug_kaufkunde.getSelectionModel().getSelectedItem() != null ? fahrzeug_kaufkunde.getSelectionModel().getSelectedItem() : -1);
                 fahrzeug.setLetzterTuev(Date.valueOf(fahrzeug_letzterTuev.getText()));
                 fahrzeug.setAnzVorherigeBesitzer(Integer.parseInt(fahrzeug_anzVorherigeBesitzer.getText()));
                 fahrzeug.setKilometerstand(Integer.parseInt(fahrzeug_kilometerstand.getText()));
@@ -530,6 +530,7 @@ public class MainViewController {
             HatFarben.printCount();
             Hersteller.printCount();
 
+            /*
             // Testen update
             Mitarbeiter m1 = Mitarbeiter.getMitarbeiterList().get(0);
             m1.setVorname("TEST");
@@ -641,7 +642,7 @@ public class MainViewController {
             Hersteller.clearList();
             loadHersteller(connection);
             //deleteHersteller(1);
-
+        */
 
             //connection.close();
         } catch (SQLException e) {
@@ -658,7 +659,7 @@ public class MainViewController {
         showFahrzeug();
         showFahrzeugfarbe();
         showFahrzeugmodell();
-        showFahrzeugtyp();
+        showFahrzeugtyp();          // DEBUG
         showAnsprechpartner();
         showHatFarben();
         showHersteller();
@@ -956,8 +957,8 @@ public class MainViewController {
 
         try {
             String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, fahrzeug.getModell_id());
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeug.getModell_id());
                 preparedStatement.setFloat(2, fahrzeug.getKaufpreis());
                 preparedStatement.setFloat(3, fahrzeug.getMietpreis());
                 preparedStatement.setBoolean(4, fahrzeug.isIstVermietet());
@@ -974,7 +975,6 @@ public class MainViewController {
                 preparedStatement.setInt(9, fahrzeug.getAnzVorherigeBesitzer());
                 preparedStatement.setInt(10, fahrzeug.getKilometerstand());
                 preparedStatement.setInt(11, fahrzeug.getId());
-
                 int rowsAffected = preparedStatement.executeUpdate();
                 if (rowsAffected > 0) {
                     System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " erfolgreich aktualisiert.");
@@ -1833,7 +1833,7 @@ public class MainViewController {
             // TODO: mietkunde und kaufkunde brauchen option "-1"
 
             fahrzeug_mietkunde.getItems().clear();
-            //Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
+            Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
             int selectedId = fahrz.getMietKunde_id();
             ObservableList<Integer> itemsMiet = fahrzeug_mietkunde.getItems();
             index = -1;
@@ -1848,7 +1848,7 @@ public class MainViewController {
             }
 
             fahrzeug_kaufkunde.getItems().clear();
-            //Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
+            Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
             selectedId = fahrz.getKaufKunde_id();
             ObservableList<Integer> itemsKauf = fahrzeug_kaufkunde.getItems();
             index = -1;
