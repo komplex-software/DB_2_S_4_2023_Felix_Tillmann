@@ -178,7 +178,7 @@ public class MainViewController {
     // ------------ Hersteller -------------
     // --------------- Kunde ---------------
     @FXML
-    private ComboBox kunde_id;
+    private ComboBox<Integer> kunde_id;
     @FXML
     private TextField kunde_vorname;
     @FXML
@@ -1788,6 +1788,40 @@ public class MainViewController {
 
             tableView.getItems().add(kunde);
         }
+
+        for(Kunde kund: Kunde.getKundeList()) {
+            kunde_id.getItems().add(kund.getId());
+        }
+        kunde_id.setOnAction(event -> {
+            Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            Kunde kund = Kunde.getKundeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            kunde_anrede.getItems().clear();
+            Anrede.getAnredeList().forEach(anred -> kunde_anrede.getItems().add(anred.getId()));
+            try {
+                kunde_anrede.getSelectionModel().select(kund.getAnrede_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            kunde_vorname.setText(kund.getVorname());
+            kunde_nachname.setText(kund.getNachname());
+            kunde_adresse.getItems().clear();
+            Adresse.getAdresseList().forEach(addr -> kunde_adresse.getItems().add(addr.getId()));
+            try {
+                kunde_adresse.getSelectionModel().select(kund.getAdresse_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            kunde_ansprechpartner.getItems().clear();
+            Mitarbeiter.getMitarbeiterList().forEach(mitarb -> kunde_ansprechpartner.getItems().add(mitarb.getId()));
+            try {
+                kunde_ansprechpartner.getSelectionModel().select(kund.getAnsprechpartner_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void showMitarbeiter() {
