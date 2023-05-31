@@ -16,11 +16,8 @@ import java.util.stream.Collectors;
 public class MainViewController {
     // ------------- Adresse --------------
     @FXML
-<<<<<<< Updated upstream
     private ComboBox<Integer> adresse_id;
     @FXML
-=======
->>>>>>> Stashed changes
     private TextField adresse_straße;
     @FXML
     private TextField adresse_stadt;
@@ -29,8 +26,6 @@ public class MainViewController {
     @FXML
     private TextField adresse_hausnummer;
 
-    @FXML
-    private ComboBox adresse_id;
 
     @FXML
     private Button adresse_speichern;

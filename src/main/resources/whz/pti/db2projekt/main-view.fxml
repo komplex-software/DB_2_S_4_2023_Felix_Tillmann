@@ -37,11 +37,8 @@
                         <TextField fx:id="adresse_postleitzahl" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_straße" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_hausnummer" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="179.0" />
-<<<<<<< Updated upstream
                         <ComboBox fx:id="adresse_id" layoutX="178.0" layoutY="102.0" prefHeight="26.0" prefWidth="178.0" />
-=======
-                        <ComboBox fx:id="adresse_id" layoutX="179.0" layoutY="102.0" prefHeight="25.0" prefWidth="176.0" />
->>>>>>> Stashed changes
+
                      </children>
                   </AnchorPane>
                </content>
