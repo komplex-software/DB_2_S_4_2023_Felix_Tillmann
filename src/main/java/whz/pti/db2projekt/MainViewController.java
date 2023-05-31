@@ -1560,7 +1560,25 @@ public class MainViewController {
             }
             fahrzeug_kaufpreis.setText(Float.toString(fahrz.getKaufpreis()));
             fahrzeug_mietpreis.setText(Float.toString(fahrz.getMietpreis()));
-            /// TODO: fahrzeug_istVermietet sollte checkbox sein
+            fahrzeug_istVermietet.setSelected(fahrz.isIstVermietet());
+            fahrzeug_istVerkauft.setSelected(fahrz.isIstVerkauft());
+            fahrzeug_mietkunde.getItems().clear();
+            Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
+            try {
+                fahrzeug_mietkunde.getSelectionModel().select(fahrz.getMietKunde_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fahrzeug_kaufkunde.getItems().clear();
+            Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
+            try {
+                fahrzeug_kaufkunde.getSelectionModel().select(fahrz.getKaufKunde_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fahrzeug_letzterTuev.setText(fahrz.getLetzterTuev().toString());
+            fahrzeug_anzVorherigeBesitzer.setText(""+fahrz.getAnzVorherigeBesitzer());
+            fahrzeug_kilometerstand.setText(""+fahrz.getKilometerstand());
         });
     }
 
