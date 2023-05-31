@@ -1434,6 +1434,9 @@ public class MainViewController {
                     .collect(Collectors.toList())
                     .get(0);
             adresse_straße.setText(adr.getStrasse());
+            adresse_stadt.setText(adr.getStadt());
+            adresse_postleitzahl.setText(adr.getPostleitzahl());
+            adresse_hausnummer.setText(adr.getHausnummer());
         });
     }
 
