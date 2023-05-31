@@ -28,7 +28,7 @@ public class MainViewController {
 
 
     @FXML
-    private Button adresse_löschen;
+    private Button adresse_speichern;
     @FXML
     private Button adresse_suchen;
     @FXML
@@ -43,7 +43,7 @@ public class MainViewController {
     private TextField anrede_anredewort;
 
     @FXML
-    private Button anrede_löschen;
+    private Button anrede_speichern;
     @FXML
     private Button anrede_suchen;
     @FXML
@@ -73,7 +73,7 @@ public class MainViewController {
     private ComboBox fahrzeug_istVermietet;
 
     @FXML
-    private Button fahrzeug_löschen;
+    private Button fahrzeug_speichern;
     @FXML
     private Button fahrzeug_suchen;
     @FXML
@@ -88,7 +88,7 @@ public class MainViewController {
     private TextField fahrzeugfarbe_farbname;
 
     @FXML
-    private Button fahrzeugfarbe_löschen;
+    private Button fahrzeugfarbe_speichern;
     @FXML
     private Button fahrzeugfarbe_suchen;
     @FXML
@@ -105,7 +105,7 @@ public class MainViewController {
     private ComboBox fahrzeugmodell_fahrzeugtyp;
 
     @FXML
-    private Button fahrzeugmodell_löschen;
+    private Button fahrzeugmodell_speichern;
     @FXML
     private Button fahrzeugmodell_suchen;
     @FXML
@@ -120,7 +120,7 @@ public class MainViewController {
     private TextField fahrzeugtyp_bezeichnung;
 
     @FXML
-    private Button fahrzeugtyp_löschen;
+    private Button fahrzeugtyp_speichern;
     @FXML
     private Button fahrzeugtyp_suchen;
     @FXML
@@ -135,7 +135,7 @@ public class MainViewController {
     private ComboBox hatAnsprechpartner_farbe;
 
     @FXML
-    private Button hatAnsprechpartner_löschen;
+    private Button hatAnsprechpartner_speichern;
     @FXML
     private Button hatAnsprechpartner_suchen;
     @FXML
@@ -150,7 +150,7 @@ public class MainViewController {
     private ComboBox hatFarben_farbe;
 
     @FXML
-    private Button hatFarben_löschen;
+    private Button hatFarben_speichern;
     @FXML
     private Button hatFarben_suchen;
     @FXML
@@ -165,7 +165,7 @@ public class MainViewController {
     private TextField hersteller_name;
 
     @FXML
-    private Button hersteller_löschen;
+    private Button hersteller_speichern;
     @FXML
     private Button hersteller_suchen;
     @FXML
@@ -189,7 +189,7 @@ public class MainViewController {
     private ComboBox kunde_ansprechpartner;
 
     @FXML
-    private Button kunde_löschen;
+    private Button kunde_speichern;
     @FXML
     private Button kunde_suchen;
     @FXML
@@ -217,7 +217,7 @@ public class MainViewController {
     private ComboBox mitarbeiter_adresse;
 
     @FXML
-    private Button mitarbeiter_löschen;
+    private Button mitarbeiter_speichern;
     @FXML
     private Button mitarbeiter_anlegen;
     @FXML

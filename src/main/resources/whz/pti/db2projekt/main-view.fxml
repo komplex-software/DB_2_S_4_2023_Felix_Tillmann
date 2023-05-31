@@ -30,7 +30,7 @@
                         <Label layoutX="14.0" layoutY="236.0" text="Hausnummer" />
                         <Label layoutX="14.0" layoutY="140.0" text="Straße" />
                         <Button fx:id="adresse_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="adresse_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="adresse_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="adresse_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <TextField fx:id="adresse_stadt" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_postleitzahl" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
@@ -55,7 +55,7 @@
                         <Label layoutX="14.0" layoutY="106.0" text="ID" />
                         <Label layoutX="14.0" layoutY="140.0" text="Anredewort" />
                         <Button fx:id="anrede_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="anrede_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="anrede_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="anrede_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <TextField fx:id="anrede_anredewort" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
                         <ComboBox fx:id="anrede_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="180.0" />
@@ -82,7 +82,7 @@
                         <Label layoutX="14.0" layoutY="294.0" text="LetzterTüv" />
                         <Label layoutX="14.0" layoutY="134.0" text="Modell" />
                         <Button fx:id="fahrzeug_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="fahrzeug_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="fahrzeug_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="fahrzeug_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="fahrzeug_modell" layoutX="176.0" layoutY="130.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="fahrzeug_istVermietet" layoutX="177.0" layoutY="226.0" prefHeight="25.0" prefWidth="181.0" />
@@ -111,7 +111,7 @@
                         <Label layoutX="14.0" layoutY="106.0" text="ID" />
                         <Label layoutX="14.0" layoutY="140.0" text="Farbname" />
                         <Button fx:id="fahrzeugfarbe_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="fahrzeugfarbe_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="fahrzeugfarbe_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="fahrzeugfarbe_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <TextField fx:id="fahrzeugfarbe_farbname" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
                         <ComboBox fx:id="fahrzeugfarbe_id" layoutX="176.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
@@ -133,7 +133,7 @@
                         <Label layoutX="16.0" layoutY="140.0" text="Hersteller" />
                         <Label layoutX="15.0" layoutY="173.0" text="Fahrzeugtyp" />
                         <Button fx:id="fahrzeugmodell_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="fahrzeugmodell_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="fahrzeugmodell_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="fahrzeugmodell_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="fahrzeugmodell_fahrzeugtyp" layoutX="177.0" layoutY="169.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="fahrzeugmodell_hersteller" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
@@ -155,7 +155,7 @@
                         <Label layoutX="14.0" layoutY="106.0" text="ID" />
                         <Label layoutX="15.0" layoutY="139.0" text="Bezeichnung" />
                         <Button fx:id="fahrzeugtyp_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="fahrzeugtyp_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="fahrzeugtyp_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="fahrzeugtyp_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <TextField fx:id="fahrzeugtyp_bezeichnung" layoutX="178.0" layoutY="135.0" prefHeight="25.0" prefWidth="179.0" />
                         <ComboBox fx:id="fahrzeugtyp_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
@@ -176,7 +176,7 @@
                         <Label layoutX="14.0" layoutY="106.0" text="Fahrzeug" />
                         <Label layoutX="14.0" layoutY="140.0" text="Farbe" />
                         <Button fx:id="hatAnsprechpartner_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="hatAnsprechpartner_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="hatAnsprechpartner_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="hatAnsprechpartner_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="hatAnsprechpartner_farbe" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="hatAnsprechpartner_fahrzeug" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
@@ -197,7 +197,7 @@
                         <Label layoutX="14.0" layoutY="106.0" text="Fahrzeug" />
                         <Label layoutX="14.0" layoutY="140.0" text="Farbe" />
                         <Button fx:id="hatFarben_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="hatFarben_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="hatFarben_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="hatFarben_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="hatFarben_farbe" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="hatFarben_fahrzeug" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
@@ -218,7 +218,7 @@
                         <Label layoutX="14.0" layoutY="106.0" text="ID" />
                         <Label layoutX="15.0" layoutY="140.0" text="Name" />
                         <Button fx:id="hersteller_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="hersteller_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="hersteller_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="hersteller_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <TextField fx:id="hersteller_name" layoutX="178.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
                         <ComboBox fx:id="hersteller_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
@@ -242,7 +242,7 @@
                         <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
                         <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
                         <Button fx:id="kunde_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="kunde_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="kunde_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="kunde_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="kunde_anrede" layoutX="178.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="kunde_adresse" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
@@ -274,7 +274,7 @@
                         <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
                         <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
                         <Button fx:id="mitarbeiter_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
-                        <Button fx:id="mitarbeiter_löschen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Löschen" />
+                        <Button fx:id="mitarbeiter_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="mitarbeiter_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="mitarbeiter_anrede" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="mitarbeiter_adresse" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
