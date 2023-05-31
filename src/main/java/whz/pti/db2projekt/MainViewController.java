@@ -283,6 +283,10 @@ public class MainViewController {
             fm1.setFahrzeugtyp_id(1);
             updateFahrzeugmodelle(fm1);
 
+            Fahrzeugtyp ft1 = Fahrzeugtyp.getTypList().get(0);
+            ft1.setBezeichnung("BRUMM-BRUMM");
+            updateFahrzeugtypen(ft1);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -656,6 +660,30 @@ public class MainViewController {
             }
         } finally {
             // Release resources
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void updateFahrzeugtypen(Fahrzeugtyp fahrzeugtyp) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "UPDATE Fahrzeugtyp SET bezeichnung = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, fahrzeugtyp.getBezeichnung());
+            preparedStatement.setInt(2, fahrzeugtyp.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Fahrzeugtyp mit ID " + fahrzeugtyp.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Fahrzeugtyp mit ID " + fahrzeugtyp.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
