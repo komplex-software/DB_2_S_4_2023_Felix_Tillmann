@@ -1,5 +1,7 @@
 package whz.pti.db2projekt.model;
 
+import javafx.beans.property.Property;
+
 import java.util.ArrayList;
 
 public class Adresse {

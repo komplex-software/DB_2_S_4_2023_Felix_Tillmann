@@ -1,5 +1,6 @@
 package whz.pti.db2projekt;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -1293,49 +1294,39 @@ public class MainViewController {
     }
 
 
-    private void showAdresse(){
+    private void showAdresse() {
+        TableView<Adresse> tableView = adresse_anzeige;
+        TableColumn<Adresse, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Adresse, String> strasseColumn = new TableColumn<>("Straße");
+        TableColumn<Adresse, String> stadtColumn = new TableColumn<>("Stadt");
+        TableColumn<Adresse, String> postleitzahlColumn = new TableColumn<>("Postleitzahl");
+        TableColumn<Adresse, String> hausnummerColumn = new TableColumn<>("Hausnummer");
 
-        Collection<String> listID = new ArrayList<>();
-        Collection<String> straßeList = new ArrayList<>();
-        Collection<String> stadtList = new ArrayList<>();
-        Collection<String> plzList = new ArrayList<>();
-        Collection<String> hnrList = new ArrayList<>();
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        strasseColumn.setCellValueFactory(new PropertyValueFactory<>("strasse"));
+        stadtColumn.setCellValueFactory(new PropertyValueFactory<>("stadt"));
+        postleitzahlColumn.setCellValueFactory(new PropertyValueFactory<>("postleitzahl"));
+        hausnummerColumn.setCellValueFactory(new PropertyValueFactory<>("hausnummer"));
 
-        Adresse.getAdresseList().forEach(e->{listID.add(""+e.getId());});
-        Adresse.getAdresseList().forEach(e->{straßeList.add(""+e.getStrasse());});
-        Adresse.getAdresseList().forEach(e->{stadtList.add(""+e.getStadt());});
-        Adresse.getAdresseList().forEach(e->{plzList.add(""+e.getPostleitzahl());});
-        Adresse.getAdresseList().forEach(e->{hnrList.add(""+e.getHausnummer());});
+        tableView.getColumns().addAll(idColumn, strasseColumn, stadtColumn, postleitzahlColumn, hausnummerColumn);
 
-        ObservableList<String> ids = FXCollections.observableArrayList(listID);
-        ObservableList<String> straßen = FXCollections.observableArrayList(straßeList);
-        ObservableList<String> stadt = FXCollections.observableArrayList(stadtList);
-        ObservableList<String> plz = FXCollections.observableArrayList(plzList);
-        ObservableList<String> hnr = FXCollections.observableArrayList(hnrList);
+        ArrayList<Adresse> adresseList = Adresse.getAdresseList();
 
-        TableColumn<String, String> idC = new TableColumn<>("ID");
-        TableColumn<String, String> straßeC = new TableColumn<>("Straße");
-        TableColumn<String, String> stadtC = new TableColumn<>("Stadt");
-        TableColumn<String, String> plzC = new TableColumn<>("Plz");
-        TableColumn<String, String> hnrC = new TableColumn<>("Hnr");
+        for (Adresse adresse : adresseList) {
+            TableRow<Adresse> row = new TableRow<>();
 
-        adresse_anzeige.getColumns().addAll(idC, straßeC,stadtC,plzC,hnrC);
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            strasseColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStrasse()));
+            stadtColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStadt()));
+            postleitzahlColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPostleitzahl()));
+            hausnummerColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHausnummer()));
 
-        idC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
-        straßeC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
-        stadtC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
-        plzC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
-        hnrC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+            tableView.getItems().add(adresse);
+        }
 
-
-        adresse_anzeige.setItems(ids);
-        adresse_anzeige.setItems(straßen);
-        adresse_anzeige.setItems(stadt);
-        adresse_anzeige.setItems(plz);
-        adresse_anzeige.setItems(hnr);
-
-
-       // adresse_anzeige.setItems(oListStavaka);
+        // Füge die TableView zur gewünschten Oberfläche hinzu
+        // Zum Beispiel:
+        // root.getChildren().add(tableView);
     }
 
 
@@ -1350,12 +1341,13 @@ public class MainViewController {
         TableColumn plzC = new TableColumn("Plz");
         TableColumn hnrC = new TableColumn("Hnr");
 
-        idC.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        idC.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        /*
         straßeC.setCellValueFactory(new PropertyValueFactory<>("Straße"));
         stadtC.setCellValueFactory(new PropertyValueFactory<>("Stadt"));
         plzC.setCellValueFactory(new PropertyValueFactory<>("Plz"));
         hnrC.setCellValueFactory(new PropertyValueFactory<>("Hnr"));
-
+*/
         adresse_anzeige.getColumns().addAll(idC, straßeC,stadtC,plzC,hnrC);
     }
 
