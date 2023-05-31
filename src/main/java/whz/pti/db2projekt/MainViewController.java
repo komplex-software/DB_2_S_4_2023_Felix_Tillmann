@@ -101,7 +101,7 @@ public class MainViewController {
     // ---------- Fahrzeugfarbe -----------
     // ---------- Fahrzeugmodell ----------
     @FXML
-    private ComboBox fahrzeugmodell_id;
+    private ComboBox<Integer> fahrzeugmodell_id;
     @FXML
     private ComboBox fahrzeugmodell_hersteller;
     @FXML
@@ -1632,6 +1632,31 @@ public class MainViewController {
 
             tableView.getItems().add(modell);
         }
+
+        for(Fahrzeugmodell fahrzmod: Fahrzeugmodell.getModellList()) {
+            fahrzeugmodell_id.getItems().add(fahrzmod.getId());
+        }
+        fahrzeugmodell_id.setOnAction(event -> {
+            Integer selected = fahrzeugmodell_id.getSelectionModel().getSelectedItem();
+            Fahrzeugmodell fahrzmod = Fahrzeugmodell.getModellList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            fahrzeugmodell_fahrzeugtyp.getItems().clear();
+            Fahrzeugtyp.getTypList().forEach(typ -> fahrzeugmodell_fahrzeugtyp.getItems().add(typ.getId()));
+            try {
+                fahrzeugmodell_fahrzeugtyp.getSelectionModel().select(fahrzmod.getFahrzeugtyp_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fahrzeugmodell_hersteller.getItems().clear();
+            Hersteller.getHerstellerList().forEach(hersteller -> fahrzeugmodell_hersteller.getItems().add(hersteller.getId()));
+            try {
+                fahrzeugmodell_hersteller.getSelectionModel().select(fahrzmod.getHersteller_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void showFahrzeugtyp() {
