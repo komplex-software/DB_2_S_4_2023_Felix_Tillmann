@@ -118,7 +118,7 @@ public class MainViewController {
     // ---------- Fahrzeugmodell ----------
     // ----------- Fahrzeugtyp ------------
     @FXML
-    private ComboBox fahrzeugtyp_id;
+    private ComboBox<Integer> fahrzeugtyp_id;
     @FXML
     private TextField fahrzeugtyp_bezeichnung;
 
@@ -1676,6 +1676,18 @@ public class MainViewController {
 
             tableView.getItems().add(typ);
         }
+
+        for(Fahrzeugtyp fahrztyp: Fahrzeugtyp.getTypList()) {
+            fahrzeugtyp_id.getItems().add(fahrztyp.getId());
+        }
+        fahrzeugtyp_id.setOnAction(event -> {
+            Integer selected = fahrzeugtyp_id.getSelectionModel().getSelectedItem();
+            Fahrzeugtyp fahrztyp = Fahrzeugtyp.getTypList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            fahrzeugtyp_bezeichnung.setText(fahrztyp.getBezeichnung());
+        });
     }
 
     private void showAnsprechpartner() {
