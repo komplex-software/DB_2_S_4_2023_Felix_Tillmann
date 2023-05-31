@@ -11,6 +11,26 @@ public class Fahrzeugtyp {
         this.bezeichnung = bezeichnung;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getBezeichnung() {
+        return bezeichnung;
+    }
+
+    public static ArrayList<Fahrzeugtyp> getTypList() {
+        return typList;
+    }
+
     private static ArrayList<Fahrzeugtyp> typList = new ArrayList<>();
     public static void addFahrzeugtyp(Fahrzeugtyp modell) {
         typList.add(modell);

@@ -13,6 +13,27 @@ public class HatFarben {
     public static void addHatFarbe(HatFarben hatFarben) {
         hatFarbenList.add(hatFarben);
     }
+
+    public void setFahrzeug_id(int fahrzeug_id) {
+        this.fahrzeug_id = fahrzeug_id;
+    }
+
+    public void setFarb_id(int farb_id) {
+        this.farb_id = farb_id;
+    }
+
+    public int getFahrzeug_id() {
+        return fahrzeug_id;
+    }
+
+    public int getFarb_id() {
+        return farb_id;
+    }
+
+    public static ArrayList<HatFarben> getHatFarbenList() {
+        return hatFarbenList;
+    }
+
     public static void printCount() {
         System.out.println("Anzahl HatFarben: " + hatFarbenList.stream().count());
     }
