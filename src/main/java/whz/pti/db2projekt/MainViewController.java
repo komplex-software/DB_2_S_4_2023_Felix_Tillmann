@@ -1,11 +1,14 @@
 package whz.pti.db2projekt;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import whz.pti.db2projekt.model.*;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class MainViewController {
     // ------------- Adresse --------------
@@ -676,15 +679,29 @@ public class MainViewController {
 
 
     private void showAdresse(){
+        setUpAdressTable();
+        ArrayList<Adresse> listStavaka = Adresse.getAdresseList();
+        ObservableList<String> oListStavaka = FXCollections.observableArrayList();
+        for (Adresse stavka : listStavaka) {
+            oListStavaka.add("heil");
+        }
 
-        TableColumn nameColumn = new TableColumn("Name");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        TableColumn surnameColumn = new TableColumn("Surname");
-        surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
-
-        adresse_anzeige.getColumns().addAll(nameColumn, surnameColumn);
+        adresse_anzeige.setItems(oListStavaka);
     }
+    private void setUpAdressTable(){
+        TableColumn idC = new TableColumn("ID");
+        TableColumn straßeC = new TableColumn("Straße");
+        TableColumn stadtC = new TableColumn("Stadt");
+        TableColumn plzC = new TableColumn("Plz");
+        TableColumn hnrC = new TableColumn("Hnr");
 
+        idC.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        straßeC.setCellValueFactory(new PropertyValueFactory<>("Straße"));
+        stadtC.setCellValueFactory(new PropertyValueFactory<>("Stadt"));
+        plzC.setCellValueFactory(new PropertyValueFactory<>("Plz"));
+        hnrC.setCellValueFactory(new PropertyValueFactory<>("Hnr"));
+
+        adresse_anzeige.getColumns().addAll(idC, straßeC,stadtC,plzC,hnrC);
+    }
 
 }
