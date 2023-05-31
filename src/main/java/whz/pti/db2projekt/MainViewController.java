@@ -2,7 +2,6 @@ package whz.pti.db2projekt;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import whz.pti.db2projekt.model.*;
 
 import java.sql.Connection;
@@ -56,6 +55,7 @@ public class MainViewController {
             loadFahrzeugmodelle(connection);
             loadFahrzeugtypen(connection);
             loadHatAnsprechpartner(connection);
+            loadHatFarbe(connection);
 
             // Testen der Daten
             Mitarbeiter.printCount();
@@ -67,6 +67,7 @@ public class MainViewController {
             Fahrzeugmodell.printCount();
             Fahrzeugtyp.printCount();
             HatAnsprechpartner.printCount();
+            HatFarben.printCount();
 
             connection.close();
         } catch (SQLException e) {
@@ -209,6 +210,18 @@ public class MainViewController {
         }
     }
 
+    private void loadHatFarbe(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM HatFarben;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            HatFarben newHatFarben = new HatFarben(
+                    rs.getInt("fahrzeug_id"),
+                    rs.getInt("farb_id")
+            );
+            HatFarben.addHatFarbe(newHatFarben);
+        }
+    }
 
 
     public void setConnection(Connection connection) {
