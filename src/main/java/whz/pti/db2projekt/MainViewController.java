@@ -2,6 +2,7 @@ package whz.pti.db2projekt;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import whz.pti.db2projekt.model.*;
 
 import java.sql.*;
@@ -295,6 +296,8 @@ public class MainViewController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        showAdresse();
     }
 
     private void loadMitarbeiter(Connection connection) throws SQLException {
@@ -725,4 +728,18 @@ public class MainViewController {
     public void setPermissions(UserPermissions permissions) {
         this.permissions = permissions;
     }
+
+
+    private void showAdresse(){
+
+        TableColumn nameColumn = new TableColumn("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn surnameColumn = new TableColumn("Surname");
+        surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
+
+        adresse_anzeige.getColumns().addAll(nameColumn, surnameColumn);
+    }
+
+
 }

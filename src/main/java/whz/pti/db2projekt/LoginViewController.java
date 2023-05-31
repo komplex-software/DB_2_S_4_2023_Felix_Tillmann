@@ -72,6 +72,10 @@ public class LoginViewController {
             stage.setScene(scene);
             stage.show();
 
+
+
+
+
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);

@@ -16,6 +16,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Autohaendler");
         stage.setScene(scene);
         stage.setUserData(scene);
+        stage.setUserData(stage);
         stage.show();
 
     }
