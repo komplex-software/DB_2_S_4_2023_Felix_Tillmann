@@ -296,6 +296,11 @@ public class MainViewController {
             hf.setFarb_id(1);
             updateHatFarbe(hf);
 
+            Kunde k1 = Kunde.getKundeList().get(0);
+            k1.setVorname("DÜNSCH");
+            updateKunde(k1);
+
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -747,6 +752,36 @@ public class MainViewController {
             }
         }
     }
+
+    private void updateKunde(Kunde kunde) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "UPDATE Kunde SET Vorname = ?, Nachname = ?, adresse_id = ?, ansprechpartner_id = ?, anrede_id = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, kunde.getVorname());
+            preparedStatement.setString(2, kunde.getNachname());
+            preparedStatement.setInt(3, kunde.getAdresse_id());
+            preparedStatement.setInt(4, kunde.getAnsprechpartner_id());
+            preparedStatement.setInt(5, kunde.getAnrede_id());
+            preparedStatement.setInt(6, kunde.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Kunde mit ID " + kunde.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Kunde mit ID " + kunde.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+
 
 
     public void setConnection(Connection connection) {
