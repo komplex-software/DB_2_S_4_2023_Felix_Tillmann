@@ -287,6 +287,23 @@ public class MainViewController {
             fm1.setFahrzeugtyp_id(1);
             updateFahrzeugmodelle(fm1);
 
+            Fahrzeugtyp ft1 = Fahrzeugtyp.getTypList().get(0);
+            ft1.setBezeichnung("BRUMM-BRUMM");
+            updateFahrzeugtypen(ft1);
+
+            HatAnsprechpartner ha1 = HatAnsprechpartner.getHatAnsprechpartnerList().get(0);
+            ha1.setMitarbeiter_id(1);
+            updateHatAnsprechpartner(ha1);
+
+            HatFarben hf = HatFarben.getHatFarbenList().get(0);
+            hf.setFarb_id(1);
+            updateHatFarbe(hf);
+
+            Kunde k1 = Kunde.getKundeList().get(0);
+            k1.setVorname("DÜNSCH");
+            updateKunde(k1);
+
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -667,6 +684,107 @@ public class MainViewController {
             }
         }
     }
+
+    private void updateFahrzeugtypen(Fahrzeugtyp fahrzeugtyp) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "UPDATE Fahrzeugtyp SET bezeichnung = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, fahrzeugtyp.getBezeichnung());
+            preparedStatement.setInt(2, fahrzeugtyp.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Fahrzeugtyp mit ID " + fahrzeugtyp.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Fahrzeugtyp mit ID " + fahrzeugtyp.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void updateHatAnsprechpartner(HatAnsprechpartner hatAnsprechpartner) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "UPDATE HatAnsprechpartner SET mitarbeiter_id = ? WHERE kunde_id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, hatAnsprechpartner.getMitarbeiter_id());
+            preparedStatement.setInt(2, hatAnsprechpartner.getKunde_id());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("HatAnsprechpartner für Kunde mit ID " + hatAnsprechpartner.getKunde_id() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("HatAnsprechpartner für Kunde mit ID " + hatAnsprechpartner.getKunde_id() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void updateHatFarbe(HatFarben hatFarben) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "UPDATE HatFarben SET farb_id = ? WHERE fahrzeug_id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, hatFarben.getFarb_id());
+            preparedStatement.setInt(2, hatFarben.getFahrzeug_id());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("HatFarben für Fahrzeug mit ID " + hatFarben.getFahrzeug_id() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("HatFarben für Fahrzeug mit ID " + hatFarben.getFahrzeug_id() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void updateKunde(Kunde kunde) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "UPDATE Kunde SET Vorname = ?, Nachname = ?, adresse_id = ?, ansprechpartner_id = ?, anrede_id = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, kunde.getVorname());
+            preparedStatement.setString(2, kunde.getNachname());
+            preparedStatement.setInt(3, kunde.getAdresse_id());
+            preparedStatement.setInt(4, kunde.getAnsprechpartner_id());
+            preparedStatement.setInt(5, kunde.getAnrede_id());
+            preparedStatement.setInt(6, kunde.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Kunde mit ID " + kunde.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Kunde mit ID " + kunde.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+
 
 
     public void setConnection(Connection connection) {
