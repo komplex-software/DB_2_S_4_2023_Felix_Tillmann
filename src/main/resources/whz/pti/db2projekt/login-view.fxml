@@ -4,11 +4,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="314.0" prefWidth="388.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.pti.db2projekt.mainViewController">
+<VBox alignment="CENTER" prefHeight="314.0" prefWidth="388.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.pti.db2projekt.loginViewController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -19,7 +19,7 @@
          </font>
       </Label>
       <ComboBox fx:id="username" accessibleText="admin&#10;reiter&#10;schreiter" prefHeight="25.0" prefWidth="361.0" promptText="Nutzername" />
-      <TextField fx:id="password" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="273.0" promptText="Passwort" />
-      <Button fx:id="login" mnemonicParsing="false" prefHeight="25.0" prefWidth="358.0" text="Einloggen" />
+      <PasswordField fx:id="password" promptText="Passwort" />
+      <Button fx:id="login" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="25.0" prefWidth="358.0" text="Einloggen" />
    </children>
 </VBox>

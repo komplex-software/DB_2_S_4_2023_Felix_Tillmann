@@ -5,11 +5,16 @@ import java.util.logging.Logger;
 
 public class DBConnector {
     private final Logger logger = Logger.getLogger(this.getClass().getName());
-    private final static String DB_URL = "jdbc:sqlserver://localhost;databaseName=Autohaendler;user=sa;password=ms-SQL-2022;trustServerCertificate=true;";
+    private static String DB_URL;
     private Connection dbConnection;
 
-    public DBConnector() {
+    public DBConnector(String username, String password) {
+        setDBUrl(username,password);
         registerDriver();
+    }
+
+    private void setDBUrl(String username, String password) {
+        DB_URL = "jdbc:sqlserver://localhost;databaseName=Autohaendler;user="+ username +";password=" + password + ";trustServerCertificate=true;";
     }
 
     private void registerDriver () {
@@ -23,9 +28,7 @@ public class DBConnector {
     }
     public Connection openConnection() {
         try {
-            System.out.println("heil");
             dbConnection = DriverManager.getConnection(DB_URL);
-            System.out.println("heilo");
             logger.info("Connection to database established");
         } catch(SQLException e) {
             logger.severe("Error while trying to execute query");
