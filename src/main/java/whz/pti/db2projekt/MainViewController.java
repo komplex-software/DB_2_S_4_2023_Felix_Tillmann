@@ -1,7 +1,6 @@
 package whz.pti.db2projekt;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -380,6 +379,8 @@ public class MainViewController {
         }
 
         showAdresse();
+        showAnrede();
+        showFahrzeug();
     }
 
     private void loadMitarbeiter(Connection connection) throws SQLException {
@@ -1406,12 +1407,6 @@ public class MainViewController {
         TableColumn<Adresse, String> postleitzahlColumn = new TableColumn<>("Postleitzahl");
         TableColumn<Adresse, String> hausnummerColumn = new TableColumn<>("Hausnummer");
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        strasseColumn.setCellValueFactory(new PropertyValueFactory<>("strasse"));
-        stadtColumn.setCellValueFactory(new PropertyValueFactory<>("stadt"));
-        postleitzahlColumn.setCellValueFactory(new PropertyValueFactory<>("postleitzahl"));
-        hausnummerColumn.setCellValueFactory(new PropertyValueFactory<>("hausnummer"));
-
         tableView.getColumns().addAll(idColumn, strasseColumn, stadtColumn, postleitzahlColumn, hausnummerColumn);
 
         ArrayList<Adresse> adresseList = Adresse.getAdresseList();
@@ -1427,32 +1422,63 @@ public class MainViewController {
 
             tableView.getItems().add(adresse);
         }
-
-        // Füge die TableView zur gewünschten Oberfläche hinzu
-        // Zum Beispiel:
-        // root.getChildren().add(tableView);
     }
 
+    private void showAnrede() {
+        TableView<Anrede> tableView = anrede_anzeige;
+        TableColumn<Anrede, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Anrede, String> anredewortColumn = new TableColumn<>("Anredewort");
 
+        tableView.getColumns().addAll(idColumn, anredewortColumn);
 
+        ArrayList<Anrede> anredeList = Anrede.getAnredeList();
 
+        for (Anrede anrede : anredeList) {
+            TableRow<Anrede> row = new TableRow<>();
 
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            anredewortColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnredewort()));
 
-    private void setUpAdressTable(){
-        TableColumn idC = new TableColumn("ID");
-        TableColumn straßeC = new TableColumn("Straße");
-        TableColumn stadtC = new TableColumn("Stadt");
-        TableColumn plzC = new TableColumn("Plz");
-        TableColumn hnrC = new TableColumn("Hnr");
-
-        idC.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        /*
-        straßeC.setCellValueFactory(new PropertyValueFactory<>("Straße"));
-        stadtC.setCellValueFactory(new PropertyValueFactory<>("Stadt"));
-        plzC.setCellValueFactory(new PropertyValueFactory<>("Plz"));
-        hnrC.setCellValueFactory(new PropertyValueFactory<>("Hnr"));
-*/
-        adresse_anzeige.getColumns().addAll(idC, straßeC,stadtC,plzC,hnrC);
+            tableView.getItems().add(anrede);
+        }
     }
+
+    private void showFahrzeug() {
+        TableView<Fahrzeug> tableView = fahrzeug_anzeige;
+        TableColumn<Fahrzeug, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Fahrzeug, String> modellColumn = new TableColumn<>("Modell");
+        TableColumn<Fahrzeug, Double> kaufpreisColumn = new TableColumn<>("Kaufpreis");
+        TableColumn<Fahrzeug, Double> mietpreisColumn = new TableColumn<>("Mietpreis");
+        TableColumn<Fahrzeug, Boolean> istVermietetColumn = new TableColumn<>("Ist vermietet");
+        TableColumn<Fahrzeug, String> mietKundeColumn = new TableColumn<>("Mietkunde");
+        TableColumn<Fahrzeug, Boolean> istVerkauftColumn = new TableColumn<>("Ist verkauft");
+        TableColumn<Fahrzeug, String> kaufKundeColumn = new TableColumn<>("Kaufkunde");
+        TableColumn<Fahrzeug, String> letzterTuevColumn = new TableColumn<>("Letzter TÜV");
+        TableColumn<Fahrzeug, Integer> anzVorherigeBesitzerColumn = new TableColumn<>("Anzahl vorherige Besitzer");
+        TableColumn<Fahrzeug, Integer> kilometerstandColumn = new TableColumn<>("Kilometerstand");
+
+        tableView.getColumns().addAll(idColumn, modellColumn, kaufpreisColumn, mietpreisColumn, istVermietetColumn, mietKundeColumn, istVerkauftColumn, kaufKundeColumn, letzterTuevColumn, anzVorherigeBesitzerColumn, kilometerstandColumn);
+
+        ArrayList<Fahrzeug> fahrzeugList = Fahrzeug.getFahrzeugList();
+
+        for (Fahrzeug fahrzeug : fahrzeugList) {
+            TableRow<Fahrzeug> row = new TableRow<>();
+
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            modellColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getModell_id()));
+            kaufpreisColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getKaufpreis()).asObject());
+            mietpreisColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getMietpreis()).asObject());
+            istVermietetColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isIstVermietet()).asObject());
+            mietKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getMietKunde_id()));
+            istVerkauftColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isIstVerkauft()).asObject());
+            kaufKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getKaufKunde_id()));
+            letzterTuevColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLetzterTuev().toString()));
+            anzVorherigeBesitzerColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnzVorherigeBesitzer()).asObject());
+            kilometerstandColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getKilometerstand()).asObject());
+
+            tableView.getItems().add(fahrzeug);
+        }
+    }
+
 
 }
