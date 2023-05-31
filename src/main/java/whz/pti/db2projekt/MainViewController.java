@@ -77,6 +77,11 @@ public class MainViewController {
             h1.setName("TEST");
             updateHersteller(h1);
 
+            Adresse a1 = Adresse.getAdresseList().get(0);
+            a1.setStadt("TEST");
+            updateAdressen(a1);
+
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -245,6 +250,9 @@ public class MainViewController {
         }
     }
 
+    // TODO:
+    // return in allen updates falls keine write permissions
+
     private void updateHersteller(Hersteller hersteller) throws SQLException {
         PreparedStatement preparedStatement = null;
 
@@ -298,6 +306,34 @@ public class MainViewController {
             }
         }
     }
+
+    private void updateAdressen(Adresse adresse) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "UPDATE Adresse SET straße = ?, stadt = ?, postleitzahl = ?, hausnummer = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, adresse.getStrasse());
+            preparedStatement.setString(2, adresse.getStadt());
+            preparedStatement.setString(3, adresse.getPostleitzahl());
+            preparedStatement.setString(4, adresse.getHausnummer());
+            preparedStatement.setInt(5, adresse.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Adresse mit ID " + adresse.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Adresse mit ID " + adresse.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
 
     public void setConnection(Connection connection) {
         this.connection = connection;

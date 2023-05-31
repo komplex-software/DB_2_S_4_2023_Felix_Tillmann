@@ -47,4 +47,24 @@ public class Adresse {
     public static void printCount() {
         System.out.println("Anzahl Adresen: " + adresseList.stream().count());
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setStrasse(String strasse) {
+        this.strasse = strasse;
+    }
+
+    public void setStadt(String stadt) {
+        this.stadt = stadt;
+    }
+
+    public void setPostleitzahl(String postleitzahl) {
+        this.postleitzahl = postleitzahl;
+    }
+
+    public void setHausnummer(String hausnummer) {
+        this.hausnummer = hausnummer;
+    }
 }
