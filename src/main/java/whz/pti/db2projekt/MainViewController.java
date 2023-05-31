@@ -2120,27 +2120,51 @@ public class MainViewController {
                     .get(0);
             kunde_anrede.getItems().clear();
             Anrede.getAnredeList().forEach(anred -> kunde_anrede.getItems().add(anred.getId()));
-            try {
-                kunde_anrede.getSelectionModel().select(kund.getAnrede_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAnredeId = kund.getAnrede_id();
+            ObservableList<Integer> items = kunde_anrede.getItems();
+            int index = -1;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) == selectedAnredeId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                kunde_anrede.getSelectionModel().select(index);
+            }
+
             kunde_vorname.setText(kund.getVorname());
             kunde_nachname.setText(kund.getNachname());
             kunde_adresse.getItems().clear();
             Adresse.getAdresseList().forEach(addr -> kunde_adresse.getItems().add(addr.getId()));
-            try {
-                kunde_adresse.getSelectionModel().select(kund.getAdresse_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAdresseId = kund.getAdresse_id();
+            ObservableList<Integer> itemsAdress = kunde_adresse.getItems();
+            index = -1;
+            for (int i = 0; i < itemsAdress.size(); i++) {
+                if (itemsAdress.get(i) == selectedAdresseId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                kunde_adresse.getSelectionModel().select(index);
+            }
+
             kunde_ansprechpartner.getItems().clear();
             Mitarbeiter.getMitarbeiterList().forEach(mitarb -> kunde_ansprechpartner.getItems().add(mitarb.getId()));
-            try {
-                kunde_ansprechpartner.getSelectionModel().select(kund.getAnsprechpartner_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAnsprechpartnerId = kund.getAnsprechpartner_id();
+            ObservableList<Integer> itemsAnsp = kunde_ansprechpartner.getItems();
+            index = -1;
+            for (int i = 0; i < itemsAnsp.size(); i++) {
+                if (itemsAnsp.get(i) == selectedAnsprechpartnerId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                kunde_ansprechpartner.getSelectionModel().select(index);
+            }
+
         });
     }
 
