@@ -279,6 +279,10 @@ public class MainViewController {
             ff1.setFarbname("ANTRAZIT");
             updateFahrzeugfarben(ff1);
 
+            Fahrzeugmodell fm1 = Fahrzeugmodell.getModellList().get(0);
+            fm1.setFahrzeugtyp_id(1);
+            updateFahrzeugmodelle(fm1);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -628,6 +632,30 @@ public class MainViewController {
             }
         } finally {
             // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void updateFahrzeugmodelle(Fahrzeugmodell fahrzeugmodell) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "UPDATE Fahrzeugmodell SET hersteller_id = ?, fahrzeugtyp_id = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeugmodell.getHersteller_id());
+            preparedStatement.setInt(2, fahrzeugmodell.getFahrzeugtyp_id());
+            preparedStatement.setInt(3, fahrzeugmodell.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Fahrzeugmodell with ID " + fahrzeugmodell.getId() + " successfully updated.");
+            } else {
+                System.out.println("Fahrzeugmodell with ID " + fahrzeugmodell.getId() + " could not be found.");
+            }
+        } finally {
+            // Release resources
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
