@@ -3,6 +3,10 @@ package whz.pti.db2projekt.model;
 import java.util.ArrayList;
 
 public class Adresse {
+    public static void clearList() {
+        adresseList.clear();
+    }
+
     public int getId() {
         return id;
     }

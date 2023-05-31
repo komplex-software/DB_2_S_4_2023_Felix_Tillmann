@@ -316,6 +316,13 @@ public class MainViewController {
             createMitarbeiter(mNew);
             Mitarbeiter.clearList();
             loadMitarbeiter(connection);
+            //deleteMitarbeiter(1);
+
+            Adresse addrNew = new Adresse(-1, "strasse", "stadt", "0190", "45a");
+            createAdresse(addrNew);
+            Adresse.clearList();
+            loadAdressen(connection);
+            //deleteAdresse(1);
 
             connection.close();
         } catch (SQLException e) {
@@ -902,6 +909,53 @@ public class MainViewController {
         }
     }
 
+    private void createAdresse(Adresse adresse) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "INSERT INTO Adresse (straße, stadt, postleitzahl, hausnummer) VALUES (?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, adresse.getStrasse());
+            preparedStatement.setString(2, adresse.getStadt());
+            preparedStatement.setString(3, adresse.getPostleitzahl());
+            preparedStatement.setString(4, adresse.getHausnummer());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neue Adresse erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen der neuen Adresse.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void deleteAdresse(int adresseId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "DELETE FROM Adresse WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, adresseId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Adresse mit ID " + adresseId + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Adresse mit ID " + adresseId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
 
 
 
