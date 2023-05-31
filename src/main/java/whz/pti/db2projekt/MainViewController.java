@@ -1,7 +1,7 @@
 package whz.pti.db2projekt;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import whz.pti.db2projekt.model.Mitarbeiter;
 
 import java.sql.Connection;
@@ -11,12 +11,32 @@ import java.sql.Statement;
 
 public class MainViewController {
     @FXML
-    private Label welcomeText;
+    private TextField id;
+    @FXML
+    private TextField vorname;
+    @FXML
+    private TextField nachname;
+    @FXML
+    private TextField lohn;
+    @FXML
+    private TextField beschaeftigungsstart;
+    @FXML
+    private TextField verfuegbarkeit;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private ComboBox anrede;
+    @FXML
+    private ComboBox adresse;
+
+    @FXML
+    private Button speichern;
+    @FXML
+    private Button anlegen;
+    @FXML
+    private Button suchen;
+
+    @FXML
+    private TableView anzeige;
 
     private Connection connection;
 

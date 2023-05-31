@@ -1,15 +1,439 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="257.0" prefWidth="337.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.pti.db2projekt.MainViewController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-
-    <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.pti.db2projekt.MainViewController">
+   <children>
+      <TabPane prefHeight="451.0" prefWidth="1090.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Adresse">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige1" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Adresse">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen1" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen1" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern1" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede1" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse1" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id1" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname1" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname1" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn1" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart1" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit1" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Anrede">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige11" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Anrede">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen11" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen11" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern11" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede11" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse11" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id11" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname11" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname11" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn11" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart11" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit11" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Fahrzeuge">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige2" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeuge">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen2" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen2" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern2" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede2" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse2" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id2" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname2" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname2" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn2" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart2" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit2" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Fahrzeugfarbe">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige12" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugfarbe">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen12" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen12" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern12" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede12" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse12" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id12" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname12" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname12" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn12" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart12" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit12" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Fahrzeugmodell">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige111" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugmodell">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen111" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen111" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern111" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede111" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse111" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id111" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname111" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname111" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn111" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart111" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit111" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Fahrzeugtyp">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige3" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugtyp">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen3" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen3" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern3" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede3" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse3" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id3" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname3" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname3" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn3" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart3" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit3" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="HatAnsprechpartner">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige13" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="HatAnsprechpartner">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen13" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen13" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern13" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede13" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse13" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id13" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname13" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname13" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn13" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart13" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit13" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="HatFarben">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige112" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="HatFarben">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen112" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen112" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern112" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede112" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse112" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id112" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname112" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname112" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn112" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart112" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit112" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Hersteller">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige21" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Hersteller">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen21" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen21" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern21" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede21" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse21" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id21" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname21" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname21" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn21" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart21" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit21" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Kunde">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige121" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Kunde">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen121" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen121" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern121" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede121" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse121" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id121" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname121" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname121" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn121" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart121" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit121" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Mitarbeiter">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
+                     <children>
+                        <TableView fx:id="anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Mitarbeiter">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="106.0" text="ID" />
+                        <Label layoutX="14.0" layoutY="171.0" text="Vorname" />
+                        <Label layoutX="14.0" layoutY="203.0" text="Nachame" />
+                        <Label layoutX="14.0" layoutY="236.0" text="Adresse" />
+                        <Label layoutX="14.0" layoutY="268.0" text="Lohn" />
+                        <Label layoutX="14.0" layoutY="334.0" text="Verfügbarkeit" />
+                        <Label layoutX="14.0" layoutY="300.0" text="Beschäftigungsstart" />
+                        <Label layoutX="14.0" layoutY="140.0" text="Anrede" />
+                        <Button fx:id="anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
+                        <Button fx:id="suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
+                        <Button fx:id="speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
+                        <ComboBox fx:id="anrede" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="adresse" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField fx:id="id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="vorname" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="nachname" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="lohn" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="beschaeftigungsstart" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="verfuegbarkeit" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
