@@ -56,6 +56,7 @@ public class MainViewController {
             loadFahrzeugtypen(connection);
             loadHatAnsprechpartner(connection);
             loadHatFarbe(connection);
+            loadHersteller(connection);
 
             // Testen der Daten
             Mitarbeiter.printCount();
@@ -68,6 +69,7 @@ public class MainViewController {
             Fahrzeugtyp.printCount();
             HatAnsprechpartner.printCount();
             HatFarben.printCount();
+            Hersteller.printCount();
 
             connection.close();
         } catch (SQLException e) {
@@ -220,6 +222,19 @@ public class MainViewController {
                     rs.getInt("farb_id")
             );
             HatFarben.addHatFarbe(newHatFarben);
+        }
+    }
+
+    private void loadHersteller(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Hersteller;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Hersteller newHersteller = new Hersteller(
+                    rs.getInt("id"),
+                    rs.getString("name")
+            );
+            Hersteller.addHersteller(newHersteller);
         }
     }
 
