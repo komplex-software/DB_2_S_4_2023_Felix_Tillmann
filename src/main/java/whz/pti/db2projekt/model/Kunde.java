@@ -81,4 +81,8 @@ public class Kunde {
         System.out.println("Anzahl Kunden: " + kundeList.stream().count());
     }
 
+    public static void clearList() {
+        kundeList.clear();
+    }
+
 }

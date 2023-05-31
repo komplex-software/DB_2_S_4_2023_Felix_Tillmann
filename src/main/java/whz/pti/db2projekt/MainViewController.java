@@ -303,6 +303,12 @@ public class MainViewController {
             k1.setVorname("DÜNSCH");
             updateKunde(k1);
 
+            // Testen create und Delete
+            Kunde kNew = new Kunde(-1, "Vorname", "Nachname", 1, 1,1);
+            createKunde(kNew);
+            Kunde.clearList();
+            loadKunden(connection);
+            //deleteKunde(1);
 
             connection.close();
         } catch (SQLException e) {
@@ -783,6 +789,56 @@ public class MainViewController {
             }
         }
     }
+
+    private void deleteKunde(int kundeId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "DELETE FROM Kunde WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, kundeId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Kunde mit ID " + kundeId + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Kunde mit ID " + kundeId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+    private void createKunde(Kunde kunde) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "INSERT INTO Kunde (Vorname, Nachname, adresse_id, ansprechpartner_id, anrede_id) VALUES (?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, kunde.getVorname());
+            preparedStatement.setString(2, kunde.getNachname());
+            preparedStatement.setInt(3, kunde.getAdresse_id());
+            preparedStatement.setInt(4, kunde.getAnsprechpartner_id());
+            preparedStatement.setInt(5, kunde.getAnrede_id());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neuer Kunde erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen des neuen Kunden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+
 
 
 
