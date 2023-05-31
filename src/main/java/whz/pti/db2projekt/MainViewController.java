@@ -38,7 +38,7 @@ public class MainViewController {
     // ------------- Adresse --------------
     // -------------- Anrede --------------
     @FXML
-    private ComboBox anrede_id;
+    private ComboBox<Integer> anrede_id;
     @FXML
     private TextField anrede_anredewort;
 
@@ -1453,6 +1453,7 @@ public class MainViewController {
             tableView.getItems().add(adresse);
         }
 
+        // Selecter
         for(Adresse adr: Adresse.getAdresseList()) {
             adresse_id.getItems().add(adr.getId());
         }
@@ -1486,6 +1487,19 @@ public class MainViewController {
 
             tableView.getItems().add(anrede);
         }
+
+        // Selecter
+        for(Anrede anred: Anrede.getAnredeList()) {
+            anrede_id.getItems().add(anred.getId());
+        }
+        anrede_id.setOnAction(e -> {
+            Integer selected = anrede_id.getSelectionModel().getSelectedItem();
+            Anrede anred = Anrede.getAnredeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            anrede_anredewort.setText(anred.getAnredewort());
+        });
     }
 
     private void showFahrzeug() {
