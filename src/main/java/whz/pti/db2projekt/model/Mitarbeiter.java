@@ -4,23 +4,88 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class Mitarbeiter {
+    int id;
+    public int getId() {
+        return this.id;
+    }
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
+    }
+
+    public void setAdresse_id(int adresse_id) {
+        this.adresse_id = adresse_id;
+    }
+
+    public void setAnrede_id(int anrede_id) {
+        this.anrede_id = anrede_id;
+    }
+
+    public void setLohn(float lohn) {
+        this.lohn = lohn;
+    }
+
+    public void setBeschaeftigungsstart(Date beschaeftigungsstart) {
+        this.beschaeftigungsstart = beschaeftigungsstart;
+    }
+
+    public void setVerfuegbar(boolean verfuegbar) {
+        this.verfuegbar = verfuegbar;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public int getAdresse_id() {
+        return adresse_id;
+    }
+
+    public int getAnrede_id() {
+        return anrede_id;
+    }
+
+    public float getLohn() {
+        return lohn;
+    }
+
+    public Date getBeschaeftigungsstart() {
+        return beschaeftigungsstart;
+    }
+
+    public boolean isVerfuegbar() {
+        return verfuegbar;
+    }
+
+    public static ArrayList<Mitarbeiter> getMitarbeiterList() {
+        return mitarbeiterList;
+    }
+
     private String vorname;
     private String nachname;
     private int adresse_id;
     private int anrede_id;
     private float lohn;
-    private Date beschaeftigung;
+    private Date beschaeftigungsstart;
     private boolean verfuegbar;
 
     private static ArrayList<Mitarbeiter> mitarbeiterList = new ArrayList<>();
 
-    public Mitarbeiter(String vorname, String nachname, int adresse_id, int anrede_id, float lohn, Date beschaeftigung, boolean verfuegbar) {
+    public Mitarbeiter(int id, String vorname, String nachname, int adresse_id, int anrede_id, float lohn, Date beschaeftigungsstart, boolean verfuegbar) {
+        this.id = id;
         this.vorname = vorname;
         this.nachname = nachname;
         this.adresse_id = adresse_id;
         this.anrede_id = anrede_id;
         this.lohn = lohn;
-        this.beschaeftigung = beschaeftigung;
+        this.beschaeftigungsstart = beschaeftigungsstart;
         this.verfuegbar = verfuegbar;
     }
 

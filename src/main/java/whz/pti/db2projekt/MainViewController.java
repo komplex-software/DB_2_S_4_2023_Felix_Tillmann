@@ -69,6 +69,10 @@ public class MainViewController {
             Hersteller.printCount();
 
             // Testen update
+            Mitarbeiter m1 = Mitarbeiter.getMitarbeiterList().get(0);
+            m1.setVorname("TEST");
+            updateMitarbeiter(m1);
+
             Hersteller h1 = Hersteller.getHerstellerList().get(0);
             h1.setName("TEST");
             updateHersteller(h1);
@@ -85,6 +89,7 @@ public class MainViewController {
         ResultSet rs = st.executeQuery(sql);
         while (rs.next()) {
             Mitarbeiter newMitarbeiter = new Mitarbeiter(
+                    rs.getInt("ID"),
                     rs.getString("Vorname"),
                     rs.getString("Nachname"),
                     rs.getInt("Adresse_ID"),
@@ -260,8 +265,36 @@ public class MainViewController {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-            if (connection != null) {
-                connection.close();
+        }
+    }
+
+    private void updateMitarbeiter(Mitarbeiter mitarbeiter) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "UPDATE Mitarbeiter SET Vorname = ?, Nachname = ?, Adresse_ID = ?, Anrede_ID = ?, Lohn = ?, BeschäftigungsStart = ?, Verfügbar = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, mitarbeiter.getVorname());
+            preparedStatement.setString(2, mitarbeiter.getNachname());
+            preparedStatement.setInt(3, mitarbeiter.getAdresse_id());
+            preparedStatement.setInt(4, mitarbeiter.getAnrede_id());
+            preparedStatement.setFloat(5, mitarbeiter.getLohn());
+            preparedStatement.setDate(6, mitarbeiter.getBeschaeftigungsstart());
+            preparedStatement.setBoolean(7, mitarbeiter.isVerfuegbar());
+            preparedStatement.setInt(8, mitarbeiter.getId());
+
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Mitarbeiter mit ID " + mitarbeiter.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Mitarbeiter mit ID " + mitarbeiter.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
         }
     }
