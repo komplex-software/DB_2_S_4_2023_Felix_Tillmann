@@ -366,6 +366,12 @@ public class MainViewController {
             loadHatFarbe(connection);
             //deleteHatFarbe(1,1);
 
+            Hersteller hNew = new Hersteller(-1,"Name");
+            createHersteller(hNew);
+            Hersteller.clearList();
+            loadHersteller(connection);
+            //deleteHersteller(1);
+
 
             connection.close();
         } catch (SQLException e) {
@@ -1330,6 +1336,53 @@ public class MainViewController {
             }
         }
     }
+    private void createHersteller(Hersteller hersteller) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "INSERT INTO Hersteller (name) VALUES (?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, hersteller.getName());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neuer Hersteller erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen des neuen Herstellers.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+
+    private void deleteHersteller(int herstellerId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "DELETE FROM Hersteller WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, herstellerId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Hersteller erfolgreich gelöscht.");
+            } else {
+                System.out.println("Hersteller konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+
 
 
 

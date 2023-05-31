@@ -3,6 +3,10 @@ package whz.pti.db2projekt.model;
 import java.util.ArrayList;
 
 public class Hersteller {
+    public static void clearList() {
+        herstellerList.clear();
+    }
+
     public int getId() {
         return id;
     }
