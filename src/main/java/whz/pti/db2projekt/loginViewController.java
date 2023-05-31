@@ -1,5 +1,6 @@
 package whz.pti.db2projekt;
 
+import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +19,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class loginViewController {
+public class loginViewController{
 
     @FXML
     private ComboBox username;
@@ -27,6 +28,7 @@ public class loginViewController {
     @FXML
     private Button login;
 
+    private Stage ls;
     private ObservableList<String> olUsernames = FXCollections.observableArrayList();
 
     @FXML
@@ -44,10 +46,14 @@ public class loginViewController {
 
     @FXML
     protected void onLoginButtonClick() {
-        checkPassword();
+        if (checkPassword().equals("falsch")){return;}
+
         DBConnector dbConnector = new DBConnector(username.getValue().toString(),checkPassword());
         try {
             Connection connection = dbConnector.openConnection();
+
+            //main
+
             connection.close();
 
             // Startet Main View
@@ -73,6 +79,10 @@ public class loginViewController {
         }
     }
 
+    public void setStage(){
+
+    }
+
     private String checkPassword(){
         if (password.getText().equals("ms-SQL-2022")){
             return "ms-SQL-2022";
@@ -87,7 +97,10 @@ public class loginViewController {
                 }
             });
         }
-
         return "falsch";
+    }
+
+    private void loadloginView(Stage stage) throws IOException {
+
     }
 }
