@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.pti.db2projekt.MainViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whz.pti.db2projekt.MainViewController">
    <children>
       <TabPane prefHeight="451.0" prefWidth="1090.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -33,11 +33,11 @@
                         <Button fx:id="adresse_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
                         <Button fx:id="adresse_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="adresse_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
-                        <TextField fx:id="adresse_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_stadt" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_postleitzahl" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_straße" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_hausnummer" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="179.0" />
+                        <ComboBox fx:id="adresse_id" layoutX="178.0" layoutY="102.0" prefHeight="26.0" prefWidth="178.0" />
                      </children>
                   </AnchorPane>
                </content>

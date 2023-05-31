@@ -11,11 +11,12 @@ import whz.pti.db2projekt.model.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class MainViewController {
     // ------------- Adresse --------------
     @FXML
-    private TextField adresse_id;
+    private ComboBox<Integer> adresse_id;
     @FXML
     private TextField adresse_straße;
     @FXML
@@ -1422,6 +1423,18 @@ public class MainViewController {
 
             tableView.getItems().add(adresse);
         }
+
+        for(Adresse adr: Adresse.getAdresseList()) {
+            adresse_id.getItems().add(adr.getId());
+        }
+        adresse_id.setOnAction(e -> {
+            Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            Adresse adr = Adresse.getAdresseList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            adresse_straße.setText(adr.getStrasse());
+        });
     }
 
     private void showAnrede() {
