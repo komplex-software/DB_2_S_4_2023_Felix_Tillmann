@@ -52,6 +52,7 @@ public class MainViewController {
             loadAdressen(connection);
             loadAnreden(connection);
             loadFahrzeuge(connection);
+            loadFahrzeugfarben(connection);
 
             // Testen der Daten
             Mitarbeiter.printCount();
@@ -59,6 +60,7 @@ public class MainViewController {
             Adresse.printCount();
             Anrede.printCount();
             Fahrzeug.printCount();
+            Fahrzeugfarbe.printCount();
 
             connection.close();
         } catch (SQLException e) {
@@ -150,6 +152,19 @@ public class MainViewController {
             Fahrzeug.addFahrzeug(newFahrzeug);
         }
     }
+    private void loadFahrzeugfarben(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Fahrzeugfarbe;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Fahrzeugfarbe newFahrzeugfarbe = new Fahrzeugfarbe(
+                    rs.getInt("id"),
+                    rs.getString("farbname")
+            );
+            Fahrzeugfarbe.addFarbe(newFahrzeugfarbe);
+        }
+    }
+
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
