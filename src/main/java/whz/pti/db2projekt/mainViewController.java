@@ -32,7 +32,7 @@ public class mainViewController {
             e.printStackTrace();
         }
     }
-    
+
     private void loadMitarbeiter(Connection connection) throws SQLException {
         Statement st = connection.createStatement();
         String sql = "select * from  Mitarbeiter;";
@@ -44,9 +44,9 @@ public class mainViewController {
                     rs.getInt("Adresse_ID"),
                     rs.getInt("Anrede_ID"),
                     rs.getFloat("Lohn"),
-                    rs.getDate("Beschaeftigung"),
-                    rs.getBoolean("Verfuegbar")
-                    );
+                    rs.getDate("BeschäftigungsStart"),
+                    rs.getBoolean("Verfügbar")
+            );
             Mitarbeiter.addMitarbeiter(newMitarbeiter);
         }
     }
