@@ -312,6 +312,11 @@ public class MainViewController {
             loadKunden(connection);
             //deleteKunde(1);
 
+            Mitarbeiter mNew = new Mitarbeiter(-1, "Vorname", "Nachname", 1, 1,100f, new Date(1999,1,1),true );
+            createMitarbeiter(mNew);
+            Mitarbeiter.clearList();
+            loadMitarbeiter(connection);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -764,6 +769,7 @@ public class MainViewController {
         }
     }
 
+
     private void updateKunde(Kunde kunde) throws SQLException {
         PreparedStatement preparedStatement = null;
 
@@ -813,6 +819,14 @@ public class MainViewController {
             }
         }
     }
+
+    /**
+     *
+     *  CREATE METHODEN IGNORIEREN DIE ID
+     *  diese kann einfach als -1 übergeben werden, Kungen Objekte müssen eine ID haben, slebst wenn diese noch nicht in der DB sing
+     * @param kunde
+     * @throws SQLException
+     */
     private void createKunde(Kunde kunde) throws SQLException {
         PreparedStatement preparedStatement = null;
 
@@ -839,6 +853,56 @@ public class MainViewController {
             }
         }
     }
+    private void createMitarbeiter(Mitarbeiter mitarbeiter) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "INSERT INTO Mitarbeiter (Vorname, Nachname, Adresse_ID, Anrede_ID, Lohn, BeschäftigungsStart, Verfügbar) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, mitarbeiter.getVorname());
+            preparedStatement.setString(2, mitarbeiter.getNachname());
+            preparedStatement.setInt(3, mitarbeiter.getAdresse_id());
+            preparedStatement.setInt(4, mitarbeiter.getAnrede_id());
+            preparedStatement.setFloat(5, mitarbeiter.getLohn());
+            preparedStatement.setDate(6, mitarbeiter.getBeschaeftigungsstart());
+            preparedStatement.setBoolean(7, mitarbeiter.isVerfuegbar());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neuer Mitarbeiter erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen des neuen Mitarbeiters.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+    private void deleteMitarbeiter(int mitarbeiterId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "DELETE FROM Mitarbeiter WHERE ID = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, mitarbeiterId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Mitarbeiter mit ID " + mitarbeiterId + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Mitarbeiter mit ID " + mitarbeiterId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+
 
 
 

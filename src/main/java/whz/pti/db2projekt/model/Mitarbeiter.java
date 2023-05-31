@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 public class Mitarbeiter {
     int id;
+
+    public static void clearList() {
+        mitarbeiterList.clear();
+    }
+
     public int getId() {
         return this.id;
     }
