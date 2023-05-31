@@ -272,7 +272,7 @@ public class MainViewController {
             updateAnreden(an1);
 
             Fahrzeug f1 = Fahrzeug.getFahrzeugList().get(0);
-            f1.setAnzVorherigeBesitzer(999);
+            f1.setAnzVorherigeBesitzer(420);
             updateFahrzeuge(f1);
 
             connection.close();
@@ -570,16 +570,21 @@ public class MainViewController {
         PreparedStatement preparedStatement = null;
 
         try {
-            if (fahrzeug.getKaufKunde_id() != -1 && fahrzeug.getMietKunde_id() != -1) {
-                String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
+            String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, fahrzeug.getModell_id());
                 preparedStatement.setFloat(2, fahrzeug.getKaufpreis());
                 preparedStatement.setFloat(3, fahrzeug.getMietpreis());
                 preparedStatement.setBoolean(4, fahrzeug.isIstVermietet());
-                preparedStatement.setInt(5, fahrzeug.getMietKunde_id());
+                if (fahrzeug.getMietKunde_id() != -1)
+                    preparedStatement.setInt(5, fahrzeug.getMietKunde_id());
+                else
+                    preparedStatement.setNull(5, 1);
                 preparedStatement.setBoolean(6, fahrzeug.isIstVerkauft());
-                preparedStatement.setInt(7, fahrzeug.getKaufKunde_id());
+                if (fahrzeug.getKaufKunde_id() != -1)
+                    preparedStatement.setInt(7, fahrzeug.getKaufKunde_id());
+                else
+                    preparedStatement.setNull(7, 1);
                 preparedStatement.setDate(8, fahrzeug.getLetzterTuev());
                 preparedStatement.setInt(9, fahrzeug.getAnzVorherigeBesitzer());
                 preparedStatement.setInt(10, fahrzeug.getKilometerstand());
@@ -591,66 +596,8 @@ public class MainViewController {
                 } else {
                     System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " konnte nicht gefunden werden.");
                 }
-            } else if (fahrzeug.getKaufKunde_id() == -1 && fahrzeug.getMietKunde_id() != -1) {
-                String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = NULL, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, fahrzeug.getModell_id());
-                preparedStatement.setFloat(2, fahrzeug.getKaufpreis());
-                preparedStatement.setFloat(3, fahrzeug.getMietpreis());
-                preparedStatement.setBoolean(4, fahrzeug.isIstVermietet());
-                preparedStatement.setInt(5, fahrzeug.getMietKunde_id());
-                preparedStatement.setBoolean(6, fahrzeug.isIstVerkauft());
-                preparedStatement.setDate(7, fahrzeug.getLetzterTuev());
-                preparedStatement.setInt(8, fahrzeug.getAnzVorherigeBesitzer());
-                preparedStatement.setInt(9, fahrzeug.getKilometerstand());
-                preparedStatement.setInt(10, fahrzeug.getId());
 
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " erfolgreich aktualisiert.");
-                } else {
-                    System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " konnte nicht gefunden werden.");
-                }
-            } else if (fahrzeug.getKaufKunde_id() != -1 && fahrzeug.getMietKunde_id() == -1) {
-                String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = NULL, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, fahrzeug.getModell_id());
-                preparedStatement.setFloat(2, fahrzeug.getKaufpreis());
-                preparedStatement.setFloat(3, fahrzeug.getMietpreis());
-                preparedStatement.setBoolean(4, fahrzeug.isIstVermietet());
-                preparedStatement.setBoolean(5, fahrzeug.isIstVerkauft());
-                preparedStatement.setInt(6, fahrzeug.getKaufKunde_id());
-                preparedStatement.setDate(7, fahrzeug.getLetzterTuev());
-                preparedStatement.setInt(8, fahrzeug.getAnzVorherigeBesitzer());
-                preparedStatement.setInt(9, fahrzeug.getKilometerstand());
-                preparedStatement.setInt(10, fahrzeug.getId());
 
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " erfolgreich aktualisiert.");
-                } else {
-                    System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " konnte nicht gefunden werden.");
-                }
-            } else {
-                String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = NULL, istVerkauft = ?, kaufKunde_id = NULL, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, fahrzeug.getModell_id());
-                preparedStatement.setFloat(2, fahrzeug.getKaufpreis());
-                preparedStatement.setFloat(3, fahrzeug.getMietpreis());
-                preparedStatement.setBoolean(4, fahrzeug.isIstVermietet());
-                preparedStatement.setBoolean(5, fahrzeug.isIstVerkauft());
-                preparedStatement.setDate(6, fahrzeug.getLetzterTuev());
-                preparedStatement.setInt(7, fahrzeug.getAnzVorherigeBesitzer());
-                preparedStatement.setInt(8, fahrzeug.getKilometerstand());
-                preparedStatement.setInt(9, fahrzeug.getId());
-
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " erfolgreich aktualisiert.");
-                } else {
-                    System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " konnte nicht gefunden werden.");
-                }
-            }
 
         } finally {
             // Ressourcen freigeben
