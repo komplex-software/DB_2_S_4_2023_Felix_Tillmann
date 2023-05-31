@@ -163,7 +163,7 @@ public class MainViewController {
     // ------------ HatFarben -------------
     // ------------ Hersteller -------------
     @FXML
-    private ComboBox hersteller_id;
+    private ComboBox<Integer> hersteller_id;
     @FXML
     private TextField hersteller_name;
 
@@ -1707,6 +1707,8 @@ public class MainViewController {
 
             tableView.getItems().add(ansprechpartner);
         }
+
+        // TODO
     }
 
     private void showHatFarben() {
@@ -1726,6 +1728,8 @@ public class MainViewController {
 
             tableView.getItems().add(hatFarben);
         }
+
+        // TODO
     }
 
     private void showHersteller() {
@@ -1745,6 +1749,18 @@ public class MainViewController {
 
             tableView.getItems().add(hersteller);
         }
+
+        for(Hersteller herstell: Hersteller.getHerstellerList()) {
+            hersteller_id.getItems().add(herstell.getId());
+        }
+        hersteller_id.setOnAction(event -> {
+            Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            Hersteller herstell = Hersteller.getHerstellerList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            hersteller_name.setText(herstell.getName());
+        });
     }
 
     private void showKunde() {
