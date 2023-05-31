@@ -59,7 +59,9 @@ public class MainViewController {
     @FXML
     private TextField fahrzeug_mietpreis;
     @FXML
-    private TextField fahrzeug_kaufkunde;
+    private ComboBox<Integer> fahrzeug_kaufkunde;
+    @FXML
+    private ComboBox<Integer> fahrzeug_mietkunde;
     @FXML
     private TextField fahrzeug_letzterTuev;
     @FXML
@@ -70,8 +72,9 @@ public class MainViewController {
     @FXML
     private ComboBox fahrzeug_modell;
     @FXML
-    private ComboBox fahrzeug_istVermietet;
-
+    private CheckBox fahrzeug_istVermietet;
+    @FXML
+    private CheckBox fahrzeug_istVerkauft;
     @FXML
     private Button fahrzeug_speichern;
     @FXML
