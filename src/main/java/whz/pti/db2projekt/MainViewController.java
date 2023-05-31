@@ -1,5 +1,6 @@
 package whz.pti.db2projekt;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import whz.pti.db2projekt.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class MainViewController {
     // ------------- Adresse --------------
@@ -797,15 +799,55 @@ public class MainViewController {
 
 
     private void showAdresse(){
-        setUpAdressTable();
-        ArrayList<Adresse> listStavaka = Adresse.getAdresseList();
-        ObservableList<String> oListStavaka = FXCollections.observableArrayList();
-        for (Adresse stavka : listStavaka) {
-            oListStavaka.add("heil");
-        }
 
-        adresse_anzeige.setItems(oListStavaka);
+        Collection<String> listID = new ArrayList<>();
+        Collection<String> straßeList = new ArrayList<>();
+        Collection<String> stadtList = new ArrayList<>();
+        Collection<String> plzList = new ArrayList<>();
+        Collection<String> hnrList = new ArrayList<>();
+
+        Adresse.getAdresseList().forEach(e->{listID.add(""+e.getId());});
+        Adresse.getAdresseList().forEach(e->{straßeList.add(""+e.getStrasse());});
+        Adresse.getAdresseList().forEach(e->{stadtList.add(""+e.getStadt());});
+        Adresse.getAdresseList().forEach(e->{plzList.add(""+e.getPostleitzahl());});
+        Adresse.getAdresseList().forEach(e->{hnrList.add(""+e.getHausnummer());});
+
+        ObservableList<String> ids = FXCollections.observableArrayList(listID);
+        ObservableList<String> straßen = FXCollections.observableArrayList(straßeList);
+        ObservableList<String> stadt = FXCollections.observableArrayList(stadtList);
+        ObservableList<String> plz = FXCollections.observableArrayList(plzList);
+        ObservableList<String> hnr = FXCollections.observableArrayList(hnrList);
+
+        TableColumn<String, String> idC = new TableColumn<>("ID");
+        TableColumn<String, String> straßeC = new TableColumn<>("Straße");
+        TableColumn<String, String> stadtC = new TableColumn<>("Stadt");
+        TableColumn<String, String> plzC = new TableColumn<>("Plz");
+        TableColumn<String, String> hnrC = new TableColumn<>("Hnr");
+
+        adresse_anzeige.getColumns().addAll(idC, straßeC,stadtC,plzC,hnrC);
+
+        idC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+        straßeC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+        stadtC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+        plzC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+        hnrC.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+
+
+        adresse_anzeige.setItems(ids);
+        adresse_anzeige.setItems(straßen);
+        adresse_anzeige.setItems(stadt);
+        adresse_anzeige.setItems(plz);
+        adresse_anzeige.setItems(hnr);
+
+
+       // adresse_anzeige.setItems(oListStavaka);
     }
+
+
+
+
+
+
     private void setUpAdressTable(){
         TableColumn idC = new TableColumn("ID");
         TableColumn straßeC = new TableColumn("Straße");
