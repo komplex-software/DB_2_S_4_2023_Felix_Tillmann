@@ -231,6 +231,27 @@ public class MainViewController {
     private Connection connection;
     private UserPermissions permissions = UserPermissions.READ; // read ist standard
 
+    @FXML
+    private void initialize() {
+        // Speicher Button Adresse
+        adresse_speichern.setOnMouseClicked(event -> {
+            Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            Adresse adr = Adresse.getAdresseList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            adr.setStrasse(adresse_straße.getText());
+            adr.setStadt(adresse_stadt.getText());
+            adr.setPostleitzahl(adresse_postleitzahl.getText());
+            adr.setHausnummer(adresse_hausnummer.getText());
+            try {
+                updateAdressen(adr);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     public void loadConnection() {
 
         try {
@@ -374,7 +395,7 @@ public class MainViewController {
             //deleteHersteller(1);
 
 
-            connection.close();
+            //connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
