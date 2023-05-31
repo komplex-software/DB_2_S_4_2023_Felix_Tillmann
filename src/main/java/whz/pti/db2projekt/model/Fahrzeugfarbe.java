@@ -11,6 +11,10 @@ public class Fahrzeugfarbe {
         this.farbname = farbname;
     }
 
+    public static void clearList() {
+        farbeList.clear();
+    }
+
     public void setId(int id) {
         this.id = id;
     }

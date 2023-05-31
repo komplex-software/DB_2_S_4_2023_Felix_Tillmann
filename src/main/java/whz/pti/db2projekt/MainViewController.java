@@ -336,6 +336,12 @@ public class MainViewController {
             loadFahrzeuge(connection);
             //deleteFahrzeug(1);
 
+            Fahrzeugfarbe ffNew = new Fahrzeugfarbe(-1, "farbe");
+            createFahrzeugfarbe(ffNew);
+            Fahrzeugfarbe.clearList();
+            loadFahrzeugfarben(connection);
+            //deleteFahrzeugfarbe(1);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1070,6 +1076,53 @@ public class MainViewController {
             }
         }
     }
+
+    private void createFahrzeugfarbe(Fahrzeugfarbe fahrzeugfarbe) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "INSERT INTO Fahrzeugfarbe (farbname) VALUES (?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, fahrzeugfarbe.getFarbname());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neue Fahrzeugfarbe erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen der neuen Fahrzeugfarbe.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void deleteFahrzeugfarbe(int fahrzeugfarbeId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "DELETE FROM Fahrzeugfarbe WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeugfarbeId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Fahrzeugfarbe mit ID " + fahrzeugfarbeId + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Fahrzeugfarbe mit ID " + fahrzeugfarbeId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+
 
 
 
