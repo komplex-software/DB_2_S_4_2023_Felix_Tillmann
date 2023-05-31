@@ -186,11 +186,11 @@ public class MainViewController {
     private TextField kunde_nachname;
 
     @FXML
-    private ComboBox kunde_anrede;
+    private ComboBox<Integer> kunde_anrede;
     @FXML
-    private ComboBox kunde_adresse;
+    private ComboBox<Integer> kunde_adresse;
     @FXML
-    private ComboBox kunde_ansprechpartner;
+    private ComboBox<Integer> kunde_ansprechpartner;
 
     @FXML
     private Button kunde_speichern;
@@ -291,6 +291,76 @@ public class MainViewController {
                 e.printStackTrace();
             }
         });
+
+        // Speichern Button Kunde
+        kunde_speichern.setOnMouseClicked(event -> {
+            Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            Kunde kunde = Kunde.getKundeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+
+            if (kunde != null) {
+                kunde.setVorname(kunde_vorname.getText());
+                kunde.setNachname(kunde_nachname.getText());
+                kunde.setAdresse_id(Integer.parseInt(kunde_adresse.getSelectionModel().getSelectedItem().toString()));
+                kunde.setAnsprechpartner_id(kunde_ansprechpartner.getSelectionModel().getSelectedItem().intValue());
+                kunde.setAnrede_id(kunde_anrede.getSelectionModel().getSelectedItem());
+
+                try {
+                    updateKunde(kunde);
+                    Kunde.clearList();
+                    loadKunden(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Erstellen Button Kunde
+        kunde_anlegen.setOnMouseClicked(event -> {
+            Kunde kunde = new Kunde(
+                    -1,
+                    kunde_vorname.getText(),
+                    kunde_nachname.getText(),
+                    Adresse.getAdresseList().stream().filter(
+                            addr -> addr.getId() == kunde_adresse.getSelectionModel().getSelectedItem().intValue()
+                    ).collect(Collectors.toList()).get(0).getId(),
+                    kunde_ansprechpartner.getSelectionModel().getSelectedItem(),
+                    kunde_anrede.getSelectionModel().getSelectedItem()
+            );
+
+            try {
+                createKunde(kunde);
+                Kunde.clearList();
+                loadKunden(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Löschen Button Kunde
+        kunde_löschen.setOnMouseClicked(event -> {
+            Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            Kunde kunde = Kunde.getKundeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+
+            if (kunde != null) {
+                try {
+                    deleteKunde(kunde.getId());
+                    Kunde.clearList();
+                    loadKunden(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     public void loadConnection() {
