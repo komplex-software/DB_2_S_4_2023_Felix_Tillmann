@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import whz.pti.db2projekt.model.*;
 
+import java.security.Permission;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -402,7 +403,12 @@ public class MainViewController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        showTableFacade();
+        setAcces(this.permissions);
+        System.out.println(permissions.toString());
+    }
 
+    private void showTableFacade(){
         showAdresse();
         showAnrede();
         showFahrzeug();
@@ -1854,5 +1860,70 @@ public class MainViewController {
             tableView.getItems().add(mitarbeiter);
         }
     }
+    public void setAcces(UserPermissions permission){
 
+        löschenButtonFassade(false);
+        speichernButtonFassade(false);
+        anlegenButtonFassade(false);
+
+        switch (permission) {
+            case READ:
+                löschenButtonFassade(true);
+                speichernButtonFassade(true);
+                anlegenButtonFassade(true);
+                break;
+            case READWRITE:
+                löschenButtonFassade(true);
+                speichernButtonFassade(false);
+                anlegenButtonFassade(false);
+                break;
+            case ADMIN:
+                löschenButtonFassade(false);
+                speichernButtonFassade(false);
+                anlegenButtonFassade(false);
+                break;
+        }
+    }
+
+    private void löschenButtonFassade(Boolean buul){
+        adresse_löschen.setDisable(buul);
+        anrede_löschen.setDisable(buul);
+        fahrzeug_löschen.setDisable(buul);
+        fahrzeugfarbe_löschen.setDisable(buul);
+        fahrzeugmodell_löschen.setDisable(buul);
+        fahrzeugtyp_löschen.setDisable(buul);
+        hatAnsprechpartner_löschen.setDisable(buul);
+        hatFarben_löschen.setDisable(buul);
+        hersteller_löschen.setDisable(buul);
+        kunde_löschen.setDisable(buul);
+        mitarbeiter_löschen.setDisable(buul);
+    }
+
+    private void speichernButtonFassade(Boolean buul){
+        adresse_speichern.setDisable(buul);
+        anrede_speichern.setDisable(buul);
+        fahrzeug_speichern.setDisable(buul);
+        fahrzeugfarbe_speichern.setDisable(buul);
+        fahrzeugmodell_speichern.setDisable(buul);
+        fahrzeugtyp_speichern.setDisable(buul);
+        hatAnsprechpartner_speichern.setDisable(buul);
+        hatFarben_speichern.setDisable(buul);
+        hersteller_speichern.setDisable(buul);
+        kunde_speichern.setDisable(buul);
+        mitarbeiter_speichern.setDisable(buul);
+    }
+
+    private void anlegenButtonFassade(Boolean buul){
+        adresse_anlegen.setDisable(buul);
+        anrede_anlegen.setDisable(buul);
+        fahrzeug_anlegen.setDisable(buul);
+        fahrzeugfarbe_anlegen.setDisable(buul);
+        fahrzeugmodell_anlegen.setDisable(buul);
+        fahrzeugtyp_anlegen.setDisable(buul);
+        hatAnsprechpartner_anlegen.setDisable(buul);
+        hatFarben_anlegen.setDisable(buul);
+        hersteller_anlegen.setDisable(buul);
+        kunde_anlegen.setDisable(buul);
+        mitarbeiter_anlegen.setDisable(buul);
+    }
 }
