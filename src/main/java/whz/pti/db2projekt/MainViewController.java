@@ -21,6 +21,7 @@ public class MainViewController {
     private TextField adresse_postleitzahl;
     @FXML
     private TextField adresse_hausnummer;
+
     @FXML
     private Button adresse_speichern;
     @FXML
@@ -35,6 +36,15 @@ public class MainViewController {
     private TextField anrede_id;
     @FXML
     private TextField anrede_anredewort;
+
+    @FXML
+    private Button anrede_speichern;
+    @FXML
+    private Button anrede_suchen;
+    @FXML
+    private Button anrede_anlegen;
+    @FXML
+    private TableView anrede_anzeige;
     // -------------- Anrede --------------
     // ------------ Fahrzeuge -------------
     @FXML
@@ -51,48 +61,168 @@ public class MainViewController {
     private TextField fahrzeug_anzVorherigeBesitzer;
     @FXML
     private TextField fahrzeug_kilometerstand;
+
+    @FXML
+    private ComboBox fahrzeug_modell;
+    @FXML
+    private ComboBox fahrzeug_istVermietet;
+
+    @FXML
+    private Button fahrzeug_speichern;
+    @FXML
+    private Button fahrzeug_suchen;
+    @FXML
+    private Button fahrzeug_anlegen;
+    @FXML
+    private TableView fahrzeug_anzeige;
     // ------------ Fahrzeuge -------------
     // ---------- Fahrzeugfarbe -----------
     @FXML
     private TextField fahrzeugfarbe_id;
     @FXML
     private TextField fahrzeugfarbe_farbname;
+
+    @FXML
+    private Button fahrzeugfarbe_speichern;
+    @FXML
+    private Button fahrzeugfarbe_suchen;
+    @FXML
+    private Button fahrzeugfarbe_anlegen;
+    @FXML
+    private TableView fahrzeugfarbe_anzeige;
     // ---------- Fahrzeugfarbe -----------
     // ---------- Fahrzeugmodell ----------
     @FXML
     private TextField fahrzeugmodell_id;
+
+    @FXML
+    private ComboBox fahrzeugmodell_hersteller;
+    @FXML
+    private ComboBox fahrzeugmodell_fahrzeugtyp;
+
+    @FXML
+    private Button fahrzeugmodell_speichern;
+    @FXML
+    private Button fahrzeugmodell_suchen;
+    @FXML
+    private Button fahrzeugmodell_anlegen;
+    @FXML
+    private TableView fahrzeugmodell_anzeige;
     // ---------- Fahrzeugmodell ----------
-
-
-
-
+    // ----------- Fahrzeugtyp ------------
     @FXML
-    private TextField id;
+    private TextField fahrzeugtyp_id;
     @FXML
-    private TextField vorname;
-    @FXML
-    private TextField nachname;
-    @FXML
-    private TextField lohn;
-    @FXML
-    private TextField beschaeftigungsstart;
-    @FXML
-    private TextField verfuegbarkeit;
+    private TextField fahrzeugtyp_bezeichnung;
 
     @FXML
-    private ComboBox anrede;
+    private Button fahrzeugtyp_speichern;
     @FXML
-    private ComboBox adresse;
+    private Button fahrzeugtyp_suchen;
+    @FXML
+    private Button fahrzeugtyp_anlegen;
+    @FXML
+    private TableView fahrzeugtyp_anzeige;
+    // ----------- Fahrzeugtyp ------------
+    // -------- HatAnsprechpartner --------
+    @FXML
+    private ComboBox hatAnsprechpartner_fahrzeug;
+    @FXML
+    private ComboBox hatAnsprechpartner_farbe;
 
     @FXML
-    private Button speichern;
+    private Button hatAnsprechpartner_speichern;
     @FXML
-    private Button anlegen;
+    private Button hatAnsprechpartner_suchen;
     @FXML
-    private Button suchen;
+    private Button hatAnsprechpartner_anlegen;
+    @FXML
+    private TableView hatAnsprechpartner_anzeige;
+    // -------- HatAnsprechpartner --------
+    // ------------ HatFarben -------------
+    @FXML
+    private ComboBox hatFarben_fahrzeug;
+    @FXML
+    private ComboBox hatFarben_farbe;
 
     @FXML
-    private TableView anzeige;
+    private Button hatFarben_speichern;
+    @FXML
+    private Button hatFarben_suchen;
+    @FXML
+    private Button hatFarben_anlegen;
+    @FXML
+    private TableView hatFarben_anzeige;
+    // ------------ HatFarben -------------
+    // ------------ Hersteller -------------
+    @FXML
+    private TextField hersteller_id;
+    @FXML
+    private TextField hersteller_name;
+
+    @FXML
+    private Button hersteller_speichern;
+    @FXML
+    private Button hersteller_suchen;
+    @FXML
+    private Button hersteller_anlegen;
+    @FXML
+    private TableView hersteller_anzeige;
+    // ------------ Hersteller -------------
+    // --------------- Kunde ---------------
+    @FXML
+    private TextField kunde_id;
+    @FXML
+    private TextField kunde_vorname;
+    @FXML
+    private TextField kunde_nachname;
+
+    @FXML
+    private ComboBox kunde_anrede;
+    @FXML
+    private ComboBox kunde_adresse;
+    @FXML
+    private ComboBox kunde_ansprechpartner;
+
+    @FXML
+    private Button kunde_speichern;
+    @FXML
+    private Button kunde_suchen;
+    @FXML
+    private Button kunde_anlegen;
+    @FXML
+    private TableView kunde_anzeige;
+    // --------------- Kunde ---------------
+    // ------------ Mitarbeiter ------------
+    @FXML
+    private TextField mitarbeiter_id;
+    @FXML
+    private TextField mitarbeiter_vorname;
+    @FXML
+    private TextField mitarbeiter_nachname;
+    @FXML
+    private TextField mitarbeiter_lohn;
+    @FXML
+    private TextField mitarbeiter_beschaeftigungsstart;
+    @FXML
+    private TextField mitarbeiter_verfuegbarkeit;
+
+    @FXML
+    private ComboBox mitarbeiter_anrede;
+    @FXML
+    private ComboBox mitarbeiter_adresse;
+
+    @FXML
+    private Button mitarbeiter_speichern;
+    @FXML
+    private Button mitarbeiter_anlegen;
+    @FXML
+    private Button mitarbeiter_suchen;
+
+    @FXML
+    private TableView mitarbeiter_anzeige;
+    // ------------ Mitarbeiter ------------
+
 
     private Connection connection;
     private UserPermissions permissions = UserPermissions.READ; // read ist standard
