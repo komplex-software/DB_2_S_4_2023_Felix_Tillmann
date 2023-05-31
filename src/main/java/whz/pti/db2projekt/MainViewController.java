@@ -287,6 +287,10 @@ public class MainViewController {
             ft1.setBezeichnung("BRUMM-BRUMM");
             updateFahrzeugtypen(ft1);
 
+            HatAnsprechpartner ha1 = HatAnsprechpartner.getHatAnsprechpartnerList().get(0);
+            ha1.setMitarbeiter_id(1);
+            updateHatAnsprechpartner(ha1);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -681,6 +685,29 @@ public class MainViewController {
                 System.out.println("Fahrzeugtyp mit ID " + fahrzeugtyp.getId() + " erfolgreich aktualisiert.");
             } else {
                 System.out.println("Fahrzeugtyp mit ID " + fahrzeugtyp.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void updateHatAnsprechpartner(HatAnsprechpartner hatAnsprechpartner) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "UPDATE HatAnsprechpartner SET mitarbeiter_id = ? WHERE kunde_id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, hatAnsprechpartner.getMitarbeiter_id());
+            preparedStatement.setInt(2, hatAnsprechpartner.getKunde_id());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("HatAnsprechpartner für Kunde mit ID " + hatAnsprechpartner.getKunde_id() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("HatAnsprechpartner für Kunde mit ID " + hatAnsprechpartner.getKunde_id() + " konnte nicht gefunden werden.");
             }
         } finally {
             // Ressourcen freigeben
