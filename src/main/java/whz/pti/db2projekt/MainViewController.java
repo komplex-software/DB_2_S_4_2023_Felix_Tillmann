@@ -254,6 +254,21 @@ public class MainViewController {
                 e.printStackTrace();
             }
         });
+        // Erstellen Button Adresse
+        adresse_anlegen.setOnMouseClicked(event -> {
+            Adresse adr = new Adresse(
+                    -1,
+                    adresse_straße.getText(),
+                    adresse_stadt.getText(),
+                    adresse_postleitzahl.getText(),
+                    adresse_hausnummer.getText()
+            );
+            try {
+                createAdresse(adr);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void loadConnection() {
