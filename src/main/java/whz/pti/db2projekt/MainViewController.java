@@ -51,12 +51,14 @@ public class MainViewController {
             loadKunden(connection);
             loadAdressen(connection);
             loadAnreden(connection);
+            loadFahrzeuge(connection);
 
             // Testen der Daten
             Mitarbeiter.printCount();
             Kunde.printCount();
             Adresse.printCount();
             Anrede.printCount();
+            Fahrzeug.printCount();
 
             connection.close();
         } catch (SQLException e) {
@@ -127,8 +129,27 @@ public class MainViewController {
             Anrede.addAnrede(newAnrede);
         }
     }
-
-
+    private void loadFahrzeuge(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Fahrzeug;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Fahrzeug newFahrzeug = new Fahrzeug(
+                    rs.getInt("id"),
+                    rs.getInt("modell_id"),
+                    rs.getFloat("kaufpreis"),
+                    rs.getFloat("mietpreis"),
+                    rs.getBoolean("istVermietet"),
+                    rs.getInt("mietKunde_id"),
+                    rs.getBoolean("istVerkauft"),
+                    rs.getInt("kaufKunde_id"),
+                    rs.getDate("letzterTÜV"),
+                    rs.getInt("anzVorherigeBesitzer"),
+                    rs.getInt("kilometerstand")
+            );
+            Fahrzeug.addFahrzeug(newFahrzeug);
+        }
+    }
     public void setConnection(Connection connection) {
         this.connection = connection;
     }

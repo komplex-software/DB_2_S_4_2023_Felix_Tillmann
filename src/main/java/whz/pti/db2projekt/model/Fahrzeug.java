@@ -1,6 +1,7 @@
 package whz.pti.db2projekt.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Fahrzeug {
     int id;
@@ -27,6 +28,14 @@ public class Fahrzeug {
         this.letzterTuev = letzterTuev;
         this.anzVorherigeBesitzer = anzVorherigeBesitzer;
         this.kilometerstand = kilometerstand;
+    }
+
+    private static ArrayList<Fahrzeug> fahrzeugList = new ArrayList<>();
+    public static void addFahrzeug(Fahrzeug fahrzeug) {
+        fahrzeugList.add(fahrzeug);
+    }
+    public static void printCount() {
+        System.out.println("Anzahl Fahrzeuge: " + fahrzeugList.stream().count());
     }
 
 }
