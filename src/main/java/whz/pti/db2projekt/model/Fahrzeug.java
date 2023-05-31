@@ -38,4 +38,95 @@ public class Fahrzeug {
         System.out.println("Anzahl Fahrzeuge: " + fahrzeugList.stream().count());
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setModell_id(int modell_id) {
+        this.modell_id = modell_id;
+    }
+
+    public void setKaufpreis(float kaufpreis) {
+        this.kaufpreis = kaufpreis;
+    }
+
+    public void setMietpreis(float mietpreis) {
+        this.mietpreis = mietpreis;
+    }
+
+    public void setIstVermietet(boolean istVermietet) {
+        this.istVermietet = istVermietet;
+    }
+
+    public void setMietKunde_id(int mietKunde_id) {
+        this.mietKunde_id = mietKunde_id;
+    }
+
+    public void setIstVerkauft(boolean istVerkauft) {
+        this.istVerkauft = istVerkauft;
+    }
+
+    public void setKaufKunde_id(int kaufKunde_id) {
+        this.kaufKunde_id = kaufKunde_id;
+    }
+
+    public void setLetzterTuev(Date letzterTuev) {
+        this.letzterTuev = letzterTuev;
+    }
+
+    public void setAnzVorherigeBesitzer(int anzVorherigeBesitzer) {
+        this.anzVorherigeBesitzer = anzVorherigeBesitzer;
+    }
+
+    public void setKilometerstand(int kilometerstand) {
+        this.kilometerstand = kilometerstand;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getModell_id() {
+        return modell_id;
+    }
+
+    public float getKaufpreis() {
+        return kaufpreis;
+    }
+
+    public float getMietpreis() {
+        return mietpreis;
+    }
+
+    public boolean isIstVermietet() {
+        return istVermietet;
+    }
+
+    public int getMietKunde_id() {
+        return mietKunde_id;
+    }
+
+    public boolean isIstVerkauft() {
+        return istVerkauft;
+    }
+
+    public int getKaufKunde_id() {
+        return kaufKunde_id;
+    }
+
+    public Date getLetzterTuev() {
+        return letzterTuev;
+    }
+
+    public int getAnzVorherigeBesitzer() {
+        return anzVorherigeBesitzer;
+    }
+
+    public int getKilometerstand() {
+        return kilometerstand;
+    }
+
+    public static ArrayList<Fahrzeug> getFahrzeugList() {
+        return fahrzeugList;
+    }
 }

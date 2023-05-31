@@ -43,7 +43,7 @@ INSERT INTO "Mitarbeiter" ("Vorname", "Nachname", "Adresse_ID", "Anrede_ID", "Lo
     ('Erika', 'Musterfrau', 2, 2, 3500.0, '2019-05-15', 1);
 
 -- Einfügen von Beispieldaten in die Tabelle "Kunde"
-INSERT INTO "Kunde" ("Vorname", "Nachname", "Adresse_ID", "Ansprechparter_ID", "Anrede_ID") VALUES
+INSERT INTO "Kunde" ("Vorname", "Nachname", "Adresse_ID", "Ansprechpartner_ID", "Anrede_ID") VALUES
     ('Klaus', 'Kundig', 1, 1, 1),
     ('Sabine', 'Kundenfrau', 2, 2, 2);
 
