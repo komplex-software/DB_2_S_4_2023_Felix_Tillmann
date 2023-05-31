@@ -3,10 +3,7 @@ package whz.pti.db2projekt;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import whz.pti.db2projekt.model.Adresse;
-import whz.pti.db2projekt.model.Kunde;
-import whz.pti.db2projekt.model.Mitarbeiter;
-import whz.pti.db2projekt.model.UserPermissions;
+import whz.pti.db2projekt.model.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -53,11 +50,13 @@ public class MainViewController {
             loadMitarbeiter(connection);
             loadKunden(connection);
             loadAdressen(connection);
+            loadAnreden(connection);
 
             // Testen der Daten
             Mitarbeiter.printCount();
             Kunde.printCount();
             Adresse.printCount();
+            Anrede.printCount();
 
             connection.close();
         } catch (SQLException e) {
@@ -113,6 +112,19 @@ public class MainViewController {
                     rs.getString("hausnummer")
             );
             Adresse.addAdresse(newAdresse);
+        }
+    }
+
+    private void loadAnreden(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Anrede;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Anrede newAnrede = new Anrede(
+                    rs.getInt("id"),
+                    rs.getString("anredewort")
+            );
+            Anrede.addAnrede(newAnrede);
         }
     }
 
