@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class mainViewController {
+public class MainViewController {
     @FXML
     private Label welcomeText;
 

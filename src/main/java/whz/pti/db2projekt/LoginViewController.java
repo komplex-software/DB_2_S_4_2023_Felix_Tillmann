@@ -1,7 +1,5 @@
 package whz.pti.db2projekt;
 
-import javafx.application.Application;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,17 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import whz.pti.db2projekt.model.Mitarbeiter;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class loginViewController{
+public class LoginViewController {
 
     @FXML
     private ComboBox username;
@@ -62,7 +56,7 @@ public class loginViewController{
             fxmlLoader.setLocation(getClass().getResource("main-view.fxml"));
 
             Parent root = (Parent)fxmlLoader.load();
-            mainViewController controller = fxmlLoader.<mainViewController>getController();
+            MainViewController controller = fxmlLoader.<MainViewController>getController();
             controller.setConnection(connection);
             controller.loadConnection();
             Scene scene = new Scene(root);
