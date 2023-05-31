@@ -42,9 +42,6 @@ public class MainViewController {
     @FXML
     private TableView anzeige;
 
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
     private Connection connection;
     private UserPermissions permissions = UserPermissions.READ; // read ist standard
 
