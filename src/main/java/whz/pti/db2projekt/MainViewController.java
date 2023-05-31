@@ -16,8 +16,11 @@ import java.util.stream.Collectors;
 public class MainViewController {
     // ------------- Adresse --------------
     @FXML
+<<<<<<< Updated upstream
     private ComboBox<Integer> adresse_id;
     @FXML
+=======
+>>>>>>> Stashed changes
     private TextField adresse_straße;
     @FXML
     private TextField adresse_stadt;
@@ -25,6 +28,9 @@ public class MainViewController {
     private TextField adresse_postleitzahl;
     @FXML
     private TextField adresse_hausnummer;
+
+    @FXML
+    private ComboBox adresse_id;
 
     @FXML
     private Button adresse_speichern;
@@ -37,7 +43,7 @@ public class MainViewController {
     // ------------- Adresse --------------
     // -------------- Anrede --------------
     @FXML
-    private TextField anrede_id;
+    private ComboBox anrede_id;
     @FXML
     private TextField anrede_anredewort;
 
@@ -52,7 +58,7 @@ public class MainViewController {
     // -------------- Anrede --------------
     // ------------ Fahrzeuge -------------
     @FXML
-    private TextField fahrzeug_id;
+    private ComboBox fahrzeug_id;
     @FXML
     private TextField fahrzeug_kaufpreis;
     @FXML
@@ -82,7 +88,7 @@ public class MainViewController {
     // ------------ Fahrzeuge -------------
     // ---------- Fahrzeugfarbe -----------
     @FXML
-    private TextField fahrzeugfarbe_id;
+    private ComboBox fahrzeugfarbe_id;
     @FXML
     private TextField fahrzeugfarbe_farbname;
 
@@ -97,8 +103,7 @@ public class MainViewController {
     // ---------- Fahrzeugfarbe -----------
     // ---------- Fahrzeugmodell ----------
     @FXML
-    private TextField fahrzeugmodell_id;
-
+    private ComboBox fahrzeugmodell_id;
     @FXML
     private ComboBox fahrzeugmodell_hersteller;
     @FXML
@@ -115,7 +120,7 @@ public class MainViewController {
     // ---------- Fahrzeugmodell ----------
     // ----------- Fahrzeugtyp ------------
     @FXML
-    private TextField fahrzeugtyp_id;
+    private ComboBox fahrzeugtyp_id;
     @FXML
     private TextField fahrzeugtyp_bezeichnung;
 
@@ -160,7 +165,7 @@ public class MainViewController {
     // ------------ HatFarben -------------
     // ------------ Hersteller -------------
     @FXML
-    private TextField hersteller_id;
+    private ComboBox hersteller_id;
     @FXML
     private TextField hersteller_name;
 
@@ -175,7 +180,7 @@ public class MainViewController {
     // ------------ Hersteller -------------
     // --------------- Kunde ---------------
     @FXML
-    private TextField kunde_id;
+    private ComboBox kunde_id;
     @FXML
     private TextField kunde_vorname;
     @FXML
@@ -199,7 +204,7 @@ public class MainViewController {
     // --------------- Kunde ---------------
     // ------------ Mitarbeiter ------------
     @FXML
-    private TextField mitarbeiter_id;
+    private ComboBox mitarbeiter_id;
     @FXML
     private TextField mitarbeiter_vorname;
     @FXML
@@ -382,6 +387,14 @@ public class MainViewController {
         showAdresse();
         showAnrede();
         showFahrzeug();
+        showFahrzeugfarbe();
+        showFahrzeugmodell();
+        showFahrzeugtyp();
+        showAnsprechpartner();
+        showHatFarben();
+        showHersteller();
+        showKunde();
+        showMitarbeiter();
     }
 
     private void loadMitarbeiter(Connection connection) throws SQLException {
@@ -1496,5 +1509,178 @@ public class MainViewController {
         }
     }
 
+    private void showFahrzeugfarbe() {
+        TableView<Fahrzeugfarbe> tableView = fahrzeugfarbe_anzeige;
+        TableColumn<Fahrzeugfarbe, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Fahrzeugfarbe, String> farbnameColumn = new TableColumn<>("Farbname");
+
+        tableView.getColumns().addAll(idColumn, farbnameColumn);
+
+        ArrayList<Fahrzeugfarbe> farbList = Fahrzeugfarbe.getFarbeList();
+
+        for (Fahrzeugfarbe farbe : farbList) {
+            TableRow<Fahrzeugfarbe> row = new TableRow<>();
+
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            farbnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFarbname()));
+
+            tableView.getItems().add(farbe);
+        }
+    }
+
+    private void showFahrzeugmodell() {
+        TableView<Fahrzeugmodell> tableView = fahrzeugmodell_anzeige;
+        TableColumn<Fahrzeugmodell, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Fahrzeugmodell, Integer> herstellerIdColumn = new TableColumn<>("Hersteller ID");
+        TableColumn<Fahrzeugmodell, Integer> fahrzeugtypIdColumn = new TableColumn<>("Fahrzeugtyp ID");
+
+        tableView.getColumns().addAll(idColumn, herstellerIdColumn, fahrzeugtypIdColumn);
+
+        ArrayList<Fahrzeugmodell> modellList = Fahrzeugmodell.getModellList();
+
+        for (Fahrzeugmodell modell : modellList) {
+            TableRow<Fahrzeugmodell> row = new TableRow<>();
+
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            herstellerIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getHersteller_id()).asObject());
+            fahrzeugtypIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getFahrzeugtyp_id()).asObject());
+
+            tableView.getItems().add(modell);
+        }
+    }
+
+    private void showFahrzeugtyp() {
+        TableView<Fahrzeugtyp> tableView = fahrzeugtyp_anzeige;
+        TableColumn<Fahrzeugtyp, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Fahrzeugtyp, String> bezeichnungColumn = new TableColumn<>("Bezeichnung");
+
+        tableView.getColumns().addAll(idColumn, bezeichnungColumn);
+
+        ArrayList<Fahrzeugtyp> typList = Fahrzeugtyp.getTypList();
+
+        for (Fahrzeugtyp typ : typList) {
+            TableRow<Fahrzeugtyp> row = new TableRow<>();
+
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            bezeichnungColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBezeichnung()));
+
+            tableView.getItems().add(typ);
+        }
+    }
+
+    private void showAnsprechpartner() {
+        TableView<HatAnsprechpartner> tableView = hatAnsprechpartner_anzeige;
+        TableColumn<HatAnsprechpartner, Integer> kundeIdColumn = new TableColumn<>("Kunde ID");
+        TableColumn<HatAnsprechpartner, Integer> mitarbeiterIdColumn = new TableColumn<>("Mitarbeiter ID");
+
+        tableView.getColumns().addAll(kundeIdColumn, mitarbeiterIdColumn);
+
+        ArrayList<HatAnsprechpartner> ansprechpartnerList = HatAnsprechpartner.getHatAnsprechpartnerList();
+
+        for (HatAnsprechpartner ansprechpartner : ansprechpartnerList) {
+            TableRow<HatAnsprechpartner> row = new TableRow<>();
+
+            kundeIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getKunde_id()).asObject());
+            mitarbeiterIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getMitarbeiter_id()).asObject());
+
+            tableView.getItems().add(ansprechpartner);
+        }
+    }
+
+    private void showHatFarben() {
+        TableView<HatFarben> tableView = hatFarben_anzeige;
+        TableColumn<HatFarben, Integer> fahrzeugIdColumn = new TableColumn<>("Fahrzeug ID");
+        TableColumn<HatFarben, Integer> farbIdColumn = new TableColumn<>("Farb ID");
+
+        tableView.getColumns().addAll(fahrzeugIdColumn, farbIdColumn);
+
+        ArrayList<HatFarben> hatFarbenList = HatFarben.getHatFarbenList();
+
+        for (HatFarben hatFarben : hatFarbenList) {
+            TableRow<HatFarben> row = new TableRow<>();
+
+            fahrzeugIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getFahrzeug_id()).asObject());
+            farbIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getFarb_id()).asObject());
+
+            tableView.getItems().add(hatFarben);
+        }
+    }
+
+    private void showHersteller() {
+        TableView<Hersteller> tableView = hersteller_anzeige;
+        TableColumn<Hersteller, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Hersteller, String> nameColumn = new TableColumn<>("Name");
+
+        tableView.getColumns().addAll(idColumn, nameColumn);
+
+        ArrayList<Hersteller> herstellerList = Hersteller.getHerstellerList();
+
+        for (Hersteller hersteller : herstellerList) {
+            TableRow<Hersteller> row = new TableRow<>();
+
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+
+            tableView.getItems().add(hersteller);
+        }
+    }
+
+    private void showKunde() {
+        TableView<Kunde> tableView = kunde_anzeige;
+        TableColumn<Kunde, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Kunde, String> vornameColumn = new TableColumn<>("Vorname");
+        TableColumn<Kunde, String> nachnameColumn = new TableColumn<>("Nachname");
+        TableColumn<Kunde, Integer> adresseIdColumn = new TableColumn<>("Adresse ID");
+        TableColumn<Kunde, Integer> ansprechpartnerIdColumn = new TableColumn<>("Ansprechpartner ID");
+        TableColumn<Kunde, Integer> anredeIdColumn = new TableColumn<>("Anrede ID");
+
+        tableView.getColumns().addAll(idColumn, vornameColumn, nachnameColumn, adresseIdColumn, ansprechpartnerIdColumn, anredeIdColumn);
+
+        ArrayList<Kunde> kundeList = Kunde.getKundeList();
+
+        for (Kunde kunde : kundeList) {
+            TableRow<Kunde> row = new TableRow<>();
+
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            vornameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVorname()));
+            nachnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNachname()));
+            //adresseIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAdresse_id()).asObject());
+            ansprechpartnerIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnsprechpartner_id()).asObject());
+            anredeIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnrede_id()).asObject());
+
+            tableView.getItems().add(kunde);
+        }
+    }
+
+    private void showMitarbeiter() {
+        TableView<Mitarbeiter> tableView = mitarbeiter_anzeige;
+        TableColumn<Mitarbeiter, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Mitarbeiter, String> vornameColumn = new TableColumn<>("Vorname");
+        TableColumn<Mitarbeiter, String> nachnameColumn = new TableColumn<>("Nachname");
+        TableColumn<Mitarbeiter, Integer> adresseIdColumn = new TableColumn<>("Adresse ID");
+        TableColumn<Mitarbeiter, Double> lohnColumn = new TableColumn<>("Lohn");
+        TableColumn<Mitarbeiter, String> beschaeftigungsstartColumn = new TableColumn<>("Beschäftigungsstart");
+        TableColumn<Mitarbeiter, Boolean> verfuegbarColumn = new TableColumn<>("Verfügbar");
+        TableColumn<Mitarbeiter, Integer> anredeIdColumn = new TableColumn<>("Anrede ID");
+
+        tableView.getColumns().addAll(idColumn, vornameColumn, nachnameColumn, adresseIdColumn, lohnColumn, beschaeftigungsstartColumn, verfuegbarColumn, anredeIdColumn);
+
+        ArrayList<Mitarbeiter> mitarbeiterList = Mitarbeiter.getMitarbeiterList();
+
+        for (Mitarbeiter mitarbeiter : mitarbeiterList) {
+            TableRow<Mitarbeiter> row = new TableRow<>();
+
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            vornameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVorname()));
+            nachnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNachname()));
+            //adresseIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAdresse_id()).asObject());
+            lohnColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getLohn()).asObject());
+            beschaeftigungsstartColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBeschaeftigungsstart().toString()));
+            verfuegbarColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isVerfuegbar()).asObject());
+            anredeIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnrede_id()).asObject());
+
+            tableView.getItems().add(mitarbeiter);
+        }
+    }
 
 }

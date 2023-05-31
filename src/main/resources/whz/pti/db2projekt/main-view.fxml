@@ -37,7 +37,11 @@
                         <TextField fx:id="adresse_postleitzahl" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_straße" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="adresse_hausnummer" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="179.0" />
+<<<<<<< Updated upstream
                         <ComboBox fx:id="adresse_id" layoutX="178.0" layoutY="102.0" prefHeight="26.0" prefWidth="178.0" />
+=======
+                        <ComboBox fx:id="adresse_id" layoutX="179.0" layoutY="102.0" prefHeight="25.0" prefWidth="176.0" />
+>>>>>>> Stashed changes
                      </children>
                   </AnchorPane>
                </content>
@@ -57,8 +61,8 @@
                         <Button fx:id="anrede_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
                         <Button fx:id="anrede_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="anrede_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
-                        <TextField fx:id="anrede_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="anrede_anredewort" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
+                        <ComboBox fx:id="anrede_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="180.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -91,7 +95,6 @@
                         <Button fx:id="fahrzeug_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="fahrzeug_modell" layoutX="176.0" layoutY="130.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="fahrzeug_istVermietet" layoutX="177.0" layoutY="226.0" prefHeight="25.0" prefWidth="181.0" />
-                        <TextField fx:id="fahrzeug_id" layoutX="177.0" layoutY="96.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="fahrzeug_kaufpreis" layoutX="177.0" layoutY="161.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="fahrzeug_mietpreis" layoutX="177.0" layoutY="193.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="fahrzeug_kaufkunde" layoutX="177.0" layoutY="258.0" prefHeight="25.0" prefWidth="179.0" />
@@ -99,6 +102,7 @@
                         <TextField fx:id="fahrzeug_anzVorherigeBesitzer" layoutX="177.0" layoutY="324.0" prefHeight="25.0" prefWidth="179.0" />
                         <Label layoutX="15.0" layoutY="363.0" text="Kilometerstand" />
                         <TextField fx:id="fahrzeug_kilometerstand" layoutX="178.0" layoutY="359.0" prefHeight="25.0" prefWidth="179.0" />
+                        <ComboBox fx:id="fahrzeug_id" layoutX="176.0" layoutY="96.0" prefHeight="25.0" prefWidth="180.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -123,8 +127,8 @@
                         <Button fx:id="fahrzeugfarbe_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
                         <Button fx:id="fahrzeugfarbe_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="fahrzeugfarbe_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
-                        <TextField fx:id="fahrzeugfarbe_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="fahrzeugfarbe_farbname" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
+                        <ComboBox fx:id="fahrzeugfarbe_id" layoutX="176.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -151,8 +155,8 @@
                         <Button fx:id="fahrzeugmodell_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="fahrzeugmodell_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="fahrzeugmodell_fahrzeugtyp" layoutX="177.0" layoutY="169.0" prefHeight="25.0" prefWidth="181.0" />
-                        <TextField fx:id="fahrzeugmodell_id" layoutX="179.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                         <ComboBox fx:id="fahrzeugmodell_hersteller" layoutX="177.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="fahrzeugmodell_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -177,8 +181,8 @@
                         <Button fx:id="fahrzeugtyp_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
                         <Button fx:id="fahrzeugtyp_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="fahrzeugtyp_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
-                        <TextField fx:id="fahrzeugtyp_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="fahrzeugtyp_bezeichnung" layoutX="178.0" layoutY="135.0" prefHeight="25.0" prefWidth="179.0" />
+                        <ComboBox fx:id="fahrzeugtyp_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -255,8 +259,8 @@
                         <Button fx:id="hersteller_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
                         <Button fx:id="hersteller_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="hersteller_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
-                        <TextField fx:id="hersteller_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="hersteller_name" layoutX="178.0" layoutY="136.0" prefHeight="25.0" prefWidth="179.0" />
+                        <ComboBox fx:id="hersteller_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -284,13 +288,13 @@
                         <Button fx:id="kunde_anlegen" layoutX="134.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Anlegen" />
                         <Button fx:id="kunde_suchen" layoutX="251.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Suchen" />
                         <Button fx:id="kunde_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
-                        <ComboBox fx:id="kunde_anrede" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="kunde_anrede" layoutX="178.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="kunde_adresse" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
-                        <TextField fx:id="kunde_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="kunde_vorname" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="kunde_nachname" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
                         <Label layoutX="15.0" layoutY="271.0" text="Ansprechpartner" />
                         <ComboBox fx:id="kunde_ansprechpartner" layoutX="178.0" layoutY="267.0" prefHeight="25.0" prefWidth="181.0" />
+                        <ComboBox fx:id="kunde_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -323,12 +327,12 @@
                         <Button fx:id="mitarbeiter_speichern" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Speichern" />
                         <ComboBox fx:id="mitarbeiter_anrede" layoutX="176.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" />
                         <ComboBox fx:id="mitarbeiter_adresse" layoutX="177.0" layoutY="232.0" prefHeight="25.0" prefWidth="181.0" />
-                        <TextField fx:id="mitarbeiter_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="mitarbeiter_vorname" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="mitarbeiter_nachname" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="mitarbeiter_lohn" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="mitarbeiter_beschaeftigungsstart" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="mitarbeiter_verfuegbarkeit" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
+                        <ComboBox fx:id="mitarbeiter_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
                      </children>
                   </AnchorPane>
             </content>
