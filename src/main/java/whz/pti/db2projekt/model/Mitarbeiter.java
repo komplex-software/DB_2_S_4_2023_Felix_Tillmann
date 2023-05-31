@@ -28,7 +28,7 @@ public class Mitarbeiter {
         mitarbeiterList.add(mitarbeiter);
     }
 
-    public static void printMitarbeiterCount() {
+    public static void printCount() {
         System.out.println("Anzahl Mitarbeiter: " + mitarbeiterList.stream().count());
     }
 

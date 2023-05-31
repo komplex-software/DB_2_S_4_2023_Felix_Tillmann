@@ -25,7 +25,7 @@ public class Kunde {
         kundeList.add(kunde);
     }
 
-    public static void printMitarbeiterCount() {
+    public static void printCount() {
         System.out.println("Anzahl Kunden: " + kundeList.stream().count());
     }
 

@@ -2,10 +2,7 @@ package whz.pti.db2projekt;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
-import whz.pti.db2projekt.model.Kunde;
-import whz.pti.db2projekt.model.Mitarbeiter;
-import whz.pti.db2projekt.model.UserPermissions;
+import whz.pti.db2projekt.model.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -107,10 +104,28 @@ public class MainViewController {
             // Laden der Daten
             loadMitarbeiter(connection);
             loadKunden(connection);
+            loadAdressen(connection);
+            loadAnreden(connection);
+            loadFahrzeuge(connection);
+            loadFahrzeugfarben(connection);
+            loadFahrzeugmodelle(connection);
+            loadFahrzeugtypen(connection);
+            loadHatAnsprechpartner(connection);
+            loadHatFarbe(connection);
+            loadHersteller(connection);
 
             // Testen der Daten
-            Mitarbeiter.printMitarbeiterCount();
-            Kunde.printMitarbeiterCount();
+            Mitarbeiter.printCount();
+            Kunde.printCount();
+            Adresse.printCount();
+            Anrede.printCount();
+            Fahrzeug.printCount();
+            Fahrzeugfarbe.printCount();
+            Fahrzeugmodell.printCount();
+            Fahrzeugtyp.printCount();
+            HatAnsprechpartner.printCount();
+            HatFarben.printCount();
+            Hersteller.printCount();
 
             connection.close();
         } catch (SQLException e) {
@@ -150,6 +165,132 @@ public class MainViewController {
                     rs.getInt("anrede_id")
             );
             Kunde.addKunde(newKunde);
+        }
+    }
+
+    private void loadAdressen(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Adresse;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Adresse newAdresse = new Adresse(
+                    rs.getInt("id"),
+                    rs.getString("straße"),
+                    rs.getString("stadt"),
+                    rs.getString("postleitzahl"),
+                    rs.getString("hausnummer")
+            );
+            Adresse.addAdresse(newAdresse);
+        }
+    }
+
+    private void loadAnreden(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Anrede;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Anrede newAnrede = new Anrede(
+                    rs.getInt("id"),
+                    rs.getString("anredewort")
+            );
+            Anrede.addAnrede(newAnrede);
+        }
+    }
+    private void loadFahrzeuge(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Fahrzeug;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Fahrzeug newFahrzeug = new Fahrzeug(
+                    rs.getInt("id"),
+                    rs.getInt("modell_id"),
+                    rs.getFloat("kaufpreis"),
+                    rs.getFloat("mietpreis"),
+                    rs.getBoolean("istVermietet"),
+                    rs.getInt("mietKunde_id"),
+                    rs.getBoolean("istVerkauft"),
+                    rs.getInt("kaufKunde_id"),
+                    rs.getDate("letzterTÜV"),
+                    rs.getInt("anzVorherigeBesitzer"),
+                    rs.getInt("kilometerstand")
+            );
+            Fahrzeug.addFahrzeug(newFahrzeug);
+        }
+    }
+    private void loadFahrzeugfarben(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Fahrzeugfarbe;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Fahrzeugfarbe newFahrzeugfarbe = new Fahrzeugfarbe(
+                    rs.getInt("id"),
+                    rs.getString("farbname")
+            );
+            Fahrzeugfarbe.addFarbe(newFahrzeugfarbe);
+        }
+    }
+
+    private void loadFahrzeugmodelle(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Fahrzeugmodell;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Fahrzeugmodell newFahrzeugmodell = new Fahrzeugmodell(
+                    rs.getInt("id"),
+                    rs.getInt("hersteller_id"),
+                    rs.getInt("fahrzeugtyp_id")
+            );
+            Fahrzeugmodell.addModell(newFahrzeugmodell);
+        }
+    }
+    private void loadFahrzeugtypen(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Fahrzeugtyp;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Fahrzeugtyp newFahrzeugtyp = new Fahrzeugtyp(
+                    rs.getInt("id"),
+                    rs.getString("bezeichnung")
+            );
+            Fahrzeugtyp.addFahrzeugtyp(newFahrzeugtyp);
+        }
+    }
+    private void loadHatAnsprechpartner(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM HatAnsprechpartner;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            HatAnsprechpartner newHatAnsprechpartner = new HatAnsprechpartner(
+                    rs.getInt("kunde_id"),
+                    rs.getInt("mitarbeiter_id")
+            );
+            HatAnsprechpartner.addHatAnsprechpartner(newHatAnsprechpartner);
+        }
+    }
+
+    private void loadHatFarbe(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM HatFarben;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            HatFarben newHatFarben = new HatFarben(
+                    rs.getInt("fahrzeug_id"),
+                    rs.getInt("farb_id")
+            );
+            HatFarben.addHatFarbe(newHatFarben);
+        }
+    }
+
+    private void loadHersteller(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Hersteller;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Hersteller newHersteller = new Hersteller(
+                    rs.getInt("id"),
+                    rs.getString("name")
+            );
+            Hersteller.addHersteller(newHersteller);
         }
     }
 
