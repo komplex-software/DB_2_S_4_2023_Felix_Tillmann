@@ -361,6 +361,66 @@ public class MainViewController {
             }
         });
 
+        // Speichern Button Hersteller
+        hersteller_speichern.setOnMouseClicked(event -> {
+            Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            Hersteller hersteller = Hersteller.getHerstellerList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+
+            if (hersteller != null) {
+                hersteller.setName(hersteller_name.getText());
+
+                try {
+                    updateHersteller(hersteller);
+                    Hersteller.clearList();
+                    loadHersteller(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Erstellen Button Hersteller
+        hersteller_anlegen.setOnMouseClicked(event -> {
+            Hersteller hersteller = new Hersteller(
+                    -1,
+                    hersteller_name.getText()
+            );
+
+            try {
+                createHersteller(hersteller);
+                Hersteller.clearList();
+                loadHersteller(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Löschen Button Hersteller
+        hersteller_löschen.setOnMouseClicked(event -> {
+            Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            Hersteller hersteller = Hersteller.getHerstellerList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+
+            if (hersteller != null) {
+                try {
+                    deleteHersteller(hersteller.getId());
+                    Hersteller.clearList();
+                    loadHersteller(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
     }
 
     public void loadConnection() {
