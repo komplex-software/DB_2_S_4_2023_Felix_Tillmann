@@ -3,6 +3,7 @@ package whz.pti.db2projekt;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import whz.pti.db2projekt.model.Mitarbeiter;
+import whz.pti.db2projekt.model.UserPermissions;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,8 +18,8 @@ public class MainViewController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
-
     private Connection connection;
+    private UserPermissions permissions = UserPermissions.READ; // read ist standard
 
     public void loadConnection() {
 
@@ -56,5 +57,9 @@ public class MainViewController {
 
     public void setConnection(Connection connection) {
         this.connection = connection;
+    }
+
+    public void setPermissions(UserPermissions permissions) {
+        this.permissions = permissions;
     }
 }
