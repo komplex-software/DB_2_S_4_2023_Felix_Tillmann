@@ -330,6 +330,12 @@ public class MainViewController {
             loadAnreden(connection);
             //deleteAnrede(1);
 
+            Fahrzeug fNew = new Fahrzeug(-1, 1, 100f,100f ,false,-1,false,-1,new Date(1999,1,1),1,1);
+            createFahrzeug(fNew);
+            Fahrzeug.clearList();
+            loadFahrzeuge(connection);
+            //deleteFahrzeug(1);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1007,7 +1013,63 @@ public class MainViewController {
         }
     }
 
+    private void createFahrzeug(Fahrzeug fahrzeug) throws SQLException {
+        PreparedStatement preparedStatement = null;
 
+        try {
+            String sql = "INSERT INTO Fahrzeug (modell_id, kaufpreis, mietpreis, istVermietet, mietKunde_id, istVerkauft, kaufKunde_id, letzterTÜV, anzVorherigeBesitzer, kilometerstand) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeug.getModell_id());
+            preparedStatement.setFloat(2, fahrzeug.getKaufpreis());
+            preparedStatement.setFloat(3, fahrzeug.getMietpreis());
+            preparedStatement.setBoolean(4, fahrzeug.isIstVermietet());
+            if (fahrzeug.getMietKunde_id() != -1)
+                preparedStatement.setInt(5, fahrzeug.getMietKunde_id());
+            else preparedStatement.setNull(5,1);
+            preparedStatement.setBoolean(6, fahrzeug.isIstVerkauft());
+            if (fahrzeug.getKaufKunde_id() != -1)
+                preparedStatement.setInt(7, fahrzeug.getKaufKunde_id());
+            else preparedStatement.setNull(7,1);
+            preparedStatement.setDate(8, new java.sql.Date(fahrzeug.getLetzterTuev().getTime()));
+            preparedStatement.setInt(9, fahrzeug.getAnzVorherigeBesitzer());
+            preparedStatement.setInt(10, fahrzeug.getKilometerstand());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neues Fahrzeug erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen des neuen Fahrzeugs.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void deleteFahrzeug(int fahrzeugId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "DELETE FROM Fahrzeug WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeugId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Fahrzeug mit ID " + fahrzeugId + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Fahrzeug mit ID " + fahrzeugId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
 
 
 

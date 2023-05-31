@@ -38,6 +38,10 @@ public class Fahrzeug {
         System.out.println("Anzahl Fahrzeuge: " + fahrzeugList.stream().count());
     }
 
+    public static void clearList() {
+        fahrzeugList.clear();
+    }
+
     public void setId(int id) {
         this.id = id;
     }
