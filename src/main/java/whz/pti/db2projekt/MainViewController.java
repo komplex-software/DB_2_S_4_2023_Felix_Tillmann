@@ -275,6 +275,10 @@ public class MainViewController {
             f1.setAnzVorherigeBesitzer(420);
             updateFahrzeuge(f1);
 
+            Fahrzeugfarbe ff1 = Fahrzeugfarbe.getFarbeList().get(0);
+            ff1.setFarbname("ANTRAZIT");
+            updateFahrzeugfarben(ff1);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -599,6 +603,29 @@ public class MainViewController {
 
 
 
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void updateFahrzeugfarben(Fahrzeugfarbe fahrzeugfarbe) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "UPDATE Fahrzeugfarbe SET farbname = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, fahrzeugfarbe.getFarbname());
+            preparedStatement.setInt(2, fahrzeugfarbe.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Fahrzeugfarbe mit ID " + fahrzeugfarbe.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Fahrzeugfarbe mit ID " + fahrzeugfarbe.getId() + " konnte nicht gefunden werden.");
+            }
         } finally {
             // Ressourcen freigeben
             if (preparedStatement != null) {
