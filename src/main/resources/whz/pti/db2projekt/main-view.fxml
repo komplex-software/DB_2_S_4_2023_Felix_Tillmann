@@ -287,8 +287,8 @@
                         <TextField fx:id="mitarbeiter_nachname" layoutX="177.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="mitarbeiter_lohn" layoutX="177.0" layoutY="264.0" prefHeight="25.0" prefWidth="179.0" />
                         <TextField fx:id="mitarbeiter_beschaeftigungsstart" layoutX="177.0" layoutY="296.0" prefHeight="25.0" prefWidth="179.0" />
-                        <TextField fx:id="mitarbeiter_verfuegbarkeit" layoutX="177.0" layoutY="330.0" prefHeight="25.0" prefWidth="179.0" />
                         <ComboBox fx:id="mitarbeiter_id" layoutX="177.0" layoutY="102.0" prefHeight="25.0" prefWidth="181.0" />
+                        <CheckBox fx:id="mitarbeiter_verfuegbarkeit" layoutX="177.0" layoutY="334.0" mnemonicParsing="false" />
                      </children>
                   </AnchorPane>
             </content>

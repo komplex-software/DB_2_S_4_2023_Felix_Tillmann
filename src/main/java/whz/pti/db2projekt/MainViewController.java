@@ -203,7 +203,7 @@ public class MainViewController {
     // --------------- Kunde ---------------
     // ------------ Mitarbeiter ------------
     @FXML
-    private ComboBox mitarbeiter_id;
+    private ComboBox<Integer> mitarbeiter_id;
     @FXML
     private TextField mitarbeiter_vorname;
     @FXML
@@ -213,7 +213,7 @@ public class MainViewController {
     @FXML
     private TextField mitarbeiter_beschaeftigungsstart;
     @FXML
-    private TextField mitarbeiter_verfuegbarkeit;
+    private CheckBox mitarbeiter_verfuegbarkeit;
 
     @FXML
     private ComboBox mitarbeiter_anrede;
@@ -1859,6 +1859,36 @@ public class MainViewController {
 
             tableView.getItems().add(mitarbeiter);
         }
+
+        for(Mitarbeiter mitarb: Mitarbeiter.getMitarbeiterList()) {
+            mitarbeiter_id.getItems().add(mitarb.getId());
+        }
+        mitarbeiter_id.setOnAction(event -> {
+            Integer selected = mitarbeiter_id.getSelectionModel().getSelectedItem();
+            Mitarbeiter mitarb = Mitarbeiter.getMitarbeiterList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            mitarbeiter_adresse.getItems().clear();
+            Adresse.getAdresseList().forEach(addr -> mitarbeiter_adresse.getItems().add(addr.getId()));
+            try {
+                mitarbeiter_adresse.getSelectionModel().select(mitarb.getAdresse_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mitarbeiter_anrede.getItems().clear();
+            Anrede.getAnredeList().forEach(anred -> mitarbeiter_anrede.getItems().add(anred.getId()));
+            try {
+                mitarbeiter_anrede.getSelectionModel().select(mitarb.getAnrede_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mitarbeiter_beschaeftigungsstart.setText(mitarb.getBeschaeftigungsstart().toString());
+            mitarbeiter_vorname.setText(mitarb.getVorname());
+            mitarbeiter_nachname.setText(mitarb.getNachname());
+            mitarbeiter_lohn.setText(Float.toString(mitarb.getLohn()));
+            mitarbeiter_verfuegbarkeit.setSelected(mitarb.isVerfuegbar());
+        } );
     }
     public void setAcces(UserPermissions permission){
 
