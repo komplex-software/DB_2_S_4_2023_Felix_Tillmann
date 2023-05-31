@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -49,34 +50,31 @@ public class loginViewController{
         if (checkPassword().equals("falsch")){return;}
 
         DBConnector dbConnector = new DBConnector(username.getValue().toString(),checkPassword());
+        Connection connection = dbConnector.openConnection();
+
+        //main
+
+        //connection.close();
+
+        // Startet Main View
         try {
-            Connection connection = dbConnector.openConnection();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("main-view.fxml"));
 
-            //main
+            Parent root = (Parent)fxmlLoader.load();
+            mainViewController controller = fxmlLoader.<mainViewController>getController();
+            controller.setConnection(connection);
+            controller.loadConnection();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
 
-            connection.close();
-
-            // Startet Main View
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("main-view.fxml"));
-                /*
-                 * if "fx:controller" is not set in fxml
-                 * fxmlLoader.setController(NewWindowController);
-                 */
-                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-                Stage stage = new Stage();
-                stage.setTitle("Datenbanktool");
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                Logger logger = Logger.getLogger(getClass().getName());
-                logger.log(Level.SEVERE, "Failed to create new Window.", e);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
+
     }
 
     public void setStage(){

@@ -18,11 +18,12 @@ public class mainViewController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    @FXML
-    public void initialize() {
-        DBConnector dbConnector = new DBConnector("sa","ms-SQL-2022");
+    private Connection connection;
+
+    public void loadConnection() {
+        //DBConnector dbConnector = new DBConnector("sa","ms-SQL-2022");
         try {
-            Connection connection = dbConnector.openConnection();
+            //Connection connection = dbConnector.openConnection();
 
             // Laden der Daten
             loadMitarbeiter(connection);
@@ -52,5 +53,9 @@ public class mainViewController {
             );
             Mitarbeiter.addMitarbeiter(newMitarbeiter);
         }
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 }
