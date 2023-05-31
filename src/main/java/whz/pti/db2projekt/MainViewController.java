@@ -86,7 +86,7 @@ public class MainViewController {
     // ------------ Fahrzeuge -------------
     // ---------- Fahrzeugfarbe -----------
     @FXML
-    private ComboBox fahrzeugfarbe_id;
+    private ComboBox<Integer> fahrzeugfarbe_id;
     @FXML
     private TextField fahrzeugfarbe_farbname;
 
@@ -1599,6 +1599,18 @@ public class MainViewController {
 
             tableView.getItems().add(farbe);
         }
+
+        for(Fahrzeugfarbe fahrzfarb: Fahrzeugfarbe.getFarbeList()) {
+            fahrzeugfarbe_id.getItems().add(fahrzfarb.getId());
+        }
+        fahrzeugfarbe_id.setOnAction(event -> {
+            Integer selected = fahrzeugfarbe_id.getSelectionModel().getSelectedItem();
+            Fahrzeugfarbe fahrzfarb = Fahrzeugfarbe.getFarbeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            fahrzeugfarbe_farbname.setText(fahrzfarb.getFarbname());
+        });
     }
 
     private void showFahrzeugmodell() {

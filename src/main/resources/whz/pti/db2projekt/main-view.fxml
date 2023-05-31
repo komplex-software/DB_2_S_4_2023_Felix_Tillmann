@@ -78,7 +78,7 @@
                         <Label layoutX="14.0" layoutY="165.0" text="Kaufpreis" />
                         <Label layoutX="14.0" layoutY="197.0" text="Mietpreis" />
                         <Label layoutX="14.0" layoutY="230.0" text="IstVermietet" />
-                        <Label layoutX="146.0" layoutY="261.0" text="Kaufkunde" />
+                        <Label layoutX="176.0" layoutY="261.0" text="Kaufkunde" />
                         <Label layoutX="14.0" layoutY="328.0" text="AnzVorherigeBesitzer" />
                         <Label layoutX="14.0" layoutY="294.0" text="LetzterTüv" />
                         <Label layoutX="14.0" layoutY="134.0" text="Modell" />
@@ -96,9 +96,9 @@
                         <CheckBox fx:id="fahrzeug_istVermietet" layoutX="100.0" layoutY="230.0" mnemonicParsing="false" />
                         <Label layoutX="149.0" layoutY="230.0" text="IstVerkauft" />
                         <CheckBox fx:id="fahrzeug_istVerkauft" layoutX="233.0" layoutY="230.0" mnemonicParsing="false" />
-                        <ComboBox fx:id="fahrzeug_kaufkunde" layoutX="222.0" layoutY="257.0" prefHeight="26.0" prefWidth="37.0" />
+                        <ComboBox fx:id="fahrzeug_kaufkunde" layoutX="252.0" layoutY="257.0" prefHeight="26.0" prefWidth="80.0" />
                         <Label layoutX="16.0" layoutY="261.0" text="Mietkunde" />
-                        <ComboBox fx:id="fahrzeug_mietkunde" layoutX="92.0" layoutY="257.0" prefHeight="26.0" prefWidth="37.0" />
+                        <ComboBox fx:id="fahrzeug_mietkunde" layoutX="92.0" layoutY="257.0" prefHeight="26.0" prefWidth="80.0" />
                      </children>
                   </AnchorPane>
                </content>
