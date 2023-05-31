@@ -324,6 +324,12 @@ public class MainViewController {
             loadAdressen(connection);
             //deleteAdresse(1);
 
+            Anrede anrNew = new Anrede(-1, "wort");
+            createAnrede(anrNew);
+            Anrede.clearList();
+            loadAnreden(connection);
+            //deleteAnrede(1);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -948,6 +954,50 @@ public class MainViewController {
                 System.out.println("Adresse mit ID " + adresseId + " erfolgreich gelöscht.");
             } else {
                 System.out.println("Adresse mit ID " + adresseId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void createAnrede(Anrede anrede) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "INSERT INTO Anrede (anredewort) VALUES (?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, anrede.getAnredewort());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neue Anrede erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen der neuen Anrede.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+    private void deleteAnrede(int anredeId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "DELETE FROM Anrede WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, anredeId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Anrede mit ID " + anredeId + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Anrede mit ID " + anredeId + " konnte nicht gefunden werden.");
             }
         } finally {
             // Ressourcen freigeben

@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class Anrede {
     int id;
 
+    public static void clearList() {
+        anredeList.clear();
+    }
+
     public int getId() {
         return id;
     }
