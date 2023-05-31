@@ -4,10 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import whz.pti.db2projekt.model.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class MainViewController {
     @FXML
@@ -70,6 +67,11 @@ public class MainViewController {
             HatAnsprechpartner.printCount();
             HatFarben.printCount();
             Hersteller.printCount();
+
+            // Testen update
+            Hersteller h1 = Hersteller.getHerstellerList().get(0);
+            h1.setName("TEST");
+            updateHersteller(h1);
 
             connection.close();
         } catch (SQLException e) {
@@ -238,6 +240,31 @@ public class MainViewController {
         }
     }
 
+    private void updateHersteller(Hersteller hersteller) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "UPDATE Hersteller SET name = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, hersteller.getName());
+            preparedStatement.setInt(2, hersteller.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Hersteller mit ID " + hersteller.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Hersteller mit ID " + hersteller.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
 
     public void setConnection(Connection connection) {
         this.connection = connection;

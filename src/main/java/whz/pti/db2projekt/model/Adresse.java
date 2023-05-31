@@ -3,6 +3,30 @@ package whz.pti.db2projekt.model;
 import java.util.ArrayList;
 
 public class Adresse {
+    public int getId() {
+        return id;
+    }
+
+    public String getStrasse() {
+        return strasse;
+    }
+
+    public String getStadt() {
+        return stadt;
+    }
+
+    public String getPostleitzahl() {
+        return postleitzahl;
+    }
+
+    public String getHausnummer() {
+        return hausnummer;
+    }
+
+    public static ArrayList<Adresse> getAdresseList() {
+        return adresseList;
+    }
+
     private int id;
     private String strasse;
     private String stadt;
