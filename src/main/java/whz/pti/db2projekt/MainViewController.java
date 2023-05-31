@@ -13,6 +13,62 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MainViewController {
+    // ------------- Adresse --------------
+    @FXML
+    private TextField adresse_id;
+    @FXML
+    private TextField adresse_straße;
+    @FXML
+    private TextField adresse_stadt;
+    @FXML
+    private TextField adresse_postleitzahl;
+    @FXML
+    private TextField adresse_hausnummer;
+    @FXML
+    private Button adresse_speichern;
+    @FXML
+    private Button adresse_suchen;
+    @FXML
+    private Button adresse_anlegen;
+    @FXML
+    private TableView adresse_anzeige;
+    // ------------- Adresse --------------
+    // -------------- Anrede --------------
+    @FXML
+    private TextField anrede_id;
+    @FXML
+    private TextField anrede_anredewort;
+    // -------------- Anrede --------------
+    // ------------ Fahrzeuge -------------
+    @FXML
+    private TextField fahrzeug_id;
+    @FXML
+    private TextField fahrzeug_kaufpreis;
+    @FXML
+    private TextField fahrzeug_mietpreis;
+    @FXML
+    private TextField fahrzeug_kaufkunde;
+    @FXML
+    private TextField fahrzeug_letzterTuev;
+    @FXML
+    private TextField fahrzeug_anzVorherigeBesitzer;
+    @FXML
+    private TextField fahrzeug_kilometerstand;
+    // ------------ Fahrzeuge -------------
+    // ---------- Fahrzeugfarbe -----------
+    @FXML
+    private TextField fahrzeugfarbe_id;
+    @FXML
+    private TextField fahrzeugfarbe_farbname;
+    // ---------- Fahrzeugfarbe -----------
+    // ---------- Fahrzeugmodell ----------
+    @FXML
+    private TextField fahrzeugmodell_id;
+    // ---------- Fahrzeugmodell ----------
+
+
+
+
     @FXML
     private TextField id;
     @FXML
@@ -41,9 +97,6 @@ public class MainViewController {
     @FXML
     private TableView anzeige;
 
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
     private Connection connection;
     private UserPermissions permissions = UserPermissions.READ; // read ist standard
 
