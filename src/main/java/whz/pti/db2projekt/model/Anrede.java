@@ -4,6 +4,27 @@ import java.util.ArrayList;
 
 public class Anrede {
     int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAnredewort(String anredewort) {
+        this.anredewort = anredewort;
+    }
+
+    public String getAnredewort() {
+        return anredewort;
+    }
+
+    public static ArrayList<Anrede> getAnredeList() {
+        return anredeList;
+    }
+
     String anredewort;
     public Anrede(int id, String anredewort) {
         this.id = id;

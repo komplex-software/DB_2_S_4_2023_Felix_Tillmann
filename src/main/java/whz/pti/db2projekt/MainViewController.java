@@ -137,6 +137,9 @@ public class MainViewController {
             a1.setStadt("TEST");
             updateAdressen(a1);
 
+            Anrede an1 = Anrede.getAnredeList().get(0);
+            an1.setAnredewort("ens");
+            updateAnreden(an1);
 
             connection.close();
         } catch (SQLException e) {
@@ -387,6 +390,31 @@ public class MainViewController {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
+        }
+    }
+
+    private void updateAnreden(Anrede anrede) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "UPDATE Anrede SET anredewort = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, anrede.getAnredewort());
+            preparedStatement.setInt(2, anrede.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Anrede mit ID " + anrede.getId() + " erfolgreich aktualisiert.");
+            } else {
+                System.out.println("Anrede mit ID " + anrede.getId() + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
         }
     }
 
