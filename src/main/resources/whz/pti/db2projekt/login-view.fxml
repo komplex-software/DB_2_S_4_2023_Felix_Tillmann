@@ -20,6 +20,6 @@
       </Label>
       <ComboBox fx:id="username" accessibleText="admin&#10;reiter&#10;schreiter" prefHeight="25.0" prefWidth="361.0" promptText="Nutzername" />
       <PasswordField fx:id="password" promptText="Passwort" />
-      <Button fx:id="login" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="25.0" prefWidth="358.0" text="Einloggen" />
+      <Button fx:id="login" defaultButton="true" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="25.0" prefWidth="358.0" text="Einloggen" />
    </children>
 </VBox>

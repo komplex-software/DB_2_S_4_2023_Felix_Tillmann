@@ -15,6 +15,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Autohaendler");
         stage.setScene(scene);
+        stage.setUserData(scene);
         stage.show();
 
     }
