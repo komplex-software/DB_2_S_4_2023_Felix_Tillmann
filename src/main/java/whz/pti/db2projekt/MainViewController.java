@@ -21,9 +21,8 @@ public class MainViewController {
     private Connection connection;
 
     public void loadConnection() {
-        //DBConnector dbConnector = new DBConnector("sa","ms-SQL-2022");
+
         try {
-            //Connection connection = dbConnector.openConnection();
 
             // Laden der Daten
             loadMitarbeiter(connection);

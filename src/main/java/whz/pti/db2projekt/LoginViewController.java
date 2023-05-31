@@ -22,8 +22,6 @@ public class LoginViewController {
     private PasswordField password;
     @FXML
     private Button login;
-
-    private Stage ls;
     private ObservableList<String> olUsernames = FXCollections.observableArrayList();
 
     @FXML
@@ -46,10 +44,6 @@ public class LoginViewController {
         DBConnector dbConnector = new DBConnector(username.getValue().toString(),checkPassword());
         Connection connection = dbConnector.openConnection();
 
-        //main
-
-        //connection.close();
-
         // Startet Main View
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -62,16 +56,12 @@ public class LoginViewController {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-
             stage.show();
+
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
-
-    }
-
-    public void setStage(){
 
     }
 
@@ -90,9 +80,5 @@ public class LoginViewController {
             });
         }
         return "falsch";
-    }
-
-    private void loadloginView(Stage stage) throws IOException {
-
     }
 }
