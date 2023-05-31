@@ -250,6 +250,9 @@ public class MainViewController {
             adr.setHausnummer(adresse_hausnummer.getText());
             try {
                 updateAdressen(adr);
+                Adresse.clearList();
+                loadAdressen(connection);
+                showTableFacade();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -265,6 +268,25 @@ public class MainViewController {
             );
             try {
                 createAdresse(adr);
+                Adresse.clearList();
+                loadAdressen(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        // Löschen Button Adresse
+        adresse_löschen.setOnMouseClicked(event -> {
+            Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            Adresse adr = Adresse.getAdresseList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            try {
+                deleteAdresse(adr.getId());
+                Adresse.clearList();
+                loadAdressen(connection);
+                showTableFacade();
             } catch (Exception e) {
                 e.printStackTrace();
             }
