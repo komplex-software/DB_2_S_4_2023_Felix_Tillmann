@@ -1829,6 +1829,9 @@ public class MainViewController {
             fahrzeug_mietpreis.setText(Float.toString(fahrz.getMietpreis()));
             fahrzeug_istVermietet.setSelected(fahrz.isIstVermietet());
             fahrzeug_istVerkauft.setSelected(fahrz.isIstVerkauft());
+
+            // TODO: mietkunde und kaufkunde brauchen option "-1"
+
             fahrzeug_mietkunde.getItems().clear();
             //Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
             int selectedId = fahrz.getMietKunde_id();
@@ -1845,11 +1848,18 @@ public class MainViewController {
             }
 
             fahrzeug_kaufkunde.getItems().clear();
-            Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
-            try {
-                fahrzeug_kaufkunde.getSelectionModel().select(fahrz.getKaufKunde_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            //Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
+            selectedId = fahrz.getKaufKunde_id();
+            ObservableList<Integer> itemsKauf = fahrzeug_kaufkunde.getItems();
+            index = -1;
+            for (int i = 0; i < itemsKauf.size(); i++) {
+                if (itemsKauf.get(i) == selectedId) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index >= 0) {
+                fahrzeug_kaufkunde.getSelectionModel().select(index);
             }
             fahrzeug_letzterTuev.setText(fahrz.getLetzterTuev().toString());
             fahrzeug_anzVorherigeBesitzer.setText(""+fahrz.getAnzVorherigeBesitzer());
@@ -1925,18 +1935,34 @@ public class MainViewController {
                     .get(0);
             fahrzeugmodell_fahrzeugtyp.getItems().clear();
             Fahrzeugtyp.getTypList().forEach(typ -> fahrzeugmodell_fahrzeugtyp.getItems().add(typ.getId()));
-            try {
-                fahrzeugmodell_fahrzeugtyp.getSelectionModel().select(fahrzmod.getFahrzeugtyp_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedFahrzeugtypId = fahrzmod.getFahrzeugtyp_id();
+            ObservableList<Integer> items = fahrzeugmodell_fahrzeugtyp.getItems();
+            int index = -1;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) == selectedFahrzeugtypId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                fahrzeugmodell_fahrzeugtyp.getSelectionModel().select(index);
+            }
+
             fahrzeugmodell_hersteller.getItems().clear();
             Hersteller.getHerstellerList().forEach(hersteller -> fahrzeugmodell_hersteller.getItems().add(hersteller.getId()));
-            try {
-                fahrzeugmodell_hersteller.getSelectionModel().select(fahrzmod.getHersteller_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedHerstellerId = fahrzmod.getHersteller_id();
+            ObservableList<Integer> itemsModell = fahrzeugmodell_hersteller.getItems();
+            index = -1;
+            for (int i = 0; i < itemsModell.size(); i++) {
+                if (itemsModell.get(i) == selectedHerstellerId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                fahrzeugmodell_hersteller.getSelectionModel().select(index);
+            }
+
         });
     }
 
