@@ -4,13 +4,19 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import whz.pti.db2projekt.model.Mitarbeiter;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class loginViewController {
 
@@ -43,6 +49,25 @@ public class loginViewController {
         try {
             Connection connection = dbConnector.openConnection();
             connection.close();
+
+            // Startet Main View
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("main-view.fxml"));
+                /*
+                 * if "fx:controller" is not set in fxml
+                 * fxmlLoader.setController(NewWindowController);
+                 */
+                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+                Stage stage = new Stage();
+                stage.setTitle("Datenbanktool");
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                Logger logger = Logger.getLogger(getClass().getName());
+                logger.log(Level.SEVERE, "Failed to create new Window.", e);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
