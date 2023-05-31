@@ -1,6 +1,5 @@
 package whz.pti.db2projekt.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Adresse {
@@ -9,7 +8,6 @@ public class Adresse {
     private String stadt;
     private String postleitzahl;
     private String hausnummer;
-    private static ArrayList<Adresse> adresseList = new ArrayList<>();
     public Adresse(int id, String strasse, String stadt, String postleitzahl, String hausnummer) {
         this.id = id;
         this. strasse =  strasse;
@@ -18,7 +16,11 @@ public class Adresse {
         this.hausnummer = hausnummer;
     }
 
+    private static ArrayList<Adresse> adresseList = new ArrayList<>();
     public static void addAdresse(Adresse adresse) {
         adresseList.add(adresse);
+    }
+    public static void printCount() {
+        System.out.println("Anzahl Adresen: " + adresseList.stream().count());
     }
 }

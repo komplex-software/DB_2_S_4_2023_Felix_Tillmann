@@ -2,6 +2,7 @@ package whz.pti.db2projekt;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import whz.pti.db2projekt.model.Adresse;
 import whz.pti.db2projekt.model.Kunde;
 import whz.pti.db2projekt.model.Mitarbeiter;
 import whz.pti.db2projekt.model.UserPermissions;
@@ -29,10 +30,12 @@ public class MainViewController {
             // Laden der Daten
             loadMitarbeiter(connection);
             loadKunden(connection);
+            loadAdressen(connection);
 
             // Testen der Daten
-            Mitarbeiter.printMitarbeiterCount();
-            Kunde.printMitarbeiterCount();
+            Mitarbeiter.printCount();
+            Kunde.printCount();
+            Adresse.printCount();
 
             connection.close();
         } catch (SQLException e) {
@@ -72,6 +75,22 @@ public class MainViewController {
                     rs.getInt("anrede_id")
             );
             Kunde.addKunde(newKunde);
+        }
+    }
+
+    private void loadAdressen(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM Adresse;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            Adresse newAdresse = new Adresse(
+                    rs.getInt("id"),
+                    rs.getString("straße"),
+                    rs.getString("stadt"),
+                    rs.getString("postleitzahl"),
+                    rs.getString("hausnummer")
+            );
+            Adresse.addAdresse(newAdresse);
         }
     }
 
