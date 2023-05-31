@@ -83,11 +83,11 @@ CREATE TABLE
         "Vorname" TEXT NOT NULL,
         "Nachname" TEXT NOT NULL,
         "Adresse_ID" INT NOT NULL, -- n:1
-        "Ansprechparter_ID" INT NOT NULL,
+        "Ansprechpartner_ID" INT NOT NULL,
         "Anrede_ID" INT NOT NULL, -- n:1
         PRIMARY KEY ("ID"),
         FOREIGN KEY ("Adresse_ID") REFERENCES "Adresse" ("ID"),
-        FOREIGN KEY ("Ansprechparter_ID") REFERENCES "Mitarbeiter" ("ID"),
+        FOREIGN KEY ("Ansprechpartner_ID") REFERENCES "Mitarbeiter" ("ID"),
         FOREIGN KEY ("Anrede_ID") REFERENCES "Anrede" ("ID")
     );
 
