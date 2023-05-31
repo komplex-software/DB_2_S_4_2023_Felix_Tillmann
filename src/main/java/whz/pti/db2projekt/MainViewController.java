@@ -55,6 +55,7 @@ public class MainViewController {
             loadFahrzeugfarben(connection);
             loadFahrzeugmodelle(connection);
             loadFahrzeugtypen(connection);
+            loadHatAnsprechpartner(connection);
 
             // Testen der Daten
             Mitarbeiter.printCount();
@@ -65,6 +66,7 @@ public class MainViewController {
             Fahrzeugfarbe.printCount();
             Fahrzeugmodell.printCount();
             Fahrzeugtyp.printCount();
+            HatAnsprechpartner.printCount();
 
             connection.close();
         } catch (SQLException e) {
@@ -194,6 +196,19 @@ public class MainViewController {
             Fahrzeugtyp.addFahrzeugtyp(newFahrzeugtyp);
         }
     }
+    private void loadHatAnsprechpartner(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        String sql = "SELECT * FROM HatAnsprechpartner;";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            HatAnsprechpartner newHatAnsprechpartner = new HatAnsprechpartner(
+                    rs.getInt("kunde_id"),
+                    rs.getInt("mitarbeiter_id")
+            );
+            HatAnsprechpartner.addHatAnsprechpartner(newHatAnsprechpartner);
+        }
+    }
+
 
 
     public void setConnection(Connection connection) {
