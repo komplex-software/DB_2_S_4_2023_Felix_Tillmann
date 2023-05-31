@@ -60,7 +60,9 @@ public class MainViewController {
     @FXML
     private TextField fahrzeug_mietpreis;
     @FXML
-    private TextField fahrzeug_kaufkunde;
+    private ComboBox<Integer> fahrzeug_kaufkunde;
+    @FXML
+    private ComboBox<Integer> fahrzeug_mietkunde;
     @FXML
     private TextField fahrzeug_letzterTuev;
     @FXML
@@ -71,8 +73,9 @@ public class MainViewController {
     @FXML
     private ComboBox fahrzeug_modell;
     @FXML
-    private ComboBox fahrzeug_istVermietet;
-
+    private CheckBox fahrzeug_istVermietet;
+    @FXML
+    private CheckBox fahrzeug_istVerkauft;
     @FXML
     private Button fahrzeug_speichern;
     @FXML
@@ -84,7 +87,7 @@ public class MainViewController {
     // ------------ Fahrzeuge -------------
     // ---------- Fahrzeugfarbe -----------
     @FXML
-    private ComboBox fahrzeugfarbe_id;
+    private ComboBox<Integer> fahrzeugfarbe_id;
     @FXML
     private TextField fahrzeugfarbe_farbname;
 
@@ -99,7 +102,7 @@ public class MainViewController {
     // ---------- Fahrzeugfarbe -----------
     // ---------- Fahrzeugmodell ----------
     @FXML
-    private ComboBox fahrzeugmodell_id;
+    private ComboBox<Integer> fahrzeugmodell_id;
     @FXML
     private ComboBox fahrzeugmodell_hersteller;
     @FXML
@@ -116,7 +119,7 @@ public class MainViewController {
     // ---------- Fahrzeugmodell ----------
     // ----------- Fahrzeugtyp ------------
     @FXML
-    private ComboBox fahrzeugtyp_id;
+    private ComboBox<Integer> fahrzeugtyp_id;
     @FXML
     private TextField fahrzeugtyp_bezeichnung;
 
@@ -1563,7 +1566,25 @@ public class MainViewController {
             }
             fahrzeug_kaufpreis.setText(Float.toString(fahrz.getKaufpreis()));
             fahrzeug_mietpreis.setText(Float.toString(fahrz.getMietpreis()));
-            /// TODO: fahrzeug_istVermietet sollte checkbox sein
+            fahrzeug_istVermietet.setSelected(fahrz.isIstVermietet());
+            fahrzeug_istVerkauft.setSelected(fahrz.isIstVerkauft());
+            fahrzeug_mietkunde.getItems().clear();
+            Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
+            try {
+                fahrzeug_mietkunde.getSelectionModel().select(fahrz.getMietKunde_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fahrzeug_kaufkunde.getItems().clear();
+            Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
+            try {
+                fahrzeug_kaufkunde.getSelectionModel().select(fahrz.getKaufKunde_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fahrzeug_letzterTuev.setText(fahrz.getLetzterTuev().toString());
+            fahrzeug_anzVorherigeBesitzer.setText(""+fahrz.getAnzVorherigeBesitzer());
+            fahrzeug_kilometerstand.setText(""+fahrz.getKilometerstand());
         });
     }
 
@@ -1584,6 +1605,18 @@ public class MainViewController {
 
             tableView.getItems().add(farbe);
         }
+
+        for(Fahrzeugfarbe fahrzfarb: Fahrzeugfarbe.getFarbeList()) {
+            fahrzeugfarbe_id.getItems().add(fahrzfarb.getId());
+        }
+        fahrzeugfarbe_id.setOnAction(event -> {
+            Integer selected = fahrzeugfarbe_id.getSelectionModel().getSelectedItem();
+            Fahrzeugfarbe fahrzfarb = Fahrzeugfarbe.getFarbeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            fahrzeugfarbe_farbname.setText(fahrzfarb.getFarbname());
+        });
     }
 
     private void showFahrzeugmodell() {
@@ -1605,6 +1638,31 @@ public class MainViewController {
 
             tableView.getItems().add(modell);
         }
+
+        for(Fahrzeugmodell fahrzmod: Fahrzeugmodell.getModellList()) {
+            fahrzeugmodell_id.getItems().add(fahrzmod.getId());
+        }
+        fahrzeugmodell_id.setOnAction(event -> {
+            Integer selected = fahrzeugmodell_id.getSelectionModel().getSelectedItem();
+            Fahrzeugmodell fahrzmod = Fahrzeugmodell.getModellList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            fahrzeugmodell_fahrzeugtyp.getItems().clear();
+            Fahrzeugtyp.getTypList().forEach(typ -> fahrzeugmodell_fahrzeugtyp.getItems().add(typ.getId()));
+            try {
+                fahrzeugmodell_fahrzeugtyp.getSelectionModel().select(fahrzmod.getFahrzeugtyp_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fahrzeugmodell_hersteller.getItems().clear();
+            Hersteller.getHerstellerList().forEach(hersteller -> fahrzeugmodell_hersteller.getItems().add(hersteller.getId()));
+            try {
+                fahrzeugmodell_hersteller.getSelectionModel().select(fahrzmod.getHersteller_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void showFahrzeugtyp() {
@@ -1624,6 +1682,18 @@ public class MainViewController {
 
             tableView.getItems().add(typ);
         }
+
+        for(Fahrzeugtyp fahrztyp: Fahrzeugtyp.getTypList()) {
+            fahrzeugtyp_id.getItems().add(fahrztyp.getId());
+        }
+        fahrzeugtyp_id.setOnAction(event -> {
+            Integer selected = fahrzeugtyp_id.getSelectionModel().getSelectedItem();
+            Fahrzeugtyp fahrztyp = Fahrzeugtyp.getTypList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .collect(Collectors.toList())
+                    .get(0);
+            fahrzeugtyp_bezeichnung.setText(fahrztyp.getBezeichnung());
+        });
     }
 
     private void showAnsprechpartner() {
