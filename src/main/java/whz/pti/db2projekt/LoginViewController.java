@@ -23,6 +23,8 @@ public class LoginViewController {
     private PasswordField password;
     @FXML
     private Button login;
+
+    private UserPermissions perms;
     private ObservableList<String> olUsernames = FXCollections.observableArrayList();
 
     @FXML
@@ -42,7 +44,7 @@ public class LoginViewController {
     protected void onLoginButtonClick() {
         if (checkPassword().equals("falsch")){return;}
 
-        DBConnector dbConnector = new DBConnector(username.getValue().toString(),checkPassword());
+        DBConnector dbConnector = new DBConnector("sa",checkPassword());
         Connection connection = dbConnector.openConnection();
 
         // Startet Main View
@@ -57,15 +59,7 @@ public class LoginViewController {
             controller.setConnection(connection);
             controller.loadConnection();
 
-            //mitgeben der Berechtigungen
-            UserPermissions perms;
-            if (username.getSelectionModel().getSelectedIndex() == 0)
-                perms = UserPermissions.ADMIN;
-            else if (username.getSelectionModel().getSelectedIndex() == 1)
-                perms = UserPermissions.READ;
-            else
-                perms = UserPermissions.READWRITE;
-            controller.setPermissions(perms);
+            checkPermissions(controller);
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -82,6 +76,31 @@ public class LoginViewController {
         }
 
     }
+
+   private void checkPermissions(MainViewController cont){
+       //mitgeben der Berechtigungen
+
+       String usernamen = username.getSelectionModel().getSelectedItem().toString();
+       switch (usernamen){
+           case "sa":
+               perms = UserPermissions.ADMIN;
+               System.out.println("admin");
+               break;
+           case "readwriter":
+               perms = UserPermissions.READWRITE;
+               System.out.println("RW");
+               break;
+           case "reader":
+               perms = UserPermissions.READ;
+               System.out.println("R");
+               break;
+           default:
+               perms = UserPermissions.READ;
+               System.out.println("S");
+       }
+       System.out.println(perms.toString());
+       cont.setAcces(perms);
+   }
 
     private String checkPassword(){
         if (password.getText().equals("ms-SQL-2022")){
