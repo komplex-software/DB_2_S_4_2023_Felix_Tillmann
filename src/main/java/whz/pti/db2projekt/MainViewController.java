@@ -2188,18 +2188,34 @@ public class MainViewController {
                     .get(0);
             mitarbeiter_adresse.getItems().clear();
             Adresse.getAdresseList().forEach(addr -> mitarbeiter_adresse.getItems().add(addr.getId()));
-            try {
-                mitarbeiter_adresse.getSelectionModel().select(mitarb.getAdresse_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAdresseId = mitarb.getAdresse_id();
+            ObservableList<Integer> items = mitarbeiter_adresse.getItems();
+            int index = -1;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) == selectedAdresseId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                mitarbeiter_adresse.getSelectionModel().select(index);
+            }
+
             mitarbeiter_anrede.getItems().clear();
             Anrede.getAnredeList().forEach(anred -> mitarbeiter_anrede.getItems().add(anred.getId()));
-            try {
-                mitarbeiter_anrede.getSelectionModel().select(mitarb.getAnrede_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAnredeId = mitarb.getAnrede_id();
+            ObservableList<Integer> itemsAnred = mitarbeiter_anrede.getItems();
+            index = -1;
+            for (int i = 0; i < itemsAnred.size(); i++) {
+                if (itemsAnred.get(i) == selectedAnredeId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                mitarbeiter_anrede.getSelectionModel().select(index);
+            }
+
             mitarbeiter_beschaeftigungsstart.setText(mitarb.getBeschaeftigungsstart().toString());
             mitarbeiter_vorname.setText(mitarb.getVorname());
             mitarbeiter_nachname.setText(mitarb.getNachname());
