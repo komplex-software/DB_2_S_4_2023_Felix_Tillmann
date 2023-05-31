@@ -71,7 +71,7 @@ public class MainViewController {
     private TextField fahrzeug_kilometerstand;
 
     @FXML
-    private ComboBox fahrzeug_modell;
+    private ComboBox<Integer> fahrzeug_modell;
     @FXML
     private CheckBox fahrzeug_istVermietet;
     @FXML
@@ -413,6 +413,83 @@ public class MainViewController {
                     deleteHersteller(hersteller.getId());
                     Hersteller.clearList();
                     loadHersteller(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Speichern Button Fahrzeug
+        fahrzeug_speichern.setOnMouseClicked(event -> {
+            Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            Fahrzeug fahrzeug = Fahrzeug.getFahrzeugList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+
+            if (fahrzeug != null) {
+                fahrzeug.setModell_id(fahrzeugmodell_id.getSelectionModel().getSelectedItem() != null ? fahrzeugmodell_id.getSelectionModel().getSelectedItem() : -1);
+                fahrzeug.setKaufpreis(Float.parseFloat(fahrzeug_kaufpreis.getText()));
+                fahrzeug.setMietpreis(Float.parseFloat(fahrzeug_mietpreis.getText()));
+                fahrzeug.setIstVermietet(fahrzeug_istVermietet.isSelected());
+                fahrzeug.setMietKunde_id(fahrzeug_mietkunde.getSelectionModel().getSelectedItem());
+                fahrzeug.setIstVerkauft(fahrzeug_istVerkauft.isSelected());
+                fahrzeug.setKaufKunde_id(fahrzeug_kaufkunde.getSelectionModel().getSelectedItem());
+                fahrzeug.setLetzterTuev(Date.valueOf(fahrzeug_letzterTuev.getText()));
+                fahrzeug.setAnzVorherigeBesitzer(Integer.parseInt(fahrzeug_anzVorherigeBesitzer.getText()));
+                fahrzeug.setKilometerstand(Integer.parseInt(fahrzeug_kilometerstand.getText()));
+
+                try {
+                    updateFahrzeuge(fahrzeug);
+                    Fahrzeug.clearList();
+                    loadFahrzeuge(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Fahrzeug
+        fahrzeug_anlegen.setOnMouseClicked(event -> {
+            Fahrzeug fahrzeug = new Fahrzeug(
+                    -1,
+                    fahrzeug_modell.getSelectionModel().getSelectedItem(),
+                    Float.parseFloat(fahrzeug_kaufpreis.getText()),
+                    Float.parseFloat(fahrzeug_mietpreis.getText()),
+                    fahrzeug_istVermietet.isSelected(),
+                    fahrzeug_mietkunde.getSelectionModel().getSelectedItem(),
+                    fahrzeug_istVerkauft.isSelected(),
+                    fahrzeug_kaufkunde.getSelectionModel().getSelectedItem(),
+                    Date.valueOf(fahrzeug_letzterTuev.getText()),
+                    Integer.parseInt(fahrzeug_anzVorherigeBesitzer.getText()),
+                    Integer.parseInt(fahrzeug_kilometerstand.getText())
+            );
+
+            try {
+                createFahrzeug(fahrzeug);
+                Fahrzeug.clearList();
+                loadFahrzeuge(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Fahrzeug
+        fahrzeug_löschen.setOnMouseClicked(event -> {
+            Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            Fahrzeug fahrzeug = Fahrzeug.getFahrzeugList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+
+            if (fahrzeug != null) {
+                try {
+                    deleteFahrzeug(fahrzeug.getId());
+                    Fahrzeug.clearList();
+                    loadFahrzeuge(connection);
                     showTableFacade();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1735,22 +1812,38 @@ public class MainViewController {
             // Set combo box modell
             fahrzeug_modell.getItems().clear();
             Fahrzeugmodell.getModellList().forEach(modell -> fahrzeug_modell.getItems().add(modell.getId()));
-            try {
-                fahrzeug_modell.getSelectionModel().select(fahrz.getModell_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedModellId = fahrz.getModell_id();
+            ObservableList<Integer> items = fahrzeug_modell.getItems();
+            int index = -1;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) == selectedModellId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                fahrzeug_modell.getSelectionModel().select(index);
+            }
+
             fahrzeug_kaufpreis.setText(Float.toString(fahrz.getKaufpreis()));
             fahrzeug_mietpreis.setText(Float.toString(fahrz.getMietpreis()));
             fahrzeug_istVermietet.setSelected(fahrz.isIstVermietet());
             fahrzeug_istVerkauft.setSelected(fahrz.isIstVerkauft());
             fahrzeug_mietkunde.getItems().clear();
-            Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
-            try {
-                fahrzeug_mietkunde.getSelectionModel().select(fahrz.getMietKunde_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            //Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
+            int selectedId = fahrz.getMietKunde_id();
+            ObservableList<Integer> itemsMiet = fahrzeug_mietkunde.getItems();
+            index = -1;
+            for (int i = 0; i < itemsMiet.size(); i++) {
+                if (itemsMiet.get(i) == selectedId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                fahrzeug_mietkunde.getSelectionModel().select(index);
+            }
+
             fahrzeug_kaufkunde.getItems().clear();
             Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
             try {
