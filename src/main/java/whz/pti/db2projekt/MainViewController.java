@@ -342,6 +342,25 @@ public class MainViewController {
             loadFahrzeugfarben(connection);
             //deleteFahrzeugfarbe(1);
 
+            Fahrzeugmodell fmNew = new Fahrzeugmodell(-1, 1, 1);
+            createFahrzeugmodell(fmNew);
+            Fahrzeugmodell.clearList();
+            loadFahrzeugmodelle(connection);
+            //deleteFahrzeugmodell(1);
+
+            Fahrzeugtyp ftNew = new Fahrzeugtyp(-1, "bezeich");
+            createFahrzeugtyp(ftNew);
+            Fahrzeugtyp.clearList();
+            loadFahrzeugtypen(connection);
+            //deleteFahrzeugtyp(1);
+
+            HatAnsprechpartner haNew = new HatAnsprechpartner(1, 1);
+            createHatAnsprechpartner(haNew);
+            HatAnsprechpartner.clearList();
+            loadHatAnsprechpartner(connection);
+            //deleteHatAnsprechpartner(1,1);
+
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1113,6 +1132,143 @@ public class MainViewController {
                 System.out.println("Fahrzeugfarbe mit ID " + fahrzeugfarbeId + " erfolgreich gelöscht.");
             } else {
                 System.out.println("Fahrzeugfarbe mit ID " + fahrzeugfarbeId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+    private void createFahrzeugmodell(Fahrzeugmodell fahrzeugmodell) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "INSERT INTO Fahrzeugmodell (hersteller_id, fahrzeugtyp_id) VALUES (?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeugmodell.getHersteller_id());
+            preparedStatement.setInt(2, fahrzeugmodell.getFahrzeugtyp_id());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neues Fahrzeugmodell erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen des neuen Fahrzeugmodells.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void deleteFahrzeugmodell(int fahrzeugmodellId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "DELETE FROM Fahrzeugmodell WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeugmodellId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Fahrzeugmodell mit ID " + fahrzeugmodellId + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Fahrzeugmodell mit ID " + fahrzeugmodellId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void createFahrzeugtyp(Fahrzeugtyp fahrzeugtyp) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "INSERT INTO Fahrzeugtyp (bezeichnung) VALUES (?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, fahrzeugtyp.getBezeichnung());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neuer Fahrzeugtyp erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen des neuen Fahrzeugtyps.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+    private void deleteFahrzeugtyp(int fahrzeugtypId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "DELETE FROM Fahrzeugtyp WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeugtypId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Fahrzeugtyp mit ID " + fahrzeugtypId + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Fahrzeugtyp mit ID " + fahrzeugtypId + " konnte nicht gefunden werden.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    private void createHatAnsprechpartner(HatAnsprechpartner hatAnsprechpartner) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            String sql = "INSERT INTO HatAnsprechpartner (kunde_id, mitarbeiter_id) VALUES (?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, hatAnsprechpartner.getKunde_id());
+            preparedStatement.setInt(2, hatAnsprechpartner.getMitarbeiter_id());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Neue Beziehung HatAnsprechpartner erfolgreich erstellt.");
+            } else {
+                System.out.println("Fehler beim Erstellen der neuen Beziehung HatAnsprechpartner.");
+            }
+        } finally {
+            // Ressourcen freigeben
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+
+    }
+    private void deleteHatAnsprechpartner(int kundeId, int mitarbeiterId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String sql = "DELETE FROM HatAnsprechpartner WHERE kunde_id = ? AND mitarbeiter_id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, kundeId);
+            preparedStatement.setInt(2, mitarbeiterId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Beziehung HatAnsprechpartner erfolgreich gelöscht.");
+            } else {
+                System.out.println("Beziehung HatAnsprechpartner konnte nicht gefunden werden.");
             }
         } finally {
             // Ressourcen freigeben

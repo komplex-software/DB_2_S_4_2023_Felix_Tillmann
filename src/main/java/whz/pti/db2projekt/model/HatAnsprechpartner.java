@@ -11,6 +11,10 @@ public class HatAnsprechpartner {
         this.mitarbeiter_id = mitarbeiter_id;
     }
 
+    public static void clearList() {
+        hatAnsprechpartnerList.clear();
+    }
+
     public void setKunde_id(int kunde_id) {
         this.kunde_id = kunde_id;
     }

@@ -13,6 +13,10 @@ public class Fahrzeugmodell {
         this.fahrzeugtyp_id = fahrzeugtyp_id;
     }
 
+    public static void clearList() {
+        modellList.clear();
+    }
+
     public void setId(int id) {
         this.id = id;
     }

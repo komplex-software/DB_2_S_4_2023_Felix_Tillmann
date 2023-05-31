@@ -11,6 +11,10 @@ public class Fahrzeugtyp {
         this.bezeichnung = bezeichnung;
     }
 
+    public static void clearList() {
+        typList.clear();
+    }
+
     public void setId(int id) {
         this.id = id;
     }
