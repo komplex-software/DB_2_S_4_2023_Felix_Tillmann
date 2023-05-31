@@ -10,7 +10,7 @@ public class Kunde {
     int ansprechpartner_id;
     int anrede_id;
 
-    private static ArrayList<Kunde> kundeList;
+    private static ArrayList<Kunde> kundeList = new ArrayList<>();
 
     public Kunde(int id, String vorname, String nachname, int adresse_id, int ansprechpartner_id, int anrede_id) {
         this.id = id;
