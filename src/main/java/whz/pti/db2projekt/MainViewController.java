@@ -1500,6 +1500,7 @@ public class MainViewController {
         }
 
         // Selecter
+        adresse_id.getItems().clear();
         for(Adresse adr: Adresse.getAdresseList()) {
             adresse_id.getItems().add(adr.getId());
         }
@@ -1535,6 +1536,7 @@ public class MainViewController {
         }
 
         // Selecter
+        anrede_id.getItems().clear();
         for(Anrede anred: Anrede.getAnredeList()) {
             anrede_id.getItems().add(anred.getId());
         }
@@ -1584,6 +1586,7 @@ public class MainViewController {
             tableView.getItems().add(fahrzeug);
         }
 
+        fahrzeug_id.getItems().clear();
         for(Fahrzeug fahrz: Fahrzeug.getFahrzeugList()) {
             fahrzeug_id.getItems().add(fahrz.getId());
         }
@@ -1643,6 +1646,7 @@ public class MainViewController {
             tableView.getItems().add(farbe);
         }
 
+        fahrzeugfarbe_id.getItems().clear();
         for(Fahrzeugfarbe fahrzfarb: Fahrzeugfarbe.getFarbeList()) {
             fahrzeugfarbe_id.getItems().add(fahrzfarb.getId());
         }
@@ -1676,6 +1680,7 @@ public class MainViewController {
             tableView.getItems().add(modell);
         }
 
+        fahrzeugmodell_id.getItems().clear();
         for(Fahrzeugmodell fahrzmod: Fahrzeugmodell.getModellList()) {
             fahrzeugmodell_id.getItems().add(fahrzmod.getId());
         }
@@ -1720,6 +1725,7 @@ public class MainViewController {
             tableView.getItems().add(typ);
         }
 
+        fahrzeugtyp_id.getItems().clear();
         for(Fahrzeugtyp fahrztyp: Fahrzeugtyp.getTypList()) {
             fahrzeugtyp_id.getItems().add(fahrztyp.getId());
         }
@@ -1793,6 +1799,7 @@ public class MainViewController {
             tableView.getItems().add(hersteller);
         }
 
+        hersteller_id.getItems().clear();
         for(Hersteller herstell: Hersteller.getHerstellerList()) {
             hersteller_id.getItems().add(herstell.getId());
         }
@@ -1832,6 +1839,7 @@ public class MainViewController {
             tableView.getItems().add(kunde);
         }
 
+        kunde_id.getItems().clear();
         for(Kunde kund: Kunde.getKundeList()) {
             kunde_id.getItems().add(kund.getId());
         }
@@ -1897,6 +1905,7 @@ public class MainViewController {
             tableView.getItems().add(mitarbeiter);
         }
 
+        mitarbeiter_id.getItems().clear();
         for(Mitarbeiter mitarb: Mitarbeiter.getMitarbeiterList()) {
             mitarbeiter_id.getItems().add(mitarb.getId());
         }
