@@ -24,8 +24,11 @@ public class mainViewController {
         try {
             Connection connection = dbConnector.openConnection();
 
-            // Laden
+            // Laden der Daten
             loadMitarbeiter(connection);
+
+            // Testen der Daten
+            Mitarbeiter.printMitarbeiterCount();
 
             connection.close();
         } catch (SQLException e) {
