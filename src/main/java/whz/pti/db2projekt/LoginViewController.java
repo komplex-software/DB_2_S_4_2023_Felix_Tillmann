@@ -28,8 +28,8 @@ public class LoginViewController {
     @FXML
     public void initialize() {
         olUsernames.add("sa");          // Admin: 0
-        olUsernames.add("reiter");      // Reader: 1
-        olUsernames.add("schreiter");   // Writer: 2
+        olUsernames.add("reader");      // Reader: 1
+        olUsernames.add("readwriter");   // Writer: 2
 
         username.setItems(olUsernames);
 
