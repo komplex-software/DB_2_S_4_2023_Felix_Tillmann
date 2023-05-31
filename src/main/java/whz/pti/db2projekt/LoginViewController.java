@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import whz.pti.db2projekt.model.UserPermissions;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -26,9 +27,9 @@ public class LoginViewController {
 
     @FXML
     public void initialize() {
-        olUsernames.add("sa");
-        olUsernames.add("reiter");
-        olUsernames.add("schreiter");
+        olUsernames.add("sa");          // Admin: 0
+        olUsernames.add("reader");      // Reader: 1
+        olUsernames.add("readwriter");   // Writer: 2
 
         username.setItems(olUsernames);
 
@@ -51,8 +52,21 @@ public class LoginViewController {
 
             Parent root = (Parent)fxmlLoader.load();
             MainViewController controller = fxmlLoader.<MainViewController>getController();
+
+            // mitgeben der Connection
             controller.setConnection(connection);
             controller.loadConnection();
+
+            //mitgeben der Berechtigungen
+            UserPermissions perms;
+            if (username.getSelectionModel().getSelectedIndex() == 0)
+                perms = UserPermissions.ADMIN;
+            else if (username.getSelectionModel().getSelectedIndex() == 1)
+                perms = UserPermissions.READ;
+            else
+                perms = UserPermissions.READWRITE;
+            controller.setPermissions(perms);
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
