@@ -1548,6 +1548,7 @@ public class MainViewController {
     private void showAdresse() {
         TableView<Adresse> tableView = adresse_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Adresse, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Adresse, String> strasseColumn = new TableColumn<>("Straße");
         TableColumn<Adresse, String> stadtColumn = new TableColumn<>("Stadt");
@@ -1591,6 +1592,7 @@ public class MainViewController {
     private void showAnrede() {
         TableView<Anrede> tableView = anrede_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Anrede, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Anrede, String> anredewortColumn = new TableColumn<>("Anredewort");
 
@@ -1625,6 +1627,7 @@ public class MainViewController {
     private void showFahrzeug() {
         TableView<Fahrzeug> tableView = fahrzeug_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Fahrzeug, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Fahrzeug, String> modellColumn = new TableColumn<>("Modell");
         TableColumn<Fahrzeug, Double> kaufpreisColumn = new TableColumn<>("Kaufpreis");
@@ -1704,6 +1707,7 @@ public class MainViewController {
     private void showFahrzeugfarbe() {
         TableView<Fahrzeugfarbe> tableView = fahrzeugfarbe_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Fahrzeugfarbe, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Fahrzeugfarbe, String> farbnameColumn = new TableColumn<>("Farbname");
 
@@ -1737,6 +1741,7 @@ public class MainViewController {
     private void showFahrzeugmodell() {
         TableView<Fahrzeugmodell> tableView = fahrzeugmodell_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Fahrzeugmodell, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Fahrzeugmodell, Integer> herstellerIdColumn = new TableColumn<>("Hersteller ID");
         TableColumn<Fahrzeugmodell, Integer> fahrzeugtypIdColumn = new TableColumn<>("Fahrzeugtyp ID");
@@ -1785,6 +1790,7 @@ public class MainViewController {
     private void showFahrzeugtyp() {
         TableView<Fahrzeugtyp> tableView = fahrzeugtyp_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Fahrzeugtyp, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Fahrzeugtyp, String> bezeichnungColumn = new TableColumn<>("Bezeichnung");
 
@@ -1818,6 +1824,7 @@ public class MainViewController {
     private void showAnsprechpartner() {
         TableView<HatAnsprechpartner> tableView = hatAnsprechpartner_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<HatAnsprechpartner, Integer> kundeIdColumn = new TableColumn<>("Kunde ID");
         TableColumn<HatAnsprechpartner, Integer> mitarbeiterIdColumn = new TableColumn<>("Mitarbeiter ID");
 
@@ -1840,6 +1847,7 @@ public class MainViewController {
     private void showHatFarben() {
         TableView<HatFarben> tableView = hatFarben_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<HatFarben, Integer> fahrzeugIdColumn = new TableColumn<>("Fahrzeug ID");
         TableColumn<HatFarben, Integer> farbIdColumn = new TableColumn<>("Farb ID");
 
@@ -1862,6 +1870,7 @@ public class MainViewController {
     private void showHersteller() {
         TableView<Hersteller> tableView = hersteller_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Hersteller, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Hersteller, String> nameColumn = new TableColumn<>("Name");
 
@@ -1895,6 +1904,7 @@ public class MainViewController {
     private void showKunde() {
         TableView<Kunde> tableView = kunde_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Kunde, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Kunde, String> vornameColumn = new TableColumn<>("Vorname");
         TableColumn<Kunde, String> nachnameColumn = new TableColumn<>("Nachname");
@@ -1958,6 +1968,7 @@ public class MainViewController {
     private void showMitarbeiter() {
         TableView<Mitarbeiter> tableView = mitarbeiter_anzeige;
         tableView.getItems().clear();
+        tableView.getColumns().clear();
         TableColumn<Mitarbeiter, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Mitarbeiter, String> vornameColumn = new TableColumn<>("Vorname");
         TableColumn<Mitarbeiter, String> nachnameColumn = new TableColumn<>("Nachname");
