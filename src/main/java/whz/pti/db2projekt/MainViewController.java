@@ -30,7 +30,7 @@ public class MainViewController {
     @FXML
     private Button adresse_speichern;
     @FXML
-    private Button adresse_suchen;
+    private Button adresse_löschen;
     @FXML
     private Button adresse_anlegen;
     @FXML
@@ -45,7 +45,7 @@ public class MainViewController {
     @FXML
     private Button anrede_speichern;
     @FXML
-    private Button anrede_suchen;
+    private Button anrede_löschen;
     @FXML
     private Button anrede_anlegen;
     @FXML
@@ -75,7 +75,7 @@ public class MainViewController {
     @FXML
     private Button fahrzeug_speichern;
     @FXML
-    private Button fahrzeug_suchen;
+    private Button fahrzeug_löschen;
     @FXML
     private Button fahrzeug_anlegen;
     @FXML
@@ -90,7 +90,7 @@ public class MainViewController {
     @FXML
     private Button fahrzeugfarbe_speichern;
     @FXML
-    private Button fahrzeugfarbe_suchen;
+    private Button fahrzeugfarbe_löschen;
     @FXML
     private Button fahrzeugfarbe_anlegen;
     @FXML
@@ -107,7 +107,7 @@ public class MainViewController {
     @FXML
     private Button fahrzeugmodell_speichern;
     @FXML
-    private Button fahrzeugmodell_suchen;
+    private Button fahrzeugmodell_löschen;
     @FXML
     private Button fahrzeugmodell_anlegen;
     @FXML
@@ -122,7 +122,7 @@ public class MainViewController {
     @FXML
     private Button fahrzeugtyp_speichern;
     @FXML
-    private Button fahrzeugtyp_suchen;
+    private Button fahrzeugtyp_löschen;
     @FXML
     private Button fahrzeugtyp_anlegen;
     @FXML
@@ -137,7 +137,7 @@ public class MainViewController {
     @FXML
     private Button hatAnsprechpartner_speichern;
     @FXML
-    private Button hatAnsprechpartner_suchen;
+    private Button hatAnsprechpartner_löschen;
     @FXML
     private Button hatAnsprechpartner_anlegen;
     @FXML
@@ -152,7 +152,7 @@ public class MainViewController {
     @FXML
     private Button hatFarben_speichern;
     @FXML
-    private Button hatFarben_suchen;
+    private Button hatFarben_löschen;
     @FXML
     private Button hatFarben_anlegen;
     @FXML
@@ -167,7 +167,7 @@ public class MainViewController {
     @FXML
     private Button hersteller_speichern;
     @FXML
-    private Button hersteller_suchen;
+    private Button hersteller_löschen;
     @FXML
     private Button hersteller_anlegen;
     @FXML
@@ -191,7 +191,7 @@ public class MainViewController {
     @FXML
     private Button kunde_speichern;
     @FXML
-    private Button kunde_suchen;
+    private Button kunde_löschen;
     @FXML
     private Button kunde_anlegen;
     @FXML
@@ -221,7 +221,7 @@ public class MainViewController {
     @FXML
     private Button mitarbeiter_anlegen;
     @FXML
-    private Button mitarbeiter_suchen;
+    private Button mitarbeiter_löschen;
 
     @FXML
     private TableView mitarbeiter_anzeige;
