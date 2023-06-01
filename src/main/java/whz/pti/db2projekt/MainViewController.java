@@ -240,6 +240,7 @@ public class MainViewController {
         // Speicher Button Adresse
         adresse_speichern.setOnMouseClicked(event -> {
             Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Adresse adr = Adresse.getAdresseList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -278,6 +279,7 @@ public class MainViewController {
         // Löschen Button Adresse
         adresse_löschen.setOnMouseClicked(event -> {
             Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Adresse adr = Adresse.getAdresseList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -295,6 +297,7 @@ public class MainViewController {
         // Speichern Button Kunde
         kunde_speichern.setOnMouseClicked(event -> {
             Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Kunde kunde = Kunde.getKundeList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -344,6 +347,7 @@ public class MainViewController {
         // Löschen Button Kunde
         kunde_löschen.setOnMouseClicked(event -> {
             Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Kunde kunde = Kunde.getKundeList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -364,6 +368,7 @@ public class MainViewController {
         // Speichern Button Hersteller
         hersteller_speichern.setOnMouseClicked(event -> {
             Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Hersteller hersteller = Hersteller.getHerstellerList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -403,6 +408,7 @@ public class MainViewController {
         // Löschen Button Hersteller
         hersteller_löschen.setOnMouseClicked(event -> {
             Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Hersteller hersteller = Hersteller.getHerstellerList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -423,6 +429,7 @@ public class MainViewController {
         // Speichern Button Fahrzeug
         fahrzeug_speichern.setOnMouseClicked(event -> {
             Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeug fahrzeug = Fahrzeug.getFahrzeugList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -480,6 +487,7 @@ public class MainViewController {
 // Löschen Button Fahrzeug
         fahrzeug_löschen.setOnMouseClicked(event -> {
             Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeug fahrzeug = Fahrzeug.getFahrzeugList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -1719,6 +1727,7 @@ public class MainViewController {
         }
         adresse_id.setOnAction(e -> {
             Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Adresse adr = Adresse.getAdresseList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1757,6 +1766,7 @@ public class MainViewController {
         }
         anrede_id.setOnAction(e -> {
             Integer selected = anrede_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Anrede anred = Anrede.getAnredeList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1809,6 +1819,7 @@ public class MainViewController {
         }
         fahrzeug_id.setOnAction(event -> {
             Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeug fahrz = Fahrzeug.getFahrzeugList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1897,6 +1908,7 @@ public class MainViewController {
         }
         fahrzeugfarbe_id.setOnAction(event -> {
             Integer selected = fahrzeugfarbe_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeugfarbe fahrzfarb = Fahrzeugfarbe.getFarbeList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1933,6 +1945,7 @@ public class MainViewController {
         }
         fahrzeugmodell_id.setOnAction(event -> {
             Integer selected = fahrzeugmodell_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeugmodell fahrzmod = Fahrzeugmodell.getModellList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1996,6 +2009,7 @@ public class MainViewController {
         }
         fahrzeugtyp_id.setOnAction(event -> {
             Integer selected = fahrzeugtyp_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeugtyp fahrztyp = Fahrzeugtyp.getTypList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -2076,6 +2090,7 @@ public class MainViewController {
         }
         hersteller_id.setOnAction(event -> {
             Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Hersteller herstell = Hersteller.getHerstellerList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -2118,6 +2133,7 @@ public class MainViewController {
         }
         kunde_id.setOnAction(event -> {
             Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Kunde kund = Kunde.getKundeList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -2210,6 +2226,7 @@ public class MainViewController {
         }
         mitarbeiter_id.setOnAction(event -> {
             Integer selected = mitarbeiter_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Mitarbeiter mitarb = Mitarbeiter.getMitarbeiterList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
