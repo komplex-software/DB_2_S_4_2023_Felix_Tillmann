@@ -429,7 +429,7 @@ public class MainViewController {
                     .orElse(null);
 
             if (fahrzeug != null) {
-                fahrzeug.setModell_id(fahrzeugmodell_id.getSelectionModel().getSelectedItem() != null ? fahrzeugmodell_id.getSelectionModel().getSelectedItem() : -1);
+                fahrzeug.setModell_id(fahrzeug_modell.getSelectionModel().getSelectedItem());
                 fahrzeug.setKaufpreis(Float.parseFloat(fahrzeug_kaufpreis.getText()));
                 fahrzeug.setMietpreis(Float.parseFloat(fahrzeug_mietpreis.getText()));
                 fahrzeug.setIstVermietet(fahrzeug_istVermietet.isSelected());
@@ -956,9 +956,7 @@ public class MainViewController {
         PreparedStatement preparedStatement = null;
 
         try {
-            //String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
-            // DEBUG
-            String sql = "UPDATE Fahrzeug SET modell_id = 1, kaufpreis = 1, mietpreis = 1, istVermietet = 0, mietKunde_id = NULL, istVerkauft = 0, kaufKunde_id = NULL, letzterTÜV = '1999-1-1', anzVorherigeBesitzer = 1, kilometerstand = 1 WHERE id = 1";
+            String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
 
 
             preparedStatement = connection.prepareStatement(sql);
