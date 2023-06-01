@@ -1,3 +1,6 @@
+// TODO: Eingaben löschen nach operation
+// TODO: SQL fehler sollten dem nutzer mitgeteilt werden
+
 package whz.pti.db2projekt;
 
 import javafx.beans.property.*;
@@ -71,7 +74,7 @@ public class MainViewController {
     private TextField fahrzeug_kilometerstand;
 
     @FXML
-    private ComboBox fahrzeug_modell;
+    private ComboBox<Integer> fahrzeug_modell;
     @FXML
     private CheckBox fahrzeug_istVermietet;
     @FXML
@@ -104,9 +107,9 @@ public class MainViewController {
     @FXML
     private ComboBox<Integer> fahrzeugmodell_id;
     @FXML
-    private ComboBox fahrzeugmodell_hersteller;
+    private ComboBox<Integer> fahrzeugmodell_hersteller;
     @FXML
-    private ComboBox fahrzeugmodell_fahrzeugtyp;
+    private ComboBox<Integer> fahrzeugmodell_fahrzeugtyp;
 
     @FXML
     private Button fahrzeugmodell_speichern;
@@ -216,9 +219,9 @@ public class MainViewController {
     private CheckBox mitarbeiter_verfuegbarkeit;
 
     @FXML
-    private ComboBox mitarbeiter_anrede;
+    private ComboBox<Integer> mitarbeiter_anrede;
     @FXML
-    private ComboBox mitarbeiter_adresse;
+    private ComboBox<Integer> mitarbeiter_adresse;
 
     @FXML
     private Button mitarbeiter_speichern;
@@ -231,15 +234,31 @@ public class MainViewController {
     private TableView mitarbeiter_anzeige;
     // ------------ Mitarbeiter ------------
 
+    @FXML
+    TabPane tabPane;
+    @FXML
+    Tab hatAnsprechpartner_reiter;
+    @FXML
+    Tab hatFarben_reiter;
+
 
     private Connection connection;
     private UserPermissions permissions = UserPermissions.READ; // read ist standard
 
     @FXML
     private void initialize() {
+
+        hatFarben_reiter.setDisable(true);
+        hatAnsprechpartner_reiter.setDisable(true);
+
+        tabPane.getTabs().remove(hatFarben_reiter);
+        tabPane.getTabs().remove(hatAnsprechpartner_reiter);
+
+
         // Speicher Button Adresse
         adresse_speichern.setOnMouseClicked(event -> {
             Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Adresse adr = Adresse.getAdresseList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -278,6 +297,7 @@ public class MainViewController {
         // Löschen Button Adresse
         adresse_löschen.setOnMouseClicked(event -> {
             Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Adresse adr = Adresse.getAdresseList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -295,6 +315,7 @@ public class MainViewController {
         // Speichern Button Kunde
         kunde_speichern.setOnMouseClicked(event -> {
             Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Kunde kunde = Kunde.getKundeList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -344,6 +365,7 @@ public class MainViewController {
         // Löschen Button Kunde
         kunde_löschen.setOnMouseClicked(event -> {
             Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Kunde kunde = Kunde.getKundeList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -364,6 +386,7 @@ public class MainViewController {
         // Speichern Button Hersteller
         hersteller_speichern.setOnMouseClicked(event -> {
             Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Hersteller hersteller = Hersteller.getHerstellerList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -403,6 +426,7 @@ public class MainViewController {
         // Löschen Button Hersteller
         hersteller_löschen.setOnMouseClicked(event -> {
             Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Hersteller hersteller = Hersteller.getHerstellerList().stream()
                     .filter(x -> x.getId() == selected)
                     .findFirst()
@@ -420,8 +444,394 @@ public class MainViewController {
             }
         });
 
+        // Speichern Button Fahrzeug
+        fahrzeug_speichern.setOnMouseClicked(event -> {
+            Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeug fahrzeug = Fahrzeug.getFahrzeugList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
 
-    }
+            if (fahrzeug != null) {
+                fahrzeug.setModell_id(fahrzeug_modell.getSelectionModel().getSelectedItem());
+                fahrzeug.setKaufpreis(Float.parseFloat(fahrzeug_kaufpreis.getText()));
+                fahrzeug.setMietpreis(Float.parseFloat(fahrzeug_mietpreis.getText()));
+                fahrzeug.setIstVermietet(fahrzeug_istVermietet.isSelected());
+                fahrzeug.setMietKunde_id(fahrzeug_mietkunde.getSelectionModel().getSelectedItem() != null ? fahrzeug_mietkunde.getSelectionModel().getSelectedItem() : -1);
+                fahrzeug.setIstVerkauft(fahrzeug_istVerkauft.isSelected());
+                fahrzeug.setKaufKunde_id(fahrzeug_kaufkunde.getSelectionModel().getSelectedItem() != null ? fahrzeug_kaufkunde.getSelectionModel().getSelectedItem() : -1);
+                fahrzeug.setLetzterTuev(Date.valueOf(fahrzeug_letzterTuev.getText()));
+                fahrzeug.setAnzVorherigeBesitzer(Integer.parseInt(fahrzeug_anzVorherigeBesitzer.getText()));
+                fahrzeug.setKilometerstand(Integer.parseInt(fahrzeug_kilometerstand.getText()));
+
+                try {
+                    updateFahrzeuge(fahrzeug);
+                    Fahrzeug.clearList();
+                    loadFahrzeuge(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Fahrzeug
+        fahrzeug_anlegen.setOnMouseClicked(event -> {
+            Fahrzeug fahrzeug = new Fahrzeug(
+                    -1,
+                    fahrzeug_modell.getSelectionModel().getSelectedItem(),
+                    Float.parseFloat(fahrzeug_kaufpreis.getText()),
+                    Float.parseFloat(fahrzeug_mietpreis.getText()),
+                    fahrzeug_istVermietet.isSelected(),
+                    fahrzeug_mietkunde.getSelectionModel().getSelectedItem(),
+                    fahrzeug_istVerkauft.isSelected(),
+                    fahrzeug_kaufkunde.getSelectionModel().getSelectedItem(),
+                    Date.valueOf(fahrzeug_letzterTuev.getText()),
+                    Integer.parseInt(fahrzeug_anzVorherigeBesitzer.getText()),
+                    Integer.parseInt(fahrzeug_kilometerstand.getText())
+            );
+
+            try {
+                createFahrzeug(fahrzeug);
+                Fahrzeug.clearList();
+                loadFahrzeuge(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Fahrzeug
+        fahrzeug_löschen.setOnMouseClicked(event -> {
+            Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeug fahrzeug = Fahrzeug.getFahrzeugList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+
+            if (fahrzeug != null) {
+                try {
+                    deleteFahrzeug(fahrzeug.getId());
+                    Fahrzeug.clearList();
+                    loadFahrzeuge(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Speichern Button Mitarbeiter
+        mitarbeiter_speichern.setOnMouseClicked(event -> {
+            Integer selected = mitarbeiter_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Mitarbeiter mitarbeiter = Mitarbeiter.getMitarbeiterList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (mitarbeiter != null) {
+                mitarbeiter.setVorname(mitarbeiter_vorname.getText());
+                mitarbeiter.setNachname(mitarbeiter_nachname.getText());
+                mitarbeiter.setAdresse_id(mitarbeiter_adresse.getSelectionModel().getSelectedItem());
+                mitarbeiter.setAnrede_id(mitarbeiter_anrede.getSelectionModel().getSelectedItem());
+                mitarbeiter.setLohn(Float.parseFloat(mitarbeiter_lohn.getText()));
+                mitarbeiter.setBeschaeftigungsstart(Date.valueOf(mitarbeiter_beschaeftigungsstart.getText()));
+                mitarbeiter.setVerfuegbar(mitarbeiter_verfuegbarkeit.isSelected());
+
+                try {
+                    updateMitarbeiter(mitarbeiter);
+                    Mitarbeiter.clearList();
+                    loadMitarbeiter(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Mitarbeiter
+        mitarbeiter_anlegen.setOnMouseClicked(event -> {
+            Mitarbeiter mitarbeiter = new Mitarbeiter(
+                    -1,
+                    mitarbeiter_vorname.getText(),
+                    mitarbeiter_nachname.getText(),
+                    mitarbeiter_adresse.getSelectionModel().getSelectedItem(),
+                    mitarbeiter_anrede.getSelectionModel().getSelectedItem(),
+                    Float.parseFloat(mitarbeiter_lohn.getText()),
+                    Date.valueOf(mitarbeiter_beschaeftigungsstart.getText()),
+                    mitarbeiter_verfuegbarkeit.isSelected()
+            );
+            try {
+                createMitarbeiter(mitarbeiter);
+                Mitarbeiter.clearList();
+                loadMitarbeiter(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Mitarbeiter
+        mitarbeiter_löschen.setOnMouseClicked(event -> {
+            Integer selected = mitarbeiter_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Mitarbeiter mitarbeiter = Mitarbeiter.getMitarbeiterList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (mitarbeiter != null) {
+                try {
+                    deleteMitarbeiter(mitarbeiter.getId());
+                    Mitarbeiter.clearList();
+                    loadMitarbeiter(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Speichern Button Anrede
+        anrede_speichern.setOnMouseClicked(event -> {
+            Integer selected = anrede_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Anrede anrede = Anrede.getAnredeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (anrede != null) {
+                anrede.setAnredewort(anrede_anredewort.getText());
+
+                try {
+                    updateAnreden(anrede);
+                    Anrede.clearList();
+                    loadAnreden(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Anrede
+        anrede_anlegen.setOnMouseClicked(event -> {
+            Anrede anrede = new Anrede(
+                    -1,
+                    anrede_anredewort.getText()
+            );
+            try {
+                createAnrede(anrede);
+                Anrede.clearList();
+                loadAnreden(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Anrede
+        anrede_löschen.setOnMouseClicked(event -> {
+            Integer selected = anrede_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Anrede anrede = Anrede.getAnredeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (anrede != null) {
+                try {
+                    deleteAnrede(anrede.getId());
+                    Anrede.clearList();
+                    loadAnreden(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+
+        // Speichern Button Fahrzeugfarbe
+        fahrzeugfarbe_speichern.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugfarbe_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugfarbe fahrzeugfarbe = Fahrzeugfarbe.getFarbeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugfarbe != null) {
+                fahrzeugfarbe.setFarbname(fahrzeugfarbe_farbname.getText());
+
+                try {
+                    updateFahrzeugfarben(fahrzeugfarbe);
+                    Fahrzeugfarbe.clearList();
+                    loadFahrzeugfarben(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Fahrzeugfarbe
+        fahrzeugfarbe_anlegen.setOnMouseClicked(event -> {
+            Fahrzeugfarbe fahrzeugfarbe = new Fahrzeugfarbe(
+                    -1,
+                    fahrzeugfarbe_farbname.getText()
+            );
+            try {
+                createFahrzeugfarbe(fahrzeugfarbe);
+                Fahrzeugfarbe.clearList();
+                loadFahrzeugfarben(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Fahrzeugfarbe
+        fahrzeugfarbe_löschen.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugfarbe_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugfarbe fahrzeugfarbe = Fahrzeugfarbe.getFarbeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugfarbe != null) {
+                try {
+                    deleteFahrzeugfarbe(fahrzeugfarbe.getId());
+                    Fahrzeugfarbe.clearList();
+                    loadFahrzeugfarben(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Speichern Button Fahrzeugmodell
+        fahrzeugmodell_speichern.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugmodell_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugmodell fahrzeugmodell = Fahrzeugmodell.getModellList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugmodell != null) {
+                fahrzeugmodell.setHersteller_id(fahrzeugmodell_hersteller.getSelectionModel().getSelectedItem());
+                fahrzeugmodell.setFahrzeugtyp_id(fahrzeugmodell_fahrzeugtyp.getSelectionModel().getSelectedItem());
+
+                try {
+                    updateFahrzeugmodelle(fahrzeugmodell);
+                    Fahrzeugmodell.clearList();
+                    loadFahrzeugmodelle(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Fahrzeugmodell
+        fahrzeugmodell_anlegen.setOnMouseClicked(event -> {
+            Fahrzeugmodell fahrzeugmodell = new Fahrzeugmodell(
+                    -1,
+                    fahrzeugmodell_hersteller.getSelectionModel().getSelectedItem(),
+                    fahrzeugmodell_fahrzeugtyp.getSelectionModel().getSelectedItem()
+            );
+            try {
+                createFahrzeugmodell(fahrzeugmodell);
+                Fahrzeugmodell.clearList();
+                loadFahrzeugmodelle(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Fahrzeugmodell
+        fahrzeugmodell_löschen.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugmodell_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugmodell fahrzeugmodell = Fahrzeugmodell.getModellList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugmodell != null) {
+                try {
+                    deleteFahrzeugmodell(fahrzeugmodell.getId());
+                    Fahrzeugmodell.clearList();
+                    loadFahrzeugmodelle(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+
+        // Speichern Button Fahrzeugtyp
+        fahrzeugtyp_speichern.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugtyp_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugtyp fahrzeugtyp = Fahrzeugtyp.getTypList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugtyp != null) {
+                fahrzeugtyp.setBezeichnung(fahrzeugtyp_bezeichnung.getText());
+
+                try {
+                    updateFahrzeugtypen(fahrzeugtyp);
+                    Fahrzeugtyp.clearList();
+                    loadFahrzeugtypen(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Fahrzeugtyp
+        fahrzeugtyp_anlegen.setOnMouseClicked(event -> {
+            Fahrzeugtyp fahrzeugtyp = new Fahrzeugtyp(
+                    -1,
+                    fahrzeugtyp_bezeichnung.getText()
+            );
+            try {
+                createFahrzeugtyp(fahrzeugtyp);
+                Fahrzeugtyp.clearList();
+                loadFahrzeugtypen(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+
+// Löschen Button Fahrzeugtyp
+        fahrzeugtyp_löschen.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugtyp_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugtyp fahrzeugtyp = Fahrzeugtyp.getTypList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugtyp != null) {
+                try {
+                    deleteFahrzeugtyp(fahrzeugtyp.getId());
+                    Fahrzeugtyp.clearList();
+                    loadFahrzeugtypen(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+
+        }
 
     public void loadConnection() {
 
@@ -453,6 +863,7 @@ public class MainViewController {
             HatFarben.printCount();
             Hersteller.printCount();
 
+            /*
             // Testen update
             Mitarbeiter m1 = Mitarbeiter.getMitarbeiterList().get(0);
             m1.setVorname("TEST");
@@ -564,7 +975,7 @@ public class MainViewController {
             Hersteller.clearList();
             loadHersteller(connection);
             //deleteHersteller(1);
-
+        */
 
             //connection.close();
         } catch (SQLException e) {
@@ -581,7 +992,7 @@ public class MainViewController {
         showFahrzeug();
         showFahrzeugfarbe();
         showFahrzeugmodell();
-        showFahrzeugtyp();
+        showFahrzeugtyp();          // DEBUG
         showAnsprechpartner();
         showHatFarben();
         showHersteller();
@@ -879,8 +1290,10 @@ public class MainViewController {
 
         try {
             String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, fahrzeug.getModell_id());
+
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fahrzeug.getModell_id());
                 preparedStatement.setFloat(2, fahrzeug.getKaufpreis());
                 preparedStatement.setFloat(3, fahrzeug.getMietpreis());
                 preparedStatement.setBoolean(4, fahrzeug.isIstVermietet());
@@ -897,6 +1310,7 @@ public class MainViewController {
                 preparedStatement.setInt(9, fahrzeug.getAnzVorherigeBesitzer());
                 preparedStatement.setInt(10, fahrzeug.getKilometerstand());
                 preparedStatement.setInt(11, fahrzeug.getId());
+
 
                 int rowsAffected = preparedStatement.executeUpdate();
                 if (rowsAffected > 0) {
@@ -1638,6 +2052,7 @@ public class MainViewController {
         }
         adresse_id.setOnAction(e -> {
             Integer selected = adresse_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Adresse adr = Adresse.getAdresseList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1676,6 +2091,7 @@ public class MainViewController {
         }
         anrede_id.setOnAction(e -> {
             Integer selected = anrede_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Anrede anred = Anrede.getAnredeList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1728,6 +2144,7 @@ public class MainViewController {
         }
         fahrzeug_id.setOnAction(event -> {
             Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeug fahrz = Fahrzeug.getFahrzeugList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1735,28 +2152,54 @@ public class MainViewController {
             // Set combo box modell
             fahrzeug_modell.getItems().clear();
             Fahrzeugmodell.getModellList().forEach(modell -> fahrzeug_modell.getItems().add(modell.getId()));
-            try {
-                fahrzeug_modell.getSelectionModel().select(fahrz.getModell_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedModellId = fahrz.getModell_id();
+            ObservableList<Integer> items = fahrzeug_modell.getItems();
+            int index = -1;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) == selectedModellId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                fahrzeug_modell.getSelectionModel().select(index);
+            }
+
             fahrzeug_kaufpreis.setText(Float.toString(fahrz.getKaufpreis()));
             fahrzeug_mietpreis.setText(Float.toString(fahrz.getMietpreis()));
             fahrzeug_istVermietet.setSelected(fahrz.isIstVermietet());
             fahrzeug_istVerkauft.setSelected(fahrz.isIstVerkauft());
+
             fahrzeug_mietkunde.getItems().clear();
+            fahrzeug_mietkunde.getItems().add(-1);
             Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
-            try {
-                fahrzeug_mietkunde.getSelectionModel().select(fahrz.getMietKunde_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedId = fahrz.getMietKunde_id();
+            ObservableList<Integer> itemsMiet = fahrzeug_mietkunde.getItems();
+            index = -1;
+            for (int i = 0; i < itemsMiet.size(); i++) {
+                if (itemsMiet.get(i) == selectedId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                fahrzeug_mietkunde.getSelectionModel().select(index);
+            }
+
             fahrzeug_kaufkunde.getItems().clear();
+            fahrzeug_kaufkunde.getItems().add(-1);
             Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
-            try {
-                fahrzeug_kaufkunde.getSelectionModel().select(fahrz.getKaufKunde_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            selectedId = fahrz.getKaufKunde_id();
+            ObservableList<Integer> itemsKauf = fahrzeug_kaufkunde.getItems();
+            index = -1;
+            for (int i = 0; i < itemsKauf.size(); i++) {
+                if (itemsKauf.get(i) == selectedId) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index >= 0) {
+                fahrzeug_kaufkunde.getSelectionModel().select(index);
             }
             fahrzeug_letzterTuev.setText(fahrz.getLetzterTuev().toString());
             fahrzeug_anzVorherigeBesitzer.setText(""+fahrz.getAnzVorherigeBesitzer());
@@ -1790,6 +2233,7 @@ public class MainViewController {
         }
         fahrzeugfarbe_id.setOnAction(event -> {
             Integer selected = fahrzeugfarbe_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeugfarbe fahrzfarb = Fahrzeugfarbe.getFarbeList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1826,24 +2270,41 @@ public class MainViewController {
         }
         fahrzeugmodell_id.setOnAction(event -> {
             Integer selected = fahrzeugmodell_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeugmodell fahrzmod = Fahrzeugmodell.getModellList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
                     .get(0);
             fahrzeugmodell_fahrzeugtyp.getItems().clear();
             Fahrzeugtyp.getTypList().forEach(typ -> fahrzeugmodell_fahrzeugtyp.getItems().add(typ.getId()));
-            try {
-                fahrzeugmodell_fahrzeugtyp.getSelectionModel().select(fahrzmod.getFahrzeugtyp_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedFahrzeugtypId = fahrzmod.getFahrzeugtyp_id();
+            ObservableList<Integer> items = fahrzeugmodell_fahrzeugtyp.getItems();
+            int index = -1;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) == selectedFahrzeugtypId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                fahrzeugmodell_fahrzeugtyp.getSelectionModel().select(index);
+            }
+
             fahrzeugmodell_hersteller.getItems().clear();
             Hersteller.getHerstellerList().forEach(hersteller -> fahrzeugmodell_hersteller.getItems().add(hersteller.getId()));
-            try {
-                fahrzeugmodell_hersteller.getSelectionModel().select(fahrzmod.getHersteller_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedHerstellerId = fahrzmod.getHersteller_id();
+            ObservableList<Integer> itemsModell = fahrzeugmodell_hersteller.getItems();
+            index = -1;
+            for (int i = 0; i < itemsModell.size(); i++) {
+                if (itemsModell.get(i) == selectedHerstellerId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                fahrzeugmodell_hersteller.getSelectionModel().select(index);
+            }
+
         });
     }
 
@@ -1873,6 +2334,7 @@ public class MainViewController {
         }
         fahrzeugtyp_id.setOnAction(event -> {
             Integer selected = fahrzeugtyp_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Fahrzeugtyp fahrztyp = Fahrzeugtyp.getTypList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1953,6 +2415,7 @@ public class MainViewController {
         }
         hersteller_id.setOnAction(event -> {
             Integer selected = hersteller_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Hersteller herstell = Hersteller.getHerstellerList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
@@ -1995,33 +2458,58 @@ public class MainViewController {
         }
         kunde_id.setOnAction(event -> {
             Integer selected = kunde_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Kunde kund = Kunde.getKundeList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
                     .get(0);
             kunde_anrede.getItems().clear();
             Anrede.getAnredeList().forEach(anred -> kunde_anrede.getItems().add(anred.getId()));
-            try {
-                kunde_anrede.getSelectionModel().select(kund.getAnrede_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAnredeId = kund.getAnrede_id();
+            ObservableList<Integer> items = kunde_anrede.getItems();
+            int index = -1;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) == selectedAnredeId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                kunde_anrede.getSelectionModel().select(index);
+            }
+
             kunde_vorname.setText(kund.getVorname());
             kunde_nachname.setText(kund.getNachname());
             kunde_adresse.getItems().clear();
             Adresse.getAdresseList().forEach(addr -> kunde_adresse.getItems().add(addr.getId()));
-            try {
-                kunde_adresse.getSelectionModel().select(kund.getAdresse_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAdresseId = kund.getAdresse_id();
+            ObservableList<Integer> itemsAdress = kunde_adresse.getItems();
+            index = -1;
+            for (int i = 0; i < itemsAdress.size(); i++) {
+                if (itemsAdress.get(i) == selectedAdresseId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                kunde_adresse.getSelectionModel().select(index);
+            }
+
             kunde_ansprechpartner.getItems().clear();
             Mitarbeiter.getMitarbeiterList().forEach(mitarb -> kunde_ansprechpartner.getItems().add(mitarb.getId()));
-            try {
-                kunde_ansprechpartner.getSelectionModel().select(kund.getAnsprechpartner_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAnsprechpartnerId = kund.getAnsprechpartner_id();
+            ObservableList<Integer> itemsAnsp = kunde_ansprechpartner.getItems();
+            index = -1;
+            for (int i = 0; i < itemsAnsp.size(); i++) {
+                if (itemsAnsp.get(i) == selectedAnsprechpartnerId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                kunde_ansprechpartner.getSelectionModel().select(index);
+            }
+
         });
     }
 
@@ -2063,24 +2551,41 @@ public class MainViewController {
         }
         mitarbeiter_id.setOnAction(event -> {
             Integer selected = mitarbeiter_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
             Mitarbeiter mitarb = Mitarbeiter.getMitarbeiterList().stream()
                     .filter(x -> x.getId() == selected)
                     .collect(Collectors.toList())
                     .get(0);
             mitarbeiter_adresse.getItems().clear();
             Adresse.getAdresseList().forEach(addr -> mitarbeiter_adresse.getItems().add(addr.getId()));
-            try {
-                mitarbeiter_adresse.getSelectionModel().select(mitarb.getAdresse_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAdresseId = mitarb.getAdresse_id();
+            ObservableList<Integer> items = mitarbeiter_adresse.getItems();
+            int index = -1;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) == selectedAdresseId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                mitarbeiter_adresse.getSelectionModel().select(index);
+            }
+
             mitarbeiter_anrede.getItems().clear();
             Anrede.getAnredeList().forEach(anred -> mitarbeiter_anrede.getItems().add(anred.getId()));
-            try {
-                mitarbeiter_anrede.getSelectionModel().select(mitarb.getAnrede_id());
-            } catch (Exception e) {
-                e.printStackTrace();
+            int selectedAnredeId = mitarb.getAnrede_id();
+            ObservableList<Integer> itemsAnred = mitarbeiter_anrede.getItems();
+            index = -1;
+            for (int i = 0; i < itemsAnred.size(); i++) {
+                if (itemsAnred.get(i) == selectedAnredeId) {
+                    index = i;
+                    break;
+                }
             }
+            if (index >= 0) {
+                mitarbeiter_anrede.getSelectionModel().select(index);
+            }
+
             mitarbeiter_beschaeftigungsstart.setText(mitarb.getBeschaeftigungsstart().toString());
             mitarbeiter_vorname.setText(mitarb.getVorname());
             mitarbeiter_nachname.setText(mitarb.getNachname());
