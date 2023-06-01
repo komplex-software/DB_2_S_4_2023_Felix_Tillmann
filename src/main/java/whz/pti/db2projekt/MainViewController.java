@@ -578,6 +578,65 @@ public class MainViewController {
             }
         });
 
+        // Speichern Button Anrede
+        anrede_speichern.setOnMouseClicked(event -> {
+            Integer selected = anrede_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Anrede anrede = Anrede.getAnredeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (anrede != null) {
+                anrede.setAnredewort(anrede_anredewort.getText());
+
+                try {
+                    updateAnreden(anrede);
+                    Anrede.clearList();
+                    loadAnreden(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Anrede
+        anrede_anlegen.setOnMouseClicked(event -> {
+            Anrede anrede = new Anrede(
+                    -1,
+                    anrede_anredewort.getText()
+            );
+            try {
+                createAnrede(anrede);
+                Anrede.clearList();
+                loadAnreden(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Anrede
+        anrede_löschen.setOnMouseClicked(event -> {
+            Integer selected = anrede_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Anrede anrede = Anrede.getAnredeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (anrede != null) {
+                try {
+                    deleteAnrede(anrede.getId());
+                    Anrede.clearList();
+                    loadAnreden(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+
         }
 
     public void loadConnection() {
