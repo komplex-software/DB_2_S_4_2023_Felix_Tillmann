@@ -756,6 +756,66 @@ public class MainViewController {
 
         });
 
+        // Speichern Button Fahrzeugtyp
+        fahrzeugtyp_speichern.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugtyp_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugtyp fahrzeugtyp = Fahrzeugtyp.getTypList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugtyp != null) {
+                fahrzeugtyp.setBezeichnung(fahrzeugtyp_bezeichnung.getText());
+
+                try {
+                    updateFahrzeugtypen(fahrzeugtyp);
+                    Fahrzeugtyp.clearList();
+                    loadFahrzeugtypen(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Fahrzeugtyp
+        fahrzeugtyp_anlegen.setOnMouseClicked(event -> {
+            Fahrzeugtyp fahrzeugtyp = new Fahrzeugtyp(
+                    -1,
+                    fahrzeugtyp_bezeichnung.getText()
+            );
+            try {
+                createFahrzeugtyp(fahrzeugtyp);
+                Fahrzeugtyp.clearList();
+                loadFahrzeugtypen(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+
+// Löschen Button Fahrzeugtyp
+        fahrzeugtyp_löschen.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugtyp_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugtyp fahrzeugtyp = Fahrzeugtyp.getTypList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugtyp != null) {
+                try {
+                    deleteFahrzeugtyp(fahrzeugtyp.getId());
+                    Fahrzeugtyp.clearList();
+                    loadFahrzeugtypen(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+
         }
 
     public void loadConnection() {
