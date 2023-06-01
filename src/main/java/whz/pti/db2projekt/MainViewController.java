@@ -637,6 +637,64 @@ public class MainViewController {
 
         });
 
+        // Speichern Button Fahrzeugfarbe
+        fahrzeugfarbe_speichern.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugfarbe_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugfarbe fahrzeugfarbe = Fahrzeugfarbe.getFarbeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugfarbe != null) {
+                fahrzeugfarbe.setFarbname(fahrzeugfarbe_farbname.getText());
+
+                try {
+                    updateFahrzeugfarben(fahrzeugfarbe);
+                    Fahrzeugfarbe.clearList();
+                    loadFahrzeugfarben(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Fahrzeugfarbe
+        fahrzeugfarbe_anlegen.setOnMouseClicked(event -> {
+            Fahrzeugfarbe fahrzeugfarbe = new Fahrzeugfarbe(
+                    -1,
+                    fahrzeugfarbe_farbname.getText()
+            );
+            try {
+                createFahrzeugfarbe(fahrzeugfarbe);
+                Fahrzeugfarbe.clearList();
+                loadFahrzeugfarben(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Fahrzeugfarbe
+        fahrzeugfarbe_löschen.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugfarbe_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugfarbe fahrzeugfarbe = Fahrzeugfarbe.getFarbeList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugfarbe != null) {
+                try {
+                    deleteFahrzeugfarbe(fahrzeugfarbe.getId());
+                    Fahrzeugfarbe.clearList();
+                    loadFahrzeugfarben(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         }
 
     public void loadConnection() {
