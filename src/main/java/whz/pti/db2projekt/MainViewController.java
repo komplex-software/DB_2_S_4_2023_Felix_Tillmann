@@ -956,7 +956,11 @@ public class MainViewController {
         PreparedStatement preparedStatement = null;
 
         try {
-            String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
+            //String sql = "UPDATE Fahrzeug SET modell_id = ?, kaufpreis = ?, mietpreis = ?, istVermietet = ?, mietKunde_id = ?, istVerkauft = ?, kaufKunde_id = ?, letzterTÜV = ?, anzVorherigeBesitzer = ?, kilometerstand = ? WHERE id = ?";
+            // DEBUG
+            String sql = "UPDATE Fahrzeug SET modell_id = 1, kaufpreis = 1, mietpreis = 1, istVermietet = 0, mietKunde_id = NULL, istVerkauft = 0, kaufKunde_id = NULL, letzterTÜV = '1999-1-1', anzVorherigeBesitzer = 1, kilometerstand = 1 WHERE id = 1";
+
+
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, fahrzeug.getModell_id());
                 preparedStatement.setFloat(2, fahrzeug.getKaufpreis());
@@ -975,6 +979,8 @@ public class MainViewController {
                 preparedStatement.setInt(9, fahrzeug.getAnzVorherigeBesitzer());
                 preparedStatement.setInt(10, fahrzeug.getKilometerstand());
                 preparedStatement.setInt(11, fahrzeug.getId());
+
+
                 int rowsAffected = preparedStatement.executeUpdate();
                 if (rowsAffected > 0) {
                     System.out.println("Fahrzeug mit ID " + fahrzeug.getId() + " erfolgreich aktualisiert.");
@@ -1830,9 +1836,8 @@ public class MainViewController {
             fahrzeug_istVermietet.setSelected(fahrz.isIstVermietet());
             fahrzeug_istVerkauft.setSelected(fahrz.isIstVerkauft());
 
-            // TODO: mietkunde und kaufkunde brauchen option "-1"
-
             fahrzeug_mietkunde.getItems().clear();
+            fahrzeug_mietkunde.getItems().add(-1);
             Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
             int selectedId = fahrz.getMietKunde_id();
             ObservableList<Integer> itemsMiet = fahrzeug_mietkunde.getItems();
@@ -1848,6 +1853,7 @@ public class MainViewController {
             }
 
             fahrzeug_kaufkunde.getItems().clear();
+            fahrzeug_kaufkunde.getItems().add(-1);
             Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
             selectedId = fahrz.getKaufKunde_id();
             ObservableList<Integer> itemsKauf = fahrzeug_kaufkunde.getItems();
