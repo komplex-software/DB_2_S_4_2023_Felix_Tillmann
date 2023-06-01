@@ -1,3 +1,6 @@
+// TODO: Eingaben löschen nach operation
+// TODO: SQL fehler sollten dem nutzer mitgeteilt werden
+
 package whz.pti.db2projekt;
 
 import javafx.beans.property.*;
@@ -216,9 +219,9 @@ public class MainViewController {
     private CheckBox mitarbeiter_verfuegbarkeit;
 
     @FXML
-    private ComboBox mitarbeiter_anrede;
+    private ComboBox<Integer> mitarbeiter_anrede;
     @FXML
-    private ComboBox mitarbeiter_adresse;
+    private ComboBox<Integer> mitarbeiter_adresse;
 
     @FXML
     private Button mitarbeiter_speichern;
@@ -505,8 +508,77 @@ public class MainViewController {
             }
         });
 
+        // Speichern Button Mitarbeiter
+        mitarbeiter_speichern.setOnMouseClicked(event -> {
+            Integer selected = mitarbeiter_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Mitarbeiter mitarbeiter = Mitarbeiter.getMitarbeiterList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (mitarbeiter != null) {
+                mitarbeiter.setVorname(mitarbeiter_vorname.getText());
+                mitarbeiter.setNachname(mitarbeiter_nachname.getText());
+                mitarbeiter.setAdresse_id(mitarbeiter_adresse.getSelectionModel().getSelectedItem());
+                mitarbeiter.setAnrede_id(mitarbeiter_anrede.getSelectionModel().getSelectedItem());
+                mitarbeiter.setLohn(Float.parseFloat(mitarbeiter_lohn.getText()));
+                mitarbeiter.setBeschaeftigungsstart(Date.valueOf(mitarbeiter_beschaeftigungsstart.getText()));
+                mitarbeiter.setVerfuegbar(mitarbeiter_verfuegbarkeit.isSelected());
 
-    }
+                try {
+                    updateMitarbeiter(mitarbeiter);
+                    Mitarbeiter.clearList();
+                    loadMitarbeiter(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Mitarbeiter
+        mitarbeiter_anlegen.setOnMouseClicked(event -> {
+            Mitarbeiter mitarbeiter = new Mitarbeiter(
+                    -1,
+                    mitarbeiter_vorname.getText(),
+                    mitarbeiter_nachname.getText(),
+                    mitarbeiter_adresse.getSelectionModel().getSelectedItem(),
+                    mitarbeiter_anrede.getSelectionModel().getSelectedItem(),
+                    Float.parseFloat(mitarbeiter_lohn.getText()),
+                    Date.valueOf(mitarbeiter_beschaeftigungsstart.getText()),
+                    mitarbeiter_verfuegbarkeit.isSelected()
+            );
+            try {
+                createMitarbeiter(mitarbeiter);
+                Mitarbeiter.clearList();
+                loadMitarbeiter(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Mitarbeiter
+        mitarbeiter_löschen.setOnMouseClicked(event -> {
+            Integer selected = mitarbeiter_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Mitarbeiter mitarbeiter = Mitarbeiter.getMitarbeiterList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (mitarbeiter != null) {
+                try {
+                    deleteMitarbeiter(mitarbeiter.getId());
+                    Mitarbeiter.clearList();
+                    loadMitarbeiter(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        }
 
     public void loadConnection() {
 
