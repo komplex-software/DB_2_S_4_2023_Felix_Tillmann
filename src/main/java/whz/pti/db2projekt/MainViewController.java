@@ -107,9 +107,9 @@ public class MainViewController {
     @FXML
     private ComboBox<Integer> fahrzeugmodell_id;
     @FXML
-    private ComboBox fahrzeugmodell_hersteller;
+    private ComboBox<Integer> fahrzeugmodell_hersteller;
     @FXML
-    private ComboBox fahrzeugmodell_fahrzeugtyp;
+    private ComboBox<Integer> fahrzeugmodell_fahrzeugtyp;
 
     @FXML
     private Button fahrzeugmodell_speichern;
@@ -693,6 +693,67 @@ public class MainViewController {
                     e.printStackTrace();
                 }
             }
+        });
+
+        // Speichern Button Fahrzeugmodell
+        fahrzeugmodell_speichern.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugmodell_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugmodell fahrzeugmodell = Fahrzeugmodell.getModellList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugmodell != null) {
+                fahrzeugmodell.setHersteller_id(fahrzeugmodell_hersteller.getSelectionModel().getSelectedItem());
+                fahrzeugmodell.setFahrzeugtyp_id(fahrzeugmodell_fahrzeugtyp.getSelectionModel().getSelectedItem());
+
+                try {
+                    updateFahrzeugmodelle(fahrzeugmodell);
+                    Fahrzeugmodell.clearList();
+                    loadFahrzeugmodelle(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+// Erstellen Button Fahrzeugmodell
+        fahrzeugmodell_anlegen.setOnMouseClicked(event -> {
+            Fahrzeugmodell fahrzeugmodell = new Fahrzeugmodell(
+                    -1,
+                    fahrzeugmodell_hersteller.getSelectionModel().getSelectedItem(),
+                    fahrzeugmodell_fahrzeugtyp.getSelectionModel().getSelectedItem()
+            );
+            try {
+                createFahrzeugmodell(fahrzeugmodell);
+                Fahrzeugmodell.clearList();
+                loadFahrzeugmodelle(connection);
+                showTableFacade();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+// Löschen Button Fahrzeugmodell
+        fahrzeugmodell_löschen.setOnMouseClicked(event -> {
+            Integer selected = fahrzeugmodell_id.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+            Fahrzeugmodell fahrzeugmodell = Fahrzeugmodell.getModellList().stream()
+                    .filter(x -> x.getId() == selected)
+                    .findFirst()
+                    .orElse(null);
+            if (fahrzeugmodell != null) {
+                try {
+                    deleteFahrzeugmodell(fahrzeugmodell.getId());
+                    Fahrzeugmodell.clearList();
+                    loadFahrzeugmodelle(connection);
+                    showTableFacade();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         });
 
         }
