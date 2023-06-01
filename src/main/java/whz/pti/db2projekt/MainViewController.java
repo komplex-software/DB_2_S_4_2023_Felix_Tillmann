@@ -234,12 +234,27 @@ public class MainViewController {
     private TableView mitarbeiter_anzeige;
     // ------------ Mitarbeiter ------------
 
+    @FXML
+    TabPane tabPane;
+    @FXML
+    Tab hatAnsprechpartner_reiter;
+    @FXML
+    Tab hatFarben_reiter;
+
 
     private Connection connection;
     private UserPermissions permissions = UserPermissions.READ; // read ist standard
 
     @FXML
     private void initialize() {
+
+        hatFarben_reiter.setDisable(true);
+        hatAnsprechpartner_reiter.setDisable(true);
+
+        tabPane.getTabs().remove(hatFarben_reiter);
+        tabPane.getTabs().remove(hatAnsprechpartner_reiter);
+
+
         // Speicher Button Adresse
         adresse_speichern.setOnMouseClicked(event -> {
             Integer selected = adresse_id.getSelectionModel().getSelectedItem();
