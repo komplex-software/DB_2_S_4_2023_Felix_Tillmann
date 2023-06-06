@@ -1,6 +1,7 @@
 package whz.pti.db2projekt.model;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Fahrzeugmodell {
     int id;
@@ -51,5 +52,21 @@ public class Fahrzeugmodell {
     }
     public static void printCount() {
         System.out.println("Anzahl Modelle: " + modellList.stream().count());
+    }
+
+    public String getHerstellerNameString() {
+        if (hersteller_id < 1) {
+            return "-";
+        }
+        Hersteller hersteller = Hersteller.getHerstellerList().stream().filter(h -> h.getId() == this.hersteller_id).collect(Collectors.toList()).get(0);
+        return hersteller.getName();
+    }
+
+    public String getFahrzeugtypNameString() {
+        if (fahrzeugtyp_id < 1) {
+            return "-";
+        }
+        Fahrzeugtyp fahrzeugtyp = Fahrzeugtyp.getTypList().stream().filter(ftyp -> ftyp.getId() == this.fahrzeugtyp_id).collect(Collectors.toList()).get(0);
+        return fahrzeugtyp.getBezeichnung();
     }
 }

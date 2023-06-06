@@ -1,6 +1,7 @@
 package whz.pti.db2projekt.model;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Kunde {
     int id;
@@ -85,4 +86,28 @@ public class Kunde {
         kundeList.clear();
     }
 
+    public String getAdresseString() {
+        if (adresse_id < 1) {
+            return "-";
+        }
+        Adresse adresse = Adresse.getAdresseList().stream().filter(a -> a.getId() == this.adresse_id).collect(Collectors.toList()).get(0);
+        String adrString = adresse.getStadt()+" "+adresse.getPostleitzahl()+" "+adresse.getStrasse()+" "+adresse.getHausnummer();
+        return adrString;
+    }
+
+    public String getAnsprechpartnerNameString() {
+        if (ansprechpartner_id < 1) {
+            return "-";
+        }
+        Mitarbeiter ansprechpartner = Mitarbeiter.getMitarbeiterList().stream().filter(mitarb -> mitarb.getId() == this.adresse_id).collect(Collectors.toList()).get(0);
+        return ansprechpartner.getVorname() + " " + ansprechpartner.getNachname();
+    }
+
+    public String getAnredeWortString() {
+        if (anrede_id < 1) {
+            return "-";
+        }
+        Anrede anrede = Anrede.getAnredeList().stream().filter(anred -> anred.getId() == this.adresse_id).collect(Collectors.toList()).get(0);
+        return anrede.getAnredewort();
+    }
 }
