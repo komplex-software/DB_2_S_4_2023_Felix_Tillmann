@@ -41,4 +41,9 @@ public class Anrede {
     public static void printCount() {
         System.out.println("Anzahl Anrede: " + anredeList.stream().count());
     }
+
+    @Override
+    public String toString() {
+        return anredewort;
+    }
 }

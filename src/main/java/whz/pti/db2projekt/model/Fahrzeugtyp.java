@@ -42,4 +42,9 @@ public class Fahrzeugtyp {
     public static void printCount() {
         System.out.println("Anzahl Typen: " + typList.stream().count());
     }
+
+    @Override
+    public String toString() {
+        return bezeichnung;
+    }
 }

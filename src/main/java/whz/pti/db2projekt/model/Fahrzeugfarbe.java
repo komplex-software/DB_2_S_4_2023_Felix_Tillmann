@@ -42,4 +42,9 @@ public class Fahrzeugfarbe {
     public static void printCount() {
         System.out.println("Anzahl Farben: " + farbeList.stream().count());
     }
+
+    @Override
+    public String toString() {
+        return farbname;
+    }
 }
