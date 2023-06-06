@@ -41,4 +41,9 @@ public class Hersteller {
     public static void printCount() {
         System.out.println("Anzahl Hersteller: " + herstellerList.stream().count());
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

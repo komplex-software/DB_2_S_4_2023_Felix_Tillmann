@@ -69,4 +69,15 @@ public class Fahrzeugmodell {
         Fahrzeugtyp fahrzeugtyp = Fahrzeugtyp.getTypList().stream().filter(ftyp -> ftyp.getId() == this.fahrzeugtyp_id).collect(Collectors.toList()).get(0);
         return fahrzeugtyp.getBezeichnung();
     }
+
+    @Override
+    public String toString() {
+        try {
+            Hersteller hersteller = Hersteller.getHerstellerList().stream().filter(h -> h.getId() == hersteller_id).collect(Collectors.toList()).get(0);
+            Fahrzeugtyp fahrzeugtyp = Fahrzeugtyp.getTypList().stream().filter(t -> t.getId() == fahrzeugtyp_id).collect(Collectors.toList()).get(0);
+            return hersteller.getName() + " " + fahrzeugtyp.getBezeichnung();
+        } catch (Exception e) {
+            return "-";
+        }
+    }
 }

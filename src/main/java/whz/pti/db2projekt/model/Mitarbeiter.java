@@ -119,4 +119,14 @@ public class Mitarbeiter {
         Anrede anrede = Anrede.getAnredeList().stream().filter(anred -> anred.getId() == this.adresse_id).collect(Collectors.toList()).get(0);
         return anrede.getAnredewort();
     }
+
+    @Override
+    public String toString() {
+        try {
+            Anrede anrede = Anrede.getAnredeList().stream().filter(a -> a.getId() == anrede_id).collect(Collectors.toList()).get(0);
+            return anrede.getAnredewort() + " " + vorname + " " + nachname;
+        } catch (Exception e) {
+            return vorname + " " + nachname;
+        }
+    }
 }
