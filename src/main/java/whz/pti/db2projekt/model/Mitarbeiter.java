@@ -2,6 +2,7 @@ package whz.pti.db2projekt.model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Mitarbeiter {
     int id;
@@ -102,4 +103,20 @@ public class Mitarbeiter {
         System.out.println("Anzahl Mitarbeiter: " + mitarbeiterList.stream().count());
     }
 
+    public String getAdresseString() {
+        if (adresse_id < 1) {
+            return "-";
+        }
+        Adresse adresse = Adresse.getAdresseList().stream().filter(a -> a.getId() == this.adresse_id).collect(Collectors.toList()).get(0);
+        String adrString = adresse.getStadt()+" "+adresse.getPostleitzahl()+" "+adresse.getStrasse()+" "+adresse.getHausnummer();
+        return adrString;
+    }
+
+    public String getAnredeString() {
+        if (anrede_id < 1) {
+            return "-";
+        }
+        Anrede anrede = Anrede.getAnredeList().stream().filter(anred -> anred.getId() == this.adresse_id).collect(Collectors.toList()).get(0);
+        return anrede.getAnredewort();
+    }
 }

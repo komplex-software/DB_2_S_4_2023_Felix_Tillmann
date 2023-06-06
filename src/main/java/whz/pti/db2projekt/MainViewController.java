@@ -2458,11 +2458,11 @@ public class MainViewController {
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
             vornameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVorname()));
             nachnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNachname()));
-            // TODO: adresse statt id
+
             adresseIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAdresseString()));
-            // TODO: name statt id
+
             ansprechpartnerIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnsprechpartnerNameString()));
-            // TODO: anrede statt id
+
             anredeIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnredeWortString()));
 
             tableView.getItems().add(kunde);
@@ -2536,11 +2536,11 @@ public class MainViewController {
         TableColumn<Mitarbeiter, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Mitarbeiter, String> vornameColumn = new TableColumn<>("Vorname");
         TableColumn<Mitarbeiter, String> nachnameColumn = new TableColumn<>("Nachname");
-        TableColumn<Mitarbeiter, Integer> adresseIdColumn = new TableColumn<>("Adresse ID");
+        TableColumn<Mitarbeiter, String> adresseIdColumn = new TableColumn<>("Adresse");
         TableColumn<Mitarbeiter, Double> lohnColumn = new TableColumn<>("Lohn");
         TableColumn<Mitarbeiter, String> beschaeftigungsstartColumn = new TableColumn<>("Beschäftigungsstart");
         TableColumn<Mitarbeiter, Boolean> verfuegbarColumn = new TableColumn<>("Verfügbar");
-        TableColumn<Mitarbeiter, Integer> anredeIdColumn = new TableColumn<>("Anrede ID");
+        TableColumn<Mitarbeiter, String> anredeIdColumn = new TableColumn<>("Anrede");
 
         tableView.getColumns().addAll(idColumn, vornameColumn, nachnameColumn, adresseIdColumn, lohnColumn, beschaeftigungsstartColumn, verfuegbarColumn, anredeIdColumn);
 
@@ -2552,11 +2552,13 @@ public class MainViewController {
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
             vornameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVorname()));
             nachnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNachname()));
-            adresseIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAdresse_id()).asObject());
+            // todo string hier
+            adresseIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAdresseString()));
             lohnColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getLohn()).asObject());
             beschaeftigungsstartColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBeschaeftigungsstart().toString()));
             verfuegbarColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isVerfuegbar()).asObject());
-            anredeIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnrede_id()).asObject());
+            // todo string hier
+            anredeIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnredeString()));
 
             tableView.getItems().add(mitarbeiter);
         }
