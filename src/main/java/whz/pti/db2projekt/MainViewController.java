@@ -2247,8 +2247,8 @@ public class MainViewController {
         tableView.getItems().clear();
         tableView.getColumns().clear();
         TableColumn<Fahrzeugmodell, Integer> idColumn = new TableColumn<>("ID");
-        TableColumn<Fahrzeugmodell, Integer> herstellerIdColumn = new TableColumn<>("Hersteller");
-        TableColumn<Fahrzeugmodell, Integer> fahrzeugtypIdColumn = new TableColumn<>("Fahrzeugtyp");
+        TableColumn<Fahrzeugmodell, String> herstellerIdColumn = new TableColumn<>("Hersteller");
+        TableColumn<Fahrzeugmodell, String> fahrzeugtypIdColumn = new TableColumn<>("Fahrzeugtyp");
 
         tableView.getColumns().addAll(idColumn, herstellerIdColumn, fahrzeugtypIdColumn);
 
@@ -2258,10 +2258,10 @@ public class MainViewController {
             TableRow<Fahrzeugmodell> row = new TableRow<>();
 
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-            // TODO: hersteller name statt id
-            herstellerIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getHersteller_id()).asObject());
-            // TODO: fahrzeugtyp name statt id
-            fahrzeugtypIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getFahrzeugtyp_id()).asObject());
+
+            herstellerIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHerstellerNameString()));
+
+            fahrzeugtypIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFahrzeugtypNameString()));
 
             tableView.getItems().add(modell);
         }
