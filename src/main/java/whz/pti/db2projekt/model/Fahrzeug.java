@@ -151,4 +151,12 @@ public class Fahrzeug {
         Kunde kaufKunde = Kunde.getKundeList().stream().filter(kunde -> kunde.getId() == this.kaufKunde_id).collect(Collectors.toList()).get(0);
         return kaufKunde.getNachname() + " " + kaufKunde.getVorname();
     }
+
+    public String getModellName() {
+        if (modell_id < 1) {
+            return "-";
+        }
+        Fahrzeugmodell modell = Fahrzeugmodell.getModellList().stream().filter(m -> m.getId() == this.modell_id).collect(Collectors.toList()).get(0);
+        return modell.toString();
+    }
 }

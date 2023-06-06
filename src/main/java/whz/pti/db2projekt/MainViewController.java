@@ -2227,7 +2227,8 @@ public class MainViewController {
             TableRow<Fahrzeug> row = new TableRow<>();
 
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-            modellColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getModell_id()));
+            // TODO: modell name
+            modellColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getModellName()));
             kaufpreisColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getKaufpreis()).asObject());
             mietpreisColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getMietpreis()).asObject());
             istVermietetColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isIstVermietet()).asObject());
