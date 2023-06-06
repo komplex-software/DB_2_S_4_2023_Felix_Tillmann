@@ -445,6 +445,7 @@ public class MainViewController {
         });
 
         // Speichern Button Fahrzeug
+        // FIXME: kaufkunde und mietkunde wird nicht übernommen
         fahrzeug_speichern.setOnMouseClicked(event -> {
             Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
             if (selected == null) return;
@@ -1186,9 +1187,6 @@ public class MainViewController {
             Hersteller.addHersteller(newHersteller);
         }
     }
-
-    // TODO:
-    // return in allen updates falls keine write permissions
 
     private void updateHersteller(Hersteller hersteller) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -2139,9 +2137,11 @@ public class MainViewController {
             kaufpreisColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getKaufpreis()).asObject());
             mietpreisColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getMietpreis()).asObject());
             istVermietetColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isIstVermietet()).asObject());
-            mietKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getMietKunde_id()));
+
+            mietKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getMietKundeNameString()));
             istVerkauftColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isIstVerkauft()).asObject());
-            kaufKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getKaufKunde_id()));
+
+            kaufKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getKaufKundeNameString()));
             letzterTuevColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLetzterTuev().toString()));
             anzVorherigeBesitzerColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnzVorherigeBesitzer()).asObject());
             kilometerstandColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getKilometerstand()).asObject());
@@ -2258,8 +2258,8 @@ public class MainViewController {
         tableView.getItems().clear();
         tableView.getColumns().clear();
         TableColumn<Fahrzeugmodell, Integer> idColumn = new TableColumn<>("ID");
-        TableColumn<Fahrzeugmodell, Integer> herstellerIdColumn = new TableColumn<>("Hersteller ID");
-        TableColumn<Fahrzeugmodell, Integer> fahrzeugtypIdColumn = new TableColumn<>("Fahrzeugtyp ID");
+        TableColumn<Fahrzeugmodell, Integer> herstellerIdColumn = new TableColumn<>("Hersteller");
+        TableColumn<Fahrzeugmodell, Integer> fahrzeugtypIdColumn = new TableColumn<>("Fahrzeugtyp");
 
         tableView.getColumns().addAll(idColumn, herstellerIdColumn, fahrzeugtypIdColumn);
 
@@ -2269,7 +2269,9 @@ public class MainViewController {
             TableRow<Fahrzeugmodell> row = new TableRow<>();
 
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+            // TODO: hersteller name statt id
             herstellerIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getHersteller_id()).asObject());
+            // TODO: fahrzeugtyp name statt id
             fahrzeugtypIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getFahrzeugtyp_id()).asObject());
 
             tableView.getItems().add(modell);
