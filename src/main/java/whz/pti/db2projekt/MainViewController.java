@@ -445,6 +445,7 @@ public class MainViewController {
         });
 
         // Speichern Button Fahrzeug
+        // FIXME: kaufkunde und mietkunde wird nicht übernommen
         fahrzeug_speichern.setOnMouseClicked(event -> {
             Integer selected = fahrzeug_id.getSelectionModel().getSelectedItem();
             if (selected == null) return;
@@ -2128,9 +2129,11 @@ public class MainViewController {
             kaufpreisColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getKaufpreis()).asObject());
             mietpreisColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getMietpreis()).asObject());
             istVermietetColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isIstVermietet()).asObject());
-            mietKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getMietKunde_id()));
+            // TODO name des Mietkunden
+            mietKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getMietKundeNameString()));
             istVerkauftColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isIstVerkauft()).asObject());
-            kaufKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getKaufKunde_id()));
+            // TODO name des Kaufkunden
+            kaufKundeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(""+cellData.getValue().getKaufKundeNameString()));
             letzterTuevColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLetzterTuev().toString()));
             anzVorherigeBesitzerColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnzVorherigeBesitzer()).asObject());
             kilometerstandColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getKilometerstand()).asObject());

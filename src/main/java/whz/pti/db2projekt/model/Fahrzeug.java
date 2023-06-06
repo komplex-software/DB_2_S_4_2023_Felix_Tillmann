@@ -2,6 +2,8 @@ package whz.pti.db2projekt.model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Fahrzeug {
     int id;
@@ -132,5 +134,21 @@ public class Fahrzeug {
 
     public static ArrayList<Fahrzeug> getFahrzeugList() {
         return fahrzeugList;
+    }
+
+    public String getMietKundeNameString() {
+        if (mietKunde_id < 1) {
+            return "-";
+        }
+        Kunde mietKunde = Kunde.getKundeList().stream().filter(kunde -> kunde.getId() == this.mietKunde_id).collect(Collectors.toList()).get(0);
+        return mietKunde.getNachname() + " " + mietKunde.getVorname();
+    }
+
+    public String getKaufKundeNameString() {
+        if (kaufKunde_id < 1) {
+            return "-";
+        }
+        Kunde kaufKunde = Kunde.getKundeList().stream().filter(kunde -> kunde.getId() == this.kaufKunde_id).collect(Collectors.toList()).get(0);
+        return kaufKunde.getNachname() + " " + kaufKunde.getVorname();
     }
 }
