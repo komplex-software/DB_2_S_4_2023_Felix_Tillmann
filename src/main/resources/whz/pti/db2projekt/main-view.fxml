@@ -19,7 +19,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="adresse_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="adresse_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getAdresseTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Adresse">
                            <font>
                               <Font size="60.0" />
@@ -47,7 +47,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="anrede_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="anrede_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getAnredeTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Anrede">
                            <font>
                               <Font size="60.0" />
@@ -68,7 +68,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="fahrzeug_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="fahrzeug_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getFahrzeugTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="5.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeuge">
                            <font>
                               <Font size="60.0" />
@@ -107,7 +107,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="fahrzeugfarbe_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="fahrzeugfarbe_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getFarbeTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugfarbe">
                            <font>
                               <Font size="60.0" />
@@ -128,7 +128,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="fahrzeugmodell_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="fahrzeugmodell_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getModellTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugmodell">
                            <font>
                               <Font size="60.0" />
@@ -151,7 +151,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="fahrzeugtyp_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="fahrzeugtyp_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getTypTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Fahrzeugtyp">
                            <font>
                               <Font size="60.0" />
@@ -214,7 +214,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="hersteller_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="hersteller_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getHerstellerTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Hersteller">
                            <font>
                               <Font size="60.0" />
@@ -235,7 +235,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="kunde_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="kunde_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getKundeTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Kunde">
                            <font>
                               <Font size="60.0" />
@@ -264,7 +264,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="1090.0">
                      <children>
-                        <TableView fx:id="mitarbeiter_anzeige" layoutX="365.0" layoutY="14.0" prefHeight="396.0" prefWidth="711.0" />
+                        <TableView fx:id="mitarbeiter_anzeige" layoutX="365.0" layoutY="14.0" onMouseClicked="#getMitarbeiterTableSelectedItem" prefHeight="396.0" prefWidth="711.0" />
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="344.0" text="Mitarbeiter">
                            <font>
                               <Font size="60.0" />
