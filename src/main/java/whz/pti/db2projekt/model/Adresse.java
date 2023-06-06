@@ -73,4 +73,9 @@ public class Adresse {
     public void setHausnummer(String hausnummer) {
         this.hausnummer = hausnummer;
     }
+
+    @Override
+    public String toString() {
+        return stadt + " " + postleitzahl + " " + strasse + " " + hausnummer;
+    }
 }

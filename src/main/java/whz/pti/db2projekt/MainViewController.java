@@ -63,9 +63,9 @@ public class MainViewController {
     @FXML
     private TextField fahrzeug_mietpreis;
     @FXML
-    private ComboBox<Integer> fahrzeug_kaufkunde;
+    private ComboBox<Kunde> fahrzeug_kaufkunde;
     @FXML
-    private ComboBox<Integer> fahrzeug_mietkunde;
+    private ComboBox<Kunde> fahrzeug_mietkunde;
     @FXML
     private TextField fahrzeug_letzterTuev;
     @FXML
@@ -74,7 +74,7 @@ public class MainViewController {
     private TextField fahrzeug_kilometerstand;
 
     @FXML
-    private ComboBox<Integer> fahrzeug_modell;
+    private ComboBox<Fahrzeugmodell> fahrzeug_modell;
     @FXML
     private CheckBox fahrzeug_istVermietet;
     @FXML
@@ -107,9 +107,9 @@ public class MainViewController {
     @FXML
     private ComboBox<Integer> fahrzeugmodell_id;
     @FXML
-    private ComboBox<Integer> fahrzeugmodell_hersteller;
+    private ComboBox<Hersteller> fahrzeugmodell_hersteller;
     @FXML
-    private ComboBox<Integer> fahrzeugmodell_fahrzeugtyp;
+    private ComboBox<Fahrzeugtyp> fahrzeugmodell_fahrzeugtyp;
 
     @FXML
     private Button fahrzeugmodell_speichern;
@@ -189,11 +189,11 @@ public class MainViewController {
     private TextField kunde_nachname;
 
     @FXML
-    private ComboBox<Integer> kunde_anrede;
+    private ComboBox<Anrede> kunde_anrede;
     @FXML
-    private ComboBox<Integer> kunde_adresse;
+    private ComboBox<Adresse> kunde_adresse;
     @FXML
-    private ComboBox<Integer> kunde_ansprechpartner;
+    private ComboBox<Mitarbeiter> kunde_ansprechpartner;
 
     @FXML
     private Button kunde_speichern;
@@ -219,9 +219,9 @@ public class MainViewController {
     private CheckBox mitarbeiter_verfuegbarkeit;
 
     @FXML
-    private ComboBox<Integer> mitarbeiter_anrede;
+    private ComboBox<Anrede> mitarbeiter_anrede;
     @FXML
-    private ComboBox<Integer> mitarbeiter_adresse;
+    private ComboBox<Adresse> mitarbeiter_adresse;
 
     @FXML
     private Button mitarbeiter_speichern;
@@ -253,7 +253,6 @@ public class MainViewController {
 
         tabPane.getTabs().remove(hatFarben_reiter);
         tabPane.getTabs().remove(hatAnsprechpartner_reiter);
-
 
         // Speicher Button Adresse
         adresse_speichern.setOnMouseClicked(event -> {
@@ -325,8 +324,8 @@ public class MainViewController {
                 kunde.setVorname(kunde_vorname.getText());
                 kunde.setNachname(kunde_nachname.getText());
                 kunde.setAdresse_id(Integer.parseInt(kunde_adresse.getSelectionModel().getSelectedItem().toString()));
-                kunde.setAnsprechpartner_id(kunde_ansprechpartner.getSelectionModel().getSelectedItem().intValue());
-                kunde.setAnrede_id(kunde_anrede.getSelectionModel().getSelectedItem());
+                kunde.setAnsprechpartner_id(kunde_ansprechpartner.getSelectionModel().getSelectedItem().getId());
+                kunde.setAnrede_id(kunde_anrede.getSelectionModel().getSelectedItem().getId());
 
                 try {
                     updateKunde(kunde);
@@ -346,10 +345,10 @@ public class MainViewController {
                     kunde_vorname.getText(),
                     kunde_nachname.getText(),
                     Adresse.getAdresseList().stream().filter(
-                            addr -> addr.getId() == kunde_adresse.getSelectionModel().getSelectedItem().intValue()
+                            addr -> addr.getId() == kunde_adresse.getSelectionModel().getSelectedItem().getId()
                     ).collect(Collectors.toList()).get(0).getId(),
-                    kunde_ansprechpartner.getSelectionModel().getSelectedItem(),
-                    kunde_anrede.getSelectionModel().getSelectedItem()
+                    kunde_ansprechpartner.getSelectionModel().getSelectedItem().getId(),
+                    kunde_anrede.getSelectionModel().getSelectedItem().getId()
             );
 
             try {
@@ -455,13 +454,13 @@ public class MainViewController {
                     .orElse(null);
 
             if (fahrzeug != null) {
-                fahrzeug.setModell_id(fahrzeug_modell.getSelectionModel().getSelectedItem());
+                fahrzeug.setModell_id(fahrzeug_modell.getSelectionModel().getSelectedItem().getId());
                 fahrzeug.setKaufpreis(Float.parseFloat(fahrzeug_kaufpreis.getText()));
                 fahrzeug.setMietpreis(Float.parseFloat(fahrzeug_mietpreis.getText()));
                 fahrzeug.setIstVermietet(fahrzeug_istVermietet.isSelected());
-                fahrzeug.setMietKunde_id(fahrzeug_mietkunde.getSelectionModel().getSelectedItem() != null ? fahrzeug_mietkunde.getSelectionModel().getSelectedItem() : -1);
+                fahrzeug.setMietKunde_id(fahrzeug_mietkunde.getSelectionModel().getSelectedItem() != null ? fahrzeug_mietkunde.getSelectionModel().getSelectedItem().getId() : -1);
                 fahrzeug.setIstVerkauft(fahrzeug_istVerkauft.isSelected());
-                fahrzeug.setKaufKunde_id(fahrzeug_kaufkunde.getSelectionModel().getSelectedItem() != null ? fahrzeug_kaufkunde.getSelectionModel().getSelectedItem() : -1);
+                fahrzeug.setKaufKunde_id(fahrzeug_kaufkunde.getSelectionModel().getSelectedItem() != null ? fahrzeug_kaufkunde.getSelectionModel().getSelectedItem().getId() : -1);
                 fahrzeug.setLetzterTuev(Date.valueOf(fahrzeug_letzterTuev.getText()));
                 fahrzeug.setAnzVorherigeBesitzer(Integer.parseInt(fahrzeug_anzVorherigeBesitzer.getText()));
                 fahrzeug.setKilometerstand(Integer.parseInt(fahrzeug_kilometerstand.getText()));
@@ -481,13 +480,13 @@ public class MainViewController {
         fahrzeug_anlegen.setOnMouseClicked(event -> {
             Fahrzeug fahrzeug = new Fahrzeug(
                     -1,
-                    fahrzeug_modell.getSelectionModel().getSelectedItem(),
+                    fahrzeug_modell.getSelectionModel().getSelectedItem().getId(),
                     Float.parseFloat(fahrzeug_kaufpreis.getText()),
                     Float.parseFloat(fahrzeug_mietpreis.getText()),
                     fahrzeug_istVermietet.isSelected(),
-                    fahrzeug_mietkunde.getSelectionModel().getSelectedItem(),
+                    fahrzeug_mietkunde.getSelectionModel().getSelectedItem().getId(),
                     fahrzeug_istVerkauft.isSelected(),
-                    fahrzeug_kaufkunde.getSelectionModel().getSelectedItem(),
+                    fahrzeug_kaufkunde.getSelectionModel().getSelectedItem().getId(),
                     Date.valueOf(fahrzeug_letzterTuev.getText()),
                     Integer.parseInt(fahrzeug_anzVorherigeBesitzer.getText()),
                     Integer.parseInt(fahrzeug_kilometerstand.getText())
@@ -535,8 +534,8 @@ public class MainViewController {
             if (mitarbeiter != null) {
                 mitarbeiter.setVorname(mitarbeiter_vorname.getText());
                 mitarbeiter.setNachname(mitarbeiter_nachname.getText());
-                mitarbeiter.setAdresse_id(mitarbeiter_adresse.getSelectionModel().getSelectedItem());
-                mitarbeiter.setAnrede_id(mitarbeiter_anrede.getSelectionModel().getSelectedItem());
+                mitarbeiter.setAdresse_id(mitarbeiter_adresse.getSelectionModel().getSelectedItem().getId());
+                mitarbeiter.setAnrede_id(mitarbeiter_anrede.getSelectionModel().getSelectedItem().getId());
                 mitarbeiter.setLohn(Float.parseFloat(mitarbeiter_lohn.getText()));
                 mitarbeiter.setBeschaeftigungsstart(Date.valueOf(mitarbeiter_beschaeftigungsstart.getText()));
                 mitarbeiter.setVerfuegbar(mitarbeiter_verfuegbarkeit.isSelected());
@@ -558,8 +557,8 @@ public class MainViewController {
                     -1,
                     mitarbeiter_vorname.getText(),
                     mitarbeiter_nachname.getText(),
-                    mitarbeiter_adresse.getSelectionModel().getSelectedItem(),
-                    mitarbeiter_anrede.getSelectionModel().getSelectedItem(),
+                    mitarbeiter_adresse.getSelectionModel().getSelectedItem().getId(),
+                    mitarbeiter_anrede.getSelectionModel().getSelectedItem().getId(),
                     Float.parseFloat(mitarbeiter_lohn.getText()),
                     Date.valueOf(mitarbeiter_beschaeftigungsstart.getText()),
                     mitarbeiter_verfuegbarkeit.isSelected()
@@ -720,8 +719,8 @@ public class MainViewController {
                     .findFirst()
                     .orElse(null);
             if (fahrzeugmodell != null) {
-                fahrzeugmodell.setHersteller_id(fahrzeugmodell_hersteller.getSelectionModel().getSelectedItem());
-                fahrzeugmodell.setFahrzeugtyp_id(fahrzeugmodell_fahrzeugtyp.getSelectionModel().getSelectedItem());
+                fahrzeugmodell.setHersteller_id(fahrzeugmodell_hersteller.getSelectionModel().getSelectedItem().getId());
+                fahrzeugmodell.setFahrzeugtyp_id(fahrzeugmodell_fahrzeugtyp.getSelectionModel().getSelectedItem().getId());
 
                 try {
                     updateFahrzeugmodelle(fahrzeugmodell);
@@ -738,8 +737,8 @@ public class MainViewController {
         fahrzeugmodell_anlegen.setOnMouseClicked(event -> {
             Fahrzeugmodell fahrzeugmodell = new Fahrzeugmodell(
                     -1,
-                    fahrzeugmodell_hersteller.getSelectionModel().getSelectedItem(),
-                    fahrzeugmodell_fahrzeugtyp.getSelectionModel().getSelectedItem()
+                    fahrzeugmodell_hersteller.getSelectionModel().getSelectedItem().getId(),
+                    fahrzeugmodell_fahrzeugtyp.getSelectionModel().getSelectedItem().getId()
             );
             try {
                 createFahrzeugmodell(fahrzeugmodell);
@@ -2162,12 +2161,12 @@ public class MainViewController {
                     .get(0);
             // Set combo box modell
             fahrzeug_modell.getItems().clear();
-            Fahrzeugmodell.getModellList().forEach(modell -> fahrzeug_modell.getItems().add(modell.getId()));
+            Fahrzeugmodell.getModellList().forEach(modell -> fahrzeug_modell.getItems().add(modell));
             int selectedModellId = fahrz.getModell_id();
-            ObservableList<Integer> items = fahrzeug_modell.getItems();
+            ObservableList<Fahrzeugmodell> items = fahrzeug_modell.getItems();
             int index = -1;
             for (int i = 0; i < items.size(); i++) {
-                if (items.get(i) == selectedModellId) {
+                if (items.get(i).getId() == selectedModellId) {
                     index = i;
                     break;
                 }
@@ -2182,13 +2181,14 @@ public class MainViewController {
             fahrzeug_istVerkauft.setSelected(fahrz.isIstVerkauft());
 
             fahrzeug_mietkunde.getItems().clear();
-            fahrzeug_mietkunde.getItems().add(-1);
-            Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde.getId()));
+            // der kunde "kein kunde"
+            fahrzeug_mietkunde.getItems().add(new Kunde(-1, "KEIN KUNDE","",1,1,1));
+            Kunde.getKundeList().forEach(kunde -> fahrzeug_mietkunde.getItems().add(kunde));
             int selectedId = fahrz.getMietKunde_id();
-            ObservableList<Integer> itemsMiet = fahrzeug_mietkunde.getItems();
+            ObservableList<Kunde> itemsMiet = fahrzeug_mietkunde.getItems();
             index = -1;
             for (int i = 0; i < itemsMiet.size(); i++) {
-                if (itemsMiet.get(i) == selectedId) {
+                if (itemsMiet.get(i).getId() == selectedId) {
                     index = i;
                     break;
                 }
@@ -2198,13 +2198,14 @@ public class MainViewController {
             }
 
             fahrzeug_kaufkunde.getItems().clear();
-            fahrzeug_kaufkunde.getItems().add(-1);
-            Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde.getId()));
+            // der kunde "kein kunde"
+            fahrzeug_kaufkunde.getItems().add(new Kunde(-1, "KEIN KUNDE","",1,1,1));
+            Kunde.getKundeList().forEach(kunde -> fahrzeug_kaufkunde.getItems().add(kunde));
             selectedId = fahrz.getKaufKunde_id();
-            ObservableList<Integer> itemsKauf = fahrzeug_kaufkunde.getItems();
+            ObservableList<Kunde> itemsKauf = fahrzeug_kaufkunde.getItems();
             index = -1;
             for (int i = 0; i < itemsKauf.size(); i++) {
-                if (itemsKauf.get(i) == selectedId) {
+                if (itemsKauf.get(i).getId() == selectedId) {
                     index = i;
                     break;
                 }
@@ -2289,12 +2290,12 @@ public class MainViewController {
                     .collect(Collectors.toList())
                     .get(0);
             fahrzeugmodell_fahrzeugtyp.getItems().clear();
-            Fahrzeugtyp.getTypList().forEach(typ -> fahrzeugmodell_fahrzeugtyp.getItems().add(typ.getId()));
+            Fahrzeugtyp.getTypList().forEach(typ -> fahrzeugmodell_fahrzeugtyp.getItems().add(typ));
             int selectedFahrzeugtypId = fahrzmod.getFahrzeugtyp_id();
-            ObservableList<Integer> items = fahrzeugmodell_fahrzeugtyp.getItems();
+            ObservableList<Fahrzeugtyp> items = fahrzeugmodell_fahrzeugtyp.getItems();
             int index = -1;
             for (int i = 0; i < items.size(); i++) {
-                if (items.get(i) == selectedFahrzeugtypId) {
+                if (items.get(i).getId() == selectedFahrzeugtypId) {
                     index = i;
                     break;
                 }
@@ -2304,12 +2305,12 @@ public class MainViewController {
             }
 
             fahrzeugmodell_hersteller.getItems().clear();
-            Hersteller.getHerstellerList().forEach(hersteller -> fahrzeugmodell_hersteller.getItems().add(hersteller.getId()));
+            Hersteller.getHerstellerList().forEach(hersteller -> fahrzeugmodell_hersteller.getItems().add(hersteller));
             int selectedHerstellerId = fahrzmod.getHersteller_id();
-            ObservableList<Integer> itemsModell = fahrzeugmodell_hersteller.getItems();
+            ObservableList<Hersteller> itemsModell = fahrzeugmodell_hersteller.getItems();
             index = -1;
             for (int i = 0; i < itemsModell.size(); i++) {
-                if (itemsModell.get(i) == selectedHerstellerId) {
+                if (itemsModell.get(i).getId() == selectedHerstellerId) {
                     index = i;
                     break;
                 }
@@ -2480,12 +2481,12 @@ public class MainViewController {
                     .collect(Collectors.toList())
                     .get(0);
             kunde_anrede.getItems().clear();
-            Anrede.getAnredeList().forEach(anred -> kunde_anrede.getItems().add(anred.getId()));
+            Anrede.getAnredeList().forEach(anred -> kunde_anrede.getItems().add(anred));
             int selectedAnredeId = kund.getAnrede_id();
-            ObservableList<Integer> items = kunde_anrede.getItems();
+            ObservableList<Anrede> items = kunde_anrede.getItems();
             int index = -1;
             for (int i = 0; i < items.size(); i++) {
-                if (items.get(i) == selectedAnredeId) {
+                if (items.get(i).getId() == selectedAnredeId) {
                     index = i;
                     break;
                 }
@@ -2497,12 +2498,12 @@ public class MainViewController {
             kunde_vorname.setText(kund.getVorname());
             kunde_nachname.setText(kund.getNachname());
             kunde_adresse.getItems().clear();
-            Adresse.getAdresseList().forEach(addr -> kunde_adresse.getItems().add(addr.getId()));
+            Adresse.getAdresseList().forEach(addr -> kunde_adresse.getItems().add(addr));
             int selectedAdresseId = kund.getAdresse_id();
-            ObservableList<Integer> itemsAdress = kunde_adresse.getItems();
+            ObservableList<Adresse> itemsAdress = kunde_adresse.getItems();
             index = -1;
             for (int i = 0; i < itemsAdress.size(); i++) {
-                if (itemsAdress.get(i) == selectedAdresseId) {
+                if (itemsAdress.get(i).getId() == selectedAdresseId) {
                     index = i;
                     break;
                 }
@@ -2512,12 +2513,12 @@ public class MainViewController {
             }
 
             kunde_ansprechpartner.getItems().clear();
-            Mitarbeiter.getMitarbeiterList().forEach(mitarb -> kunde_ansprechpartner.getItems().add(mitarb.getId()));
+            Mitarbeiter.getMitarbeiterList().forEach(mitarb -> kunde_ansprechpartner.getItems().add(mitarb));
             int selectedAnsprechpartnerId = kund.getAnsprechpartner_id();
-            ObservableList<Integer> itemsAnsp = kunde_ansprechpartner.getItems();
+            ObservableList<Mitarbeiter> itemsAnsp = kunde_ansprechpartner.getItems();
             index = -1;
             for (int i = 0; i < itemsAnsp.size(); i++) {
-                if (itemsAnsp.get(i) == selectedAnsprechpartnerId) {
+                if (itemsAnsp.get(i).getId() == selectedAnsprechpartnerId) {
                     index = i;
                     break;
                 }
@@ -2575,12 +2576,12 @@ public class MainViewController {
                     .collect(Collectors.toList())
                     .get(0);
             mitarbeiter_adresse.getItems().clear();
-            Adresse.getAdresseList().forEach(addr -> mitarbeiter_adresse.getItems().add(addr.getId()));
+            Adresse.getAdresseList().forEach(addr -> mitarbeiter_adresse.getItems().add(addr));
             int selectedAdresseId = mitarb.getAdresse_id();
-            ObservableList<Integer> items = mitarbeiter_adresse.getItems();
+            ObservableList<Adresse> items = mitarbeiter_adresse.getItems();
             int index = -1;
             for (int i = 0; i < items.size(); i++) {
-                if (items.get(i) == selectedAdresseId) {
+                if (items.get(i).getId() == selectedAdresseId) {
                     index = i;
                     break;
                 }
@@ -2590,12 +2591,12 @@ public class MainViewController {
             }
 
             mitarbeiter_anrede.getItems().clear();
-            Anrede.getAnredeList().forEach(anred -> mitarbeiter_anrede.getItems().add(anred.getId()));
+            Anrede.getAnredeList().forEach(anred -> mitarbeiter_anrede.getItems().add(anred));
             int selectedAnredeId = mitarb.getAnrede_id();
-            ObservableList<Integer> itemsAnred = mitarbeiter_anrede.getItems();
+            ObservableList<Anrede> itemsAnred = mitarbeiter_anrede.getItems();
             index = -1;
             for (int i = 0; i < itemsAnred.size(); i++) {
-                if (itemsAnred.get(i) == selectedAnredeId) {
+                if (itemsAnred.get(i).getId() == selectedAnredeId) {
                     index = i;
                     break;
                 }
