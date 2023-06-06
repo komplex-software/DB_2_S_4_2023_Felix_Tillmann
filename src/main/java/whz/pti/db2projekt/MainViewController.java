@@ -2444,9 +2444,9 @@ public class MainViewController {
         TableColumn<Kunde, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Kunde, String> vornameColumn = new TableColumn<>("Vorname");
         TableColumn<Kunde, String> nachnameColumn = new TableColumn<>("Nachname");
-        TableColumn<Kunde, Integer> adresseIdColumn = new TableColumn<>("Adresse ID");
-        TableColumn<Kunde, Integer> ansprechpartnerIdColumn = new TableColumn<>("Ansprechpartner ID");
-        TableColumn<Kunde, Integer> anredeIdColumn = new TableColumn<>("Anrede ID");
+        TableColumn<Kunde, String> adresseIdColumn = new TableColumn<>("Adresse");
+        TableColumn<Kunde, String> ansprechpartnerIdColumn = new TableColumn<>("Ansprechpartner");
+        TableColumn<Kunde, String> anredeIdColumn = new TableColumn<>("Anrede");
 
         tableView.getColumns().addAll(idColumn, vornameColumn, nachnameColumn, adresseIdColumn, ansprechpartnerIdColumn, anredeIdColumn);
 
@@ -2458,9 +2458,12 @@ public class MainViewController {
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
             vornameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVorname()));
             nachnameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNachname()));
-            adresseIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAdresse_id()).asObject());
-            ansprechpartnerIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnsprechpartner_id()).asObject());
-            anredeIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnrede_id()).asObject());
+            // TODO: adresse statt id
+            adresseIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAdresseString()));
+            // TODO: name statt id
+            ansprechpartnerIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnsprechpartnerNameString()));
+            // TODO: anrede statt id
+            anredeIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnredeWortString()));
 
             tableView.getItems().add(kunde);
         }
