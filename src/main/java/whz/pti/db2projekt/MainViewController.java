@@ -833,6 +833,17 @@ public class MainViewController {
         });
 
         }
+        @FXML
+        public void getTableSelectedItem(){
+            Adresse add = (Adresse) adresse_anzeige.getItems().get(adresse_anzeige.getSelectionModel().getSelectedIndex());
+            adresse_id.setEditable(false);
+            adresse_id.getSelectionModel().select(add.getId()-1);
+            adresse_straße.setText(add.getStrasse());
+            adresse_stadt.setText(add.getStadt());
+            adresse_postleitzahl.setText(add.getPostleitzahl());
+            adresse_hausnummer.setText(add.getHausnummer());
+
+        }
 
     public void loadConnection() {
 
