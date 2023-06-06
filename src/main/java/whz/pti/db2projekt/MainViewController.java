@@ -832,17 +832,112 @@ public class MainViewController {
         });
 
         }
-        @FXML
-        public void getTableSelectedItem(){
-            Adresse add = (Adresse) adresse_anzeige.getItems().get(adresse_anzeige.getSelectionModel().getSelectedIndex());
-            adresse_id.setEditable(false);
-            adresse_id.getSelectionModel().select(add.getId()-1);
-            adresse_straße.setText(add.getStrasse());
-            adresse_stadt.setText(add.getStadt());
-            adresse_postleitzahl.setText(add.getPostleitzahl());
-            adresse_hausnummer.setText(add.getHausnummer());
 
-        }
+
+
+
+
+
+
+
+    public void getModellTableSelectedItem() {
+        Fahrzeugmodell fahrzeugmodell = (Fahrzeugmodell) fahrzeugmodell_anzeige.getItems().get(fahrzeugmodell_anzeige.getSelectionModel().getSelectedIndex());
+        fahrzeugmodell_id.setEditable(false);
+        fahrzeugmodell_id.getSelectionModel().select(fahrzeugmodell.getId() - 1);
+        fahrzeugmodell_hersteller.getSelectionModel().select(fahrzeugmodell.getHersteller_id() - 1);
+        fahrzeugmodell_fahrzeugtyp.getSelectionModel().select(fahrzeugmodell.getFahrzeugtyp_id() - 1);
+    }
+
+    @FXML
+    public void getTypTableSelectedItem() {
+        Fahrzeugtyp fahrzeugtyp = (Fahrzeugtyp) fahrzeugtyp_anzeige.getItems().get(fahrzeugtyp_anzeige.getSelectionModel().getSelectedIndex());
+        fahrzeugtyp_id.setEditable(false);
+        fahrzeugtyp_id.getSelectionModel().select(fahrzeugtyp.getId() - 1);
+        fahrzeugtyp_bezeichnung.setText(fahrzeugtyp.getBezeichnung());
+    }
+
+    @FXML
+    public void getHerstellerTableSelectedItem() {
+        Hersteller hersteller = (Hersteller) hersteller_anzeige.getItems().get(hersteller_anzeige.getSelectionModel().getSelectedIndex());
+        hersteller_id.setEditable(false);
+        hersteller_id.getSelectionModel().select(hersteller.getId() - 1);
+        hersteller_name.setText(hersteller.getName());
+    }
+
+    @FXML
+    public void getKundeTableSelectedItem() {
+        Kunde kunde = (Kunde) kunde_anzeige.getItems().get(kunde_anzeige.getSelectionModel().getSelectedIndex());
+        kunde_id.setEditable(false);
+        kunde_id.getSelectionModel().select(kunde.getId() - 1);
+        kunde_vorname.setText(kunde.getVorname());
+        kunde_nachname.setText(kunde.getNachname());
+        kunde_anrede.getSelectionModel().select(kunde.getAnrede_id() - 1);
+        kunde_adresse.getSelectionModel().select(kunde.getAdresse_id() - 1);
+        kunde_ansprechpartner.getSelectionModel().select(kunde.getAnsprechpartner_id() - 1);
+    }
+
+    @FXML
+    public void getMitarbeiterTableSelectedItem() {
+        Mitarbeiter mitarbeiter = (Mitarbeiter) mitarbeiter_anzeige.getItems().get(mitarbeiter_anzeige.getSelectionModel().getSelectedIndex());
+        mitarbeiter_id.setEditable(false);
+        mitarbeiter_id.getSelectionModel().select(mitarbeiter.getId() - 1);
+        mitarbeiter_vorname.setText(mitarbeiter.getVorname());
+        mitarbeiter_nachname.setText(mitarbeiter.getNachname());
+        mitarbeiter_lohn.setText(String.valueOf(mitarbeiter.getLohn()));
+        mitarbeiter_beschaeftigungsstart.setText(mitarbeiter.getBeschaeftigungsstart().toString());
+        mitarbeiter_verfuegbarkeit.setSelected(mitarbeiter.isVerfuegbar());
+        mitarbeiter_anrede.getSelectionModel().select(mitarbeiter.getAnrede_id() - 1);
+        mitarbeiter_adresse.getSelectionModel().select(mitarbeiter.getAdresse_id() - 1);
+    }
+
+
+
+    @FXML
+    public void getFarbeTableSelectedItem() {
+        Fahrzeugfarbe fahrzeugfarbe = (Fahrzeugfarbe) fahrzeugfarbe_anzeige.getItems().get(fahrzeugfarbe_anzeige.getSelectionModel().getSelectedIndex());
+        fahrzeugfarbe_id.setEditable(false);
+        fahrzeugfarbe_id.getSelectionModel().select(fahrzeugfarbe.getId() - 1);
+        fahrzeugfarbe_farbname.setText(fahrzeugfarbe.getFarbname());
+    }
+
+        @FXML
+    public void getAdresseTableSelectedItem(){
+        Adresse add = (Adresse) adresse_anzeige.getItems().get(adresse_anzeige.getSelectionModel().getSelectedIndex());
+        adresse_id.setEditable(false);
+        adresse_id.getSelectionModel().select(add.getId()-1);
+        adresse_straße.setText(add.getStrasse());
+        adresse_stadt.setText(add.getStadt());
+        adresse_postleitzahl.setText(add.getPostleitzahl());
+        adresse_hausnummer.setText(add.getHausnummer());
+    }
+
+
+        @FXML
+    public void getAnredeTableSelectedItem() {
+        Anrede anrede = (Anrede) anrede_anzeige.getItems().get(anrede_anzeige.getSelectionModel().getSelectedIndex());
+        anrede_id.setEditable(false);
+        anrede_id.getSelectionModel().select(anrede.getId() - 1);
+        anrede_anredewort.setText(anrede.getAnredewort());
+    }
+
+    @FXML
+    public void getFahrzeugTableSelectedItem() {
+        Fahrzeug fahrzeug = (Fahrzeug) fahrzeug_anzeige.getItems().get(fahrzeug_anzeige.getSelectionModel().getSelectedIndex());
+        fahrzeug_id.setEditable(false);
+        fahrzeug_id.getSelectionModel().select(fahrzeug.getId() - 1);
+        //TODO: index entspricht nicht der id
+
+        fahrzeug_kaufpreis.setText(String.valueOf(fahrzeug.getKaufpreis()));
+        fahrzeug_mietpreis.setText(String.valueOf(fahrzeug.getMietpreis()));
+        fahrzeug_kaufkunde.getSelectionModel().select(fahrzeug.getKaufKunde_id() - 1);
+        fahrzeug_mietkunde.getSelectionModel().select(fahrzeug.getMietKunde_id() - 1);
+        fahrzeug_letzterTuev.setText(fahrzeug.getLetzterTuev().toString());
+        fahrzeug_anzVorherigeBesitzer.setText(String.valueOf(fahrzeug.getAnzVorherigeBesitzer()));
+        fahrzeug_kilometerstand.setText(String.valueOf(fahrzeug.getKilometerstand()));
+        fahrzeug_modell.getSelectionModel().select(fahrzeug.getModell_id() - 1);
+        fahrzeug_istVermietet.setSelected(fahrzeug.isIstVermietet());
+        fahrzeug_istVerkauft.setSelected(fahrzeug.isIstVerkauft());
+    }
 
     public void loadConnection() {
 
