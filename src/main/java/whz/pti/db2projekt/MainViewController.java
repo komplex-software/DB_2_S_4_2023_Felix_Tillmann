@@ -844,8 +844,11 @@ public class MainViewController {
     public void getModellTableSelectedItem() {
         Fahrzeugmodell fahrzeugmodell = (Fahrzeugmodell) fahrzeugmodell_anzeige.getItems().get(fahrzeugmodell_anzeige.getSelectionModel().getSelectedIndex());
         fahrzeugmodell_id.setEditable(false);
-        fahrzeugmodell_id.getSelectionModel().select(fahrzeugmodell.getId() - 1);
+
+        fahrzeugmodell_id.getSelectionModel().select(fahrzeugmodell_id.getItems().indexOf(fahrzeugmodell.getId()));
+
         fahrzeugmodell_hersteller.getSelectionModel().select(fahrzeugmodell.getHersteller_id() - 1);
+
         fahrzeugmodell_fahrzeugtyp.getSelectionModel().select(fahrzeugmodell.getFahrzeugtyp_id() - 1);
     }
 
@@ -853,7 +856,10 @@ public class MainViewController {
     public void getTypTableSelectedItem() {
         Fahrzeugtyp fahrzeugtyp = (Fahrzeugtyp) fahrzeugtyp_anzeige.getItems().get(fahrzeugtyp_anzeige.getSelectionModel().getSelectedIndex());
         fahrzeugtyp_id.setEditable(false);
-        fahrzeugtyp_id.getSelectionModel().select(fahrzeugtyp.getId() - 1);
+
+        //fahrzeugtyp_id.getSelectionModel().select(fahrzeugtyp.getId() - 1);
+        fahrzeugtyp_id.getSelectionModel().select(fahrzeugtyp_id.getItems().indexOf(fahrzeugtyp.getId()));
+
         fahrzeugtyp_bezeichnung.setText(fahrzeugtyp.getBezeichnung());
     }
 
@@ -861,7 +867,10 @@ public class MainViewController {
     public void getHerstellerTableSelectedItem() {
         Hersteller hersteller = (Hersteller) hersteller_anzeige.getItems().get(hersteller_anzeige.getSelectionModel().getSelectedIndex());
         hersteller_id.setEditable(false);
-        hersteller_id.getSelectionModel().select(hersteller.getId() - 1);
+
+        //hersteller_id.getSelectionModel().select(hersteller.getId() - 1);
+        hersteller_id.getSelectionModel().select(hersteller_id.getItems().indexOf(hersteller.getId()));
+
         hersteller_name.setText(hersteller.getName());
     }
 
@@ -869,7 +878,10 @@ public class MainViewController {
     public void getKundeTableSelectedItem() {
         Kunde kunde = (Kunde) kunde_anzeige.getItems().get(kunde_anzeige.getSelectionModel().getSelectedIndex());
         kunde_id.setEditable(false);
-        kunde_id.getSelectionModel().select(kunde.getId() - 1);
+
+        //kunde_id.getSelectionModel().select(kunde.getId() - 1);
+        kunde_id.getSelectionModel().select(kunde_id.getItems().indexOf(kunde.getId()));
+
         kunde_vorname.setText(kunde.getVorname());
         kunde_nachname.setText(kunde.getNachname());
         kunde_anrede.getSelectionModel().select(kunde.getAnrede_id() - 1);
@@ -881,7 +893,10 @@ public class MainViewController {
     public void getMitarbeiterTableSelectedItem() {
         Mitarbeiter mitarbeiter = (Mitarbeiter) mitarbeiter_anzeige.getItems().get(mitarbeiter_anzeige.getSelectionModel().getSelectedIndex());
         mitarbeiter_id.setEditable(false);
-        mitarbeiter_id.getSelectionModel().select(mitarbeiter.getId() - 1);
+
+       // mitarbeiter_id.getSelectionModel().select(mitarbeiter.getId() - 1);
+        mitarbeiter_id.getSelectionModel().select(mitarbeiter_id.getItems().indexOf(mitarbeiter.getId()));
+
         mitarbeiter_vorname.setText(mitarbeiter.getVorname());
         mitarbeiter_nachname.setText(mitarbeiter.getNachname());
         mitarbeiter_lohn.setText(String.valueOf(mitarbeiter.getLohn()));
@@ -897,7 +912,10 @@ public class MainViewController {
     public void getFarbeTableSelectedItem() {
         Fahrzeugfarbe fahrzeugfarbe = (Fahrzeugfarbe) fahrzeugfarbe_anzeige.getItems().get(fahrzeugfarbe_anzeige.getSelectionModel().getSelectedIndex());
         fahrzeugfarbe_id.setEditable(false);
-        fahrzeugfarbe_id.getSelectionModel().select(fahrzeugfarbe.getId() - 1);
+
+        //fahrzeugfarbe_id.getSelectionModel().select(fahrzeugfarbe.getId() - 1);
+        fahrzeugfarbe_id.getSelectionModel().select(fahrzeugfarbe_id.getItems().indexOf(fahrzeugfarbe.getId()));
+
         fahrzeugfarbe_farbname.setText(fahrzeugfarbe.getFarbname());
     }
 
@@ -905,7 +923,11 @@ public class MainViewController {
     public void getAdresseTableSelectedItem(){
         Adresse add = (Adresse) adresse_anzeige.getItems().get(adresse_anzeige.getSelectionModel().getSelectedIndex());
         adresse_id.setEditable(false);
-        adresse_id.getSelectionModel().select(add.getId()-1);
+
+        //adresse_id.getSelectionModel().select(add.getId()-1);
+        adresse_id.getSelectionModel().select(adresse_id.getItems().indexOf(add.getId()));
+
+
         adresse_straße.setText(add.getStrasse());
         adresse_stadt.setText(add.getStadt());
         adresse_postleitzahl.setText(add.getPostleitzahl());
@@ -917,7 +939,10 @@ public class MainViewController {
     public void getAnredeTableSelectedItem() {
         Anrede anrede = (Anrede) anrede_anzeige.getItems().get(anrede_anzeige.getSelectionModel().getSelectedIndex());
         anrede_id.setEditable(false);
-        anrede_id.getSelectionModel().select(anrede.getId() - 1);
+
+        //anrede_id.getSelectionModel().select(anrede.getId() - 1);
+        anrede_id.getSelectionModel().select(anrede_id.getItems().indexOf(anrede.getId()));
+
         anrede_anredewort.setText(anrede.getAnredewort());
     }
 
@@ -925,8 +950,10 @@ public class MainViewController {
     public void getFahrzeugTableSelectedItem() {
         Fahrzeug fahrzeug = (Fahrzeug) fahrzeug_anzeige.getItems().get(fahrzeug_anzeige.getSelectionModel().getSelectedIndex());
         fahrzeug_id.setEditable(false);
-        fahrzeug_id.getSelectionModel().select(fahrzeug.getId() - 1);
-        //TODO: index entspricht nicht der id
+
+        //fahrzeug_id.getSelectionModel().select(fahrzeug.getId() - 1);
+        fahrzeug_id.getSelectionModel().select(fahrzeug_id.getItems().indexOf(fahrzeug.getId()));
+        //TODO:DONE: index entspricht nicht der id
 
         fahrzeug_kaufpreis.setText(String.valueOf(fahrzeug.getKaufpreis()));
         fahrzeug_mietpreis.setText(String.valueOf(fahrzeug.getMietpreis()));
