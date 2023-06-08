@@ -956,14 +956,28 @@ public class MainViewController {
 
         fahrzeug_kaufpreis.setText(String.valueOf(fahrzeug.getKaufpreis()));
         fahrzeug_mietpreis.setText(String.valueOf(fahrzeug.getMietpreis()));
-        fahrzeug_kaufkunde.getSelectionModel().select(fahrzeug.getKaufKunde_id() - 1);
-        fahrzeug_mietkunde.getSelectionModel().select(fahrzeug.getMietKunde_id() - 1);
+
+        try {
+        Kunde kaufKunde = Kunde.getKundeList().stream().filter(k -> k.getId() == fahrzeug.getKaufKunde_id()).collect(Collectors.toList()).get(0);
+        int kaufKundeIndex = fahrzeug_kaufkunde.getItems().indexOf(kaufKunde);
+        fahrzeug_kaufkunde.getSelectionModel().select(kaufKundeIndex);
+        } catch (Exception e) {}
+
+        try {
+            Kunde mietKunde = Kunde.getKundeList().stream().filter(k -> k.getId() == fahrzeug.getMietKunde_id()).collect(Collectors.toList()).get(0);
+            int mietKundeIndex = fahrzeug_kaufkunde.getItems().indexOf(mietKunde);
+            fahrzeug_mietkunde.getSelectionModel().select(mietKundeIndex);
+        } catch (Exception e) {}
+
         fahrzeug_letzterTuev.setText(fahrzeug.getLetzterTuev().toString());
         fahrzeug_anzVorherigeBesitzer.setText(String.valueOf(fahrzeug.getAnzVorherigeBesitzer()));
         fahrzeug_kilometerstand.setText(String.valueOf(fahrzeug.getKilometerstand()));
         fahrzeug_modell.getSelectionModel().select(fahrzeug.getModell_id() - 1);
         fahrzeug_istVermietet.setSelected(fahrzeug.isIstVermietet());
         fahrzeug_istVerkauft.setSelected(fahrzeug.isIstVerkauft());
+
+        // debug
+        //System.out.println(fahrzeug.getMietKunde_id());
     }
 
     public void loadConnection() {
