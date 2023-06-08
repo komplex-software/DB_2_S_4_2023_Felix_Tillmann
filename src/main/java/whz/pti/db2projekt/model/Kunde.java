@@ -113,6 +113,7 @@ public class Kunde {
 
     @Override
     public String toString() {
+        if (id == -1) return "-";
         try {
             Anrede anrede = Anrede.getAnredeList().stream().filter(a -> a.getId() == anrede_id).collect(Collectors.toList()).get(0);
             return anrede.getAnredewort() + " " + vorname + " " + nachname;
