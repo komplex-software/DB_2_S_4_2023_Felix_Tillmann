@@ -1203,12 +1203,14 @@ public class MainViewController {
         ResultSet rs = st.executeQuery(sql);
         while (rs.next()) {
             int mietKundeId = rs.getInt("mietKunde_id");
-            int kaufKundeId = rs.getInt("kaufKunde_id");
 
             // Check if mietKunde_id is null and set to -1
             if (rs.wasNull()) {
                 mietKundeId = -1;
             }
+            int kaufKundeId = rs.getInt("kaufKunde_id");
+
+
 
             // Check if kaufKunde_id is null and set to -1
             if (rs.wasNull()) {
